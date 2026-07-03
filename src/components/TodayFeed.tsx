@@ -215,15 +215,15 @@ const imgAdFill = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?
 
 function AdCard() {
   return (
-    <div className="ad-container">
-      <div className="ad-spacer" />
-      <div className="ad-inner">
-        <p className="ad-label">Advertisement</p>
-        <div className="ad-box">
-          <img src={imgAdFill} alt="Advertisement" className="ad-fill" />
+    <div className="promo-container">
+      <div className="promo-spacer" />
+      <div className="promo-inner">
+        <p className="promo-label">Advertisement</p>
+        <div className="promo-box">
+          <img src={imgAdFill} alt="Advertisement" className="promo-fill" />
         </div>
       </div>
-      <div className="ad-spacer" />
+      <div className="promo-spacer" />
     </div>
   )
 }
