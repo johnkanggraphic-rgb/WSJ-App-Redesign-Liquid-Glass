@@ -49,7 +49,13 @@ function App() {
 
   return (
     <div className="stage">
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: 'center center' }}>
+      <div style={{
+        position: 'absolute',
+        left: `calc(50% - ${PHONE_W / 2}px)`,
+        top: `calc(50% - ${PHONE_H / 2}px)`,
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
+      }}>
       <div className="iphone">
         <div className="iphone-frame">
           <div className="btn-power" />
