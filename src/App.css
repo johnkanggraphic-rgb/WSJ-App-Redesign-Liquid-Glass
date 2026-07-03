@@ -21,7 +21,7 @@ body {
 
 /* iPhone 16: screen 393x852, frame adds 6px each side → 405x864 */
 .iphone {
-  flex-shrink: 0;
+  position: relative;
 }
 
 .iphone-frame {
@@ -64,6 +64,8 @@ body {
   bottom: 6px;
   border-radius: 48px;
   background: #fff;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 393 852'%3E%3Crect width='393' height='852' rx='48' ry='48' fill='white'/%3E%3C/svg%3E") 0/100% 100%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 393 852'%3E%3Crect width='393' height='852' rx='48' ry='48' fill='white'/%3E%3C/svg%3E") 0/100% 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;

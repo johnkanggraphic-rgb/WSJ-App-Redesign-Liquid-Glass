@@ -53,7 +53,13 @@ function App() {
 
   return (
     <div className="stage">
-      <div className="iphone" style={{ zoom: pos.scale }}>
+      <div className="iphone" style={{
+        position: 'absolute',
+        left: pos.left,
+        top: pos.top,
+        transform: `scale(${pos.scale})`,
+        transformOrigin: 'top left',
+      }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />
