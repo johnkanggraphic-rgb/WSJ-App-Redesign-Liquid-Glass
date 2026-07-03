@@ -285,7 +285,6 @@ function NewsPackageCard() {
           </div>
         </div>
       </div>
-      <FeedDivider />
       {/* Compact card 1 */}
       <div className="feed-card">
         <h3 className="card-headline-s">
@@ -293,11 +292,10 @@ function NewsPackageCard() {
         </h3>
         <ArticleActions
           headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-         
+
           readTime="6 min read"
         />
       </div>
-      <FeedDivider />
       {/* Compact card 2 */}
       <div className="feed-card">
         <h3 className="card-headline-s">
@@ -305,7 +303,7 @@ function NewsPackageCard() {
         </h3>
         <ArticleActions
           headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-         
+
           readTime="6 min read"
         />
       </div>
@@ -427,20 +425,16 @@ function WorldPackage() {
         />
       </div>
 
-      <FeedDivider />
-
       <div className="feed-card">
         <h3 className="card-headline-s">
           Flights Redirected From Barcelona as Fresh Storms Lash Spanish Coast
         </h3>
         <ArticleActions
           headphones={worldIcons.headphones} chat={worldIcons.chat}
-         
+
           readTime="6 min read"
         />
       </div>
-
-      <FeedDivider />
 
       <div className="feed-card">
         <h3 className="card-headline-s">
@@ -640,51 +634,40 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
       <div className="today-feed" ref={feedRef}>
         <StockBar />
         <ArticleCardHero onTap={onArticleTap} />
-        <FeedDivider />
         <LiveCard />
-        <FeedDivider />
         <CompactArticleCard
           flashline="Technology"
           headline="Trump Exempts Smartphones, Other Electronics From Chinese Tariffs"
           readTime="4 min read"
         />
-        <FeedDivider />
         <CompactArticleCard
           flashline="Markets &amp; Finance"
           headline="Fed Minutes Reveal Deep Divide Over When to Cut Rates This Year"
           readTime="5 min read"
         />
-        <FeedDivider />
         <CompactArticleCard
           flashline="Business"
           headline="Boeing Reaches $1.1 Billion Settlement With Families of 737 MAX Crash Victims"
           readTime="7 min read"
         />
-        <FeedDivider />
         <CompactArticleCard
           flashline="World"
           headline="Ukraine Strikes Russian Oil Depot Deep Inside Enemy Territory With Long-Range Drones"
           readTime="3 min read"
         />
-        <FeedDivider />
         <CompactArticleCard
           flashline="U.S."
           headline="Senate Passes Sweeping Infrastructure Bill in Rare Bipartisan Vote"
           readTime="6 min read"
         />
-        <FeedDivider />
         <CompactArticleCard
           flashline="Opinion"
           headline="The Fed Is Running Out of Time to Get Inflation Right"
           readTime="8 min read"
         />
-        <FeedDivider />
         <AdCard />
         <NewsPackageCard />
-        <FeedDivider />
-        <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%', boxShadow: 'inset 0 -1.5px 0 0 #ebebeb' }} />
         <OpinionPackage />
-        <FeedDivider />
         <WorldPackage />
         <div className="feed-bottom-pad" />
       </div>
