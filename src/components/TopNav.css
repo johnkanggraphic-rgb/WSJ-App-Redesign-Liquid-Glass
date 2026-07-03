@@ -10,6 +10,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
+  margin-top: 56px;
 }
 
 .topnav-container::-webkit-scrollbar {
