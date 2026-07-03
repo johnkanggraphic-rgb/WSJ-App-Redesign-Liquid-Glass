@@ -4,7 +4,7 @@ import { HomeIcon, MyWSJIcon, MarketDataIcon, MediaIcon, MoreIcon } from './TabI
 
 const tabs = [
   { label: 'Home',        Icon: HomeIcon },
-  { label: 'MyWSJ+',      Icon: MyWSJIcon },
+  { label: 'MyWSJ',       Icon: MyWSJIcon },
   { label: 'Market Data', Icon: MarketDataIcon, labelWide: true },
   { label: 'Media',       Icon: MediaIcon },
   { label: 'More',        Icon: MoreIcon },
