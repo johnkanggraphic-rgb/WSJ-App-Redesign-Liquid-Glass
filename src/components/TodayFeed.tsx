@@ -613,19 +613,6 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
   useEffect(() => {
     const el = feedRef.current
     if (!el) return
-    const checkDarkBg = () => {
-      if (!onDarkBg) return
-      const images = el.querySelectorAll<HTMLElement>('.card-image')
-      const elRect = el.getBoundingClientRect()
-      const tabZoneTop = elRect.bottom - 100
-      const tabZoneBottom = elRect.bottom
-      let isDark = false
-      images.forEach(img => {
-        const r = img.getBoundingClientRect()
-        if (r.top < tabZoneBottom && r.bottom > tabZoneTop) isDark = true
-      })
-      onDarkBg(isDark)
-    }
     const onScroll = () => {
       const tabbar = el.closest('.content-area')?.querySelector('.tabbar-wrapper') as HTMLElement | null
       const current = el.scrollTop
@@ -639,11 +626,30 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
         }
       }
       lastScrollY.current = current
-      checkDarkBg()
     }
     el.addEventListener('scroll', onScroll, { passive: true })
-    checkDarkBg()
-    return () => el.removeEventListener('scroll', onScroll)
+
+    // IntersectionObserver: detect when card images enter the bottom 100px (tab bar zone)
+    const darkCount = { value: 0 }
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          darkCount.value = Math.max(0, darkCount.value + (e.isIntersecting ? 1 : -1))
+        })
+        onDarkBg?.(darkCount.value > 0)
+      },
+      {
+        root: el,
+        rootMargin: `-${Math.max(0, el.clientHeight - 100)}px 0px 0px 0px`,
+        threshold: 0,
+      }
+    )
+    el.querySelectorAll('.card-image').forEach(img => observer.observe(img))
+
+    return () => {
+      el.removeEventListener('scroll', onScroll)
+      observer.disconnect()
+    }
   }, [onDarkBg])
 
   return (
