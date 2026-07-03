@@ -1,0 +1,717 @@
+/* Shared sub-page styles (PrintEdition, Newspaper, Puzzles) */
+.subpage {
+  position: absolute;
+  inset: 0;
+  background: #f4f5f7;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  border-radius: 48px;
+  overflow: hidden;
+}
+
+/* Toolbar */
+.subpage-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  flex-shrink: 0;
+  background: rgba(244,245,247,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.subpage-toolbar-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+}
+
+/* Scroll area */
+.subpage-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: #f4f5f7;
+}
+
+.subpage-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dividers */
+.subpage-divider {
+  height: 1px;
+  background: #ebebeb;
+}
+
+.subpage-section-header {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #222;
+  padding: 20px 16px 12px;
+}
+
+.subpage-bottom-pad {
+  height: 120px;
+}
+
+/* Bottom bar with back button */
+.subpage-bottom-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  pointer-events: none;
+}
+
+.subpage-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.28);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 12px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+/* ── PrintEditionPage ─────────────────────────────────── */
+
+.pe-hero {
+  background: #fff;
+  display: flex;
+  gap: 16px;
+  padding: 24px 16px 20px;
+}
+
+.pe-hero-image {
+  width: 110px;
+  height: 144px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.pe-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pe-hero-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pe-hero-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #6f6f6f;
+  line-height: 16px;
+}
+
+.pe-hero-title {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #222;
+  margin-top: 2px;
+}
+
+.pe-hero-desc {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  margin-top: 2px;
+}
+
+.pe-read-btn {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 36px;
+  background: #003057;
+  color: #fff;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  align-self: flex-start;
+}
+
+.pe-section-header {
+  padding: 20px 16px 12px;
+}
+
+.pe-section-title {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.pe-editions-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pe-editions-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.pe-edition-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pe-edition-img {
+  width: 84px;
+  height: 112px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e0e0e0;
+  border: 1px solid #dadee1;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.pe-edition-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pe-edition-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #222;
+}
+
+.pe-edition-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #6f6f6f;
+}
+
+.pe-download-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: #fff;
+}
+
+.pe-download-text {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+/* ── NewspaperPage ────────────────────────────────────── */
+
+.np-masthead {
+  background: #fff;
+  padding: 20px 16px 16px;
+  text-align: center;
+  border-bottom: 2px solid #222;
+}
+
+.np-masthead-logo {
+  font-family: 'Escrow', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 28px;
+  color: #111;
+  letter-spacing: 1px;
+}
+
+.np-masthead-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  color: #6f6f6f;
+  margin-top: 4px;
+}
+
+.np-articles {
+  background: #fff;
+  padding: 0 16px;
+}
+
+.np-article-row {
+  padding: 16px 0 12px;
+}
+
+.np-article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.np-article-col {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #222;
+  padding: 1px 5px;
+  border-radius: 2px;
+  line-height: 16px;
+}
+
+.np-article-section {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #6f6f6f;
+  line-height: 16px;
+}
+
+.np-article-headline {
+  font-family: 'Escrow Condensed', 'EscrowCondensed', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #111;
+  text-align: left;
+}
+
+/* Toolbar pills */
+.np-toolbar-pills {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background: rgba(255,255,255,0.28);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255,255,255,0.55);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 12px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.6);
+  border-radius: 9999px;
+  padding: 0 16px;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.np-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 4px;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #6f6f6f;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.np-pill-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(0,0,0,0.1);
+}
+
+/* Sheet */
+.np-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.np-sheet {
+  background: #fff;
+  border-radius: 34px 34px 0 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 70%;
+  overflow: hidden;
+}
+
+.np-sheet-grabber {
+  width: 36px;
+  height: 5px;
+  background: #ccc;
+  border-radius: 100px;
+  margin: 12px auto 4px;
+  flex-shrink: 0;
+}
+
+.np-sheet-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.np-sheet-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #222;
+}
+
+.np-sheet-close {
+  position: absolute;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.np-pages-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 16px 16px 48px;
+  flex: 1;
+}
+
+.np-pages-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.np-page-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #dadee1;
+  border-radius: 4px;
+  flex-shrink: 0;
+  width: 100px;
+  padding: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.np-page-card--active {
+  border-color: #222;
+}
+
+.np-page-img {
+  width: 84px;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.np-page-num {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a222b;
+}
+
+.np-sections-list {
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding-bottom: 20px;
+}
+
+.np-sections-list::-webkit-scrollbar {
+  display: none;
+}
+
+.np-section-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 57px;
+  padding: 0 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #222;
+  text-align: left;
+}
+
+/* ── PuzzlesPage ─────────────────────────────────────── */
+
+.pz-hero {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pz-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pz-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px 20px 20px;
+  gap: 4px;
+}
+
+.pz-hero-badge {
+  display: inline-block;
+  background: #e10000;
+  color: #fff;
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.pz-hero-title {
+  font-family: 'DJ5 Escrow Comp', 'DJ5EscrowComp', Georgia, serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #fff;
+}
+
+.pz-hero-sub {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  line-height: 16px;
+}
+
+.pz-play-btn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 36px;
+  background: #fff;
+  color: #222;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  align-self: flex-start;
+}
+
+.pz-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 16px 8px;
+}
+
+.pz-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+
+.pz-card-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+
+.pz-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pz-card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #e10000;
+  color: #fff;
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+.pz-card-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #222;
+}
+
+.pz-card-sub {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #6f6f6f;
+}
+
+.pz-recent-list {
+  background: #fff;
+  margin: 0 0 8px;
+}
+
+.pz-recent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+
+.pz-recent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pz-recent-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #222;
+}
+
+.pz-recent-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #6f6f6f;
+}
+
+.pz-completed-badge {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #0a8200;
+  background: #e8f5e9;
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.pz-continue-badge {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #003057;
+  background: #e8f0f7;
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}

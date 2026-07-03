@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import { CaretLeft } from '@phosphor-icons/react'
 import './SearchPage.css'
 import StatusBar from './StatusBar'
 
 const imgMagnifyingGlass = 'https://www.figma.com/api/mcp/asset/635ae259-7bba-4786-af71-dc08a91f3e16'
-const imgCaretLeft       = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 
 // iOS-style keypad rows
 const KEYS = [
@@ -101,14 +101,14 @@ export default function SearchPage({ visible, onBack }: {
 
   return (
     <div className={`search-page${visible ? ' search-page--visible' : ''}`}>
-      <StatusBar />
+      <StatusBar transparent />
 
       {/* Toolbar */}
       <div className="search-toolbar">
         <div className="search-toolbar-leading">
           <button className="notif-back-btn" onClick={onBack}>
             <div className="notif-back-glass">
-              <img src={imgCaretLeft} alt="Back" className="titlebar-icon" />
+              <CaretLeft size={20} weight="bold" color="#222" />
             </div>
           </button>
         </div>

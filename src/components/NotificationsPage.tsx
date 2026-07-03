@@ -1,9 +1,9 @@
+import { CaretLeft } from '@phosphor-icons/react'
 import './NotificationsPage.css'
 import StatusBar from './StatusBar'
 
 const imgCircle      = 'https://www.figma.com/api/mcp/asset/61960c48-19b4-4fbc-8792-02217cc3815b'
 const imgJasonZweig  = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=top'
-const imgCaretLeft   = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 
 const notifications = [
   {
@@ -32,13 +32,13 @@ export default function NotificationsPage({ visible, onBack }: {
 }) {
   return (
     <div className={`notif-page${visible ? ' notif-page--visible' : ''}`}>
-      <StatusBar />
+      <StatusBar transparent />
       {/* Toolbar */}
       <div className="notif-toolbar">
         <div className="notif-toolbar-leading">
           <button className="notif-back-btn" onClick={onBack}>
             <div className="notif-back-glass">
-              <img src={imgCaretLeft} alt="Back" className="titlebar-icon" />
+              <CaretLeft size={20} weight="bold" color="#222" />
             </div>
           </button>
         </div>

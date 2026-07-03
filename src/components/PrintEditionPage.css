@@ -1,0 +1,288 @@
+/* PrintEditionPage — slides in from right */
+.pe-page {
+  position: absolute;
+  inset: 0;
+  background: #f4f5f7;
+  z-index: 20;
+  border-radius: 48px;
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pe-page--visible {
+  transform: translateX(0);
+}
+
+/* ── Top blur + gradient ── */
+.pe-top-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  z-index: 8;
+  pointer-events: none;
+}
+
+.pe-top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(244,245,247,0.65) 0%, rgba(244,245,247,0) 100%);
+  z-index: 9;
+  pointer-events: none;
+}
+
+/* ── Floating toolbar ── */
+.pe-toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 115px;
+  padding: 59px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-sizing: border-box;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.pe-toolbar-leading,
+.pe-toolbar-trailing {
+  flex: 1;
+  min-width: 0;
+}
+
+.pe-toolbar-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  flex-shrink: 0;
+}
+
+/* ── Scroll area ── */
+.pe-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 131px 16px 0;
+}
+
+.pe-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Hero dark card ── */
+.pe-hero-card {
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.pe-hero-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 16px 0;
+  width: 100%;
+}
+
+.pe-hero-headline {
+  font-family: 'DJ5 Escrow Comp', 'DJ5EscrowComp', Georgia, serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+.pe-hero-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.pe-hero-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pe-hero-image {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+
+.pe-hero-btns {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pe-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: 8px;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pe-btn--solid {
+  background: #fff;
+  color: #222;
+}
+
+.pe-btn--outline {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid #fff;
+}
+
+/* ── Section header ── */
+.pe-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 12px;
+}
+
+.pe-section-strap {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #1a222b;
+}
+
+.pe-download-all {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1a222b;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ── Edition list ── */
+.pe-editions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pe-edition-row {
+  background: #fff;
+  border: 1px solid #dadee1;
+  border-radius: 8px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  gap: 8px;
+}
+
+.pe-edition-thumb {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.pe-edition-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid #dadee1;
+}
+
+.pe-edition-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pe-edition-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1a222b;
+}
+
+.pe-edition-dl-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pe-dl-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* ── Bottom back button ── */
+.pe-bottom-bar {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+/* ── Bottom padding ── */
+.pe-bottom-pad {
+  height: 96px;
+}

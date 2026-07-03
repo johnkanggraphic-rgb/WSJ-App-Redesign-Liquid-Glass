@@ -189,3 +189,24 @@
 .tab-label {
   transition: color 0.2s ease;
 }
+
+/* Dark mode (Media tab) */
+.tabbar--dark .tabbar-glass {
+  background: rgba(30, 30, 30, 0.72);
+}
+
+.tabbar--dark .tabbar-bg {
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.tabbar--dark .tab-selection-pill {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.tabbar--dark .tab-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tabbar--dark .tab-label--active {
+  color: #ffffff;
+}

@@ -1,0 +1,105 @@
+
+/* ── Sheet ── */
+.peos-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background: #fff;
+  border-top: 1px solid #dadee1;
+  box-shadow: 0px -4px 20px 0px rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: clip;
+  padding-bottom: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.peos-sheet--visible {
+  transform: translateY(0);
+}
+
+
+/* ── Page navigation row ── */
+.peos-reader-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 44px;
+}
+
+.peos-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.peos-shift-down {
+  transform: translateY(6px);
+}
+
+.peos-page-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #1a222b;
+  flex: 1;
+  text-align: center;
+}
+
+/* ── Divider ── */
+.peos-divider {
+  height: 1px;
+  background: #dadee1;
+  margin: 8px 0;
+  flex-shrink: 0;
+}
+
+/* ── Button rows ── */
+.peos-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+}
+
+.peos-row--center {
+  justify-content: center;
+}
+
+.peos-btn {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.peos-btn--solid {
+  flex: 1;
+  background: #222222;
+  color: #fff;
+}
+
+.peos-btn--minimal {
+  background: none;
+  color: #1a222b;
+  padding-left: 0;
+}

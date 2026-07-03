@@ -17,7 +17,7 @@ export function HomeIcon({ active, dark }: IconProps) {
       alt="Home"
       width={size}
       height={size}
-      style={{ display: 'block', filter: dark ? 'invert(1) brightness(2)' : undefined }}
+      style={{ display: 'block', filter: dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2) opacity(0.6)') : undefined }}
     />
   )
 }
@@ -30,7 +30,7 @@ const imgMyWSJBottomFill    = "https://www.figma.com/api/mcp/asset/add2b850-44df
 export function MyWSJIcon({ active, dark }: IconProps) {
   const topSrc    = active ? imgMyWSJTopFill    : imgMyWSJTopRegular
   const bottomSrc = active ? imgMyWSJBottomFill : imgMyWSJBottomRegular
-  const imgFilter = dark ? 'invert(1) brightness(2)' : undefined
+  const imgFilter = dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2) opacity(0.6)') : undefined
   return (
     <div style={{ position: 'relative', width: size, height: size }}>
       <div style={{ position: 'absolute', top: '15.63%', left: '12.5%', right: '12.5%', bottom: '44%' }}>
@@ -44,11 +44,11 @@ export function MyWSJIcon({ active, dark }: IconProps) {
 }
 
 export function MarketDataIcon({ active, dark }: IconProps) {
-  return <ChartBar size={size} weight={active ? 'fill' : 'regular'} color={dark ? '#ffffff' : '#222222'} />
+  return <ChartBar size={size} weight={active ? 'fill' : 'regular'} color={dark ? (active ? '#ffffff' : 'rgba(255,255,255,0.6)') : '#222222'} />
 }
 
 export function MediaIcon({ active, dark }: IconProps) {
-  return <Play size={size} weight={active ? 'fill' : 'regular'} color={dark ? '#ffffff' : '#222222'} />
+  return <Play size={size} weight={active ? 'fill' : 'regular'} color={dark ? (active ? '#ffffff' : 'rgba(255,255,255,0.6)') : '#222222'} />
 }
 
 const imgMoreOutline = "https://www.figma.com/api/mcp/asset/fe6c7014-a771-4d6b-8b89-7e40bb1fac92"
@@ -61,7 +61,7 @@ export function MoreIcon({ active, dark }: IconProps) {
       alt="More"
       width={size}
       height={size}
-      style={{ display: 'block', filter: dark ? 'invert(1) brightness(2)' : undefined }}
+      style={{ display: 'block', filter: dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2) opacity(0.6)') : undefined }}
     />
   )
 }

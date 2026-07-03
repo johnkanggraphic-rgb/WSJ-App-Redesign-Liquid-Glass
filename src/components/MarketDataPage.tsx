@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { PencilSimple, MagnifyingGlass, XCircle, Plus, Check, CaretUpDown, FunnelSimple, Headphones, BookmarkSimple } from '@phosphor-icons/react'
 import './MarketDataPage.css'
 
 const imgBell           = "https://www.figma.com/api/mcp/asset/0495eaba-4bb1-4397-a1b9-d7b995d94fec"
@@ -18,9 +19,6 @@ const imgSparkStrokeGreen = "https://www.figma.com/api/mcp/asset/daec86e5-28d7-4
 
 const imgAdFill = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'
 
-const imgWlCaretUpDown  = "https://www.figma.com/api/mcp/asset/c780ac6c-fd52-4e0e-8587-43c29b8c5364"
-const imgWlFunnelSimple = "https://www.figma.com/api/mcp/asset/4f1554b7-d0ab-47ef-87c4-527b551bc0c0"
-const imgWlPlus         = "https://www.figma.com/api/mcp/asset/da41af78-196e-4db7-a51d-d6cdc7f49f38"
 const imgWlCaretDown    = "https://www.figma.com/api/mcp/asset/5f5c21f3-1ab2-4b51-99ba-491ceb1060ed"
 const imgWlSparkGreenFill   = "https://www.figma.com/api/mcp/asset/eb075eb6-a86e-47ee-8aaa-4e9a4a850356"
 const imgWlSparkGreenStroke = "https://www.figma.com/api/mcp/asset/15f6e8ce-6c2b-482d-92ec-a5c29b39686e"
@@ -29,8 +27,6 @@ const imgWlSparkRedStroke   = "https://www.figma.com/api/mcp/asset/eff8601b-d951
 const imgWlArrowUp          = "https://www.figma.com/api/mcp/asset/b3b32616-bdcb-4dde-bdeb-3a2fb71262d6"
 const imgWlArrowDown        = "https://www.figma.com/api/mcp/asset/87be56cc-56bb-4a71-aa5f-87c06d6eb50d"
 const imgWlMinusMinus       = "https://www.figma.com/api/mcp/asset/2e7776ec-237a-4c33-8664-c64d5448e49b"
-const imgWlHeadphones       = "https://www.figma.com/api/mcp/asset/a94c3ef5-5dad-4e9b-97a7-b587a31c91d8"
-const imgWlBookmark         = "https://www.figma.com/api/mcp/asset/7f9045b4-a2bd-4678-9c10-5016fae0d189"
 
 const TABS = ['Overview', 'Watchlist']
 
@@ -275,29 +271,112 @@ function WlSparkline({ direction }: { direction: Direction }) {
   )
 }
 
+const WL_STOCK_ARTICLES: Record<string, string[]> = {
+  AAPL: [
+    "Dow Jones Futures Fall; Tesla Skids After Earnings, Elon Musk; Quantum Stocks Spike",
+    "Oklo Stock Is Having Its Worst Week Since May 2024. What's Burdening the Nuclear Start-Up.",
+    "Nuclear-Reactor Stocks Are Under the Hammer. Why There's Hope for NuScale Power.",
+  ],
+  CL00: [
+    "Oil Prices Slide as OPEC+ Extends Production Cuts Into 2027",
+    "Energy Stocks Retreat Amid Demand Uncertainty",
+  ],
+  DAII: [
+    "Mercedes-Benz Earnings Are Coming, and Perhaps 'Nothing Looms Larger' Than This Factor",
+    "European Auto Sector Faces Tariff Headwinds",
+  ],
+  MSFT: [
+    "Microsoft Cloud Revenue Beats Expectations in Latest Quarter",
+    "Tech Giants Rally as AI Spending Outlook Improves",
+  ],
+}
+
 function WlStockRow({ ticker, name, price, change, pct, direction }: WlStockData) {
-  const arrowSrc    = direction === 'down' ? imgWlArrowDown : direction === 'up' ? imgWlArrowUp : imgWlMinusMinus
-  const amtColor    = direction === 'down' ? '#e10000' : direction === 'up' ? '#0a8200' : '#6f6f6f'
+  const [open, setOpen] = useState(false)
+  const arrowSrc = direction === 'down' ? imgWlArrowDown : direction === 'up' ? imgWlArrowUp : imgWlMinusMinus
+  const amtColor = direction === 'down' ? '#e10000' : direction === 'up' ? '#0a8200' : '#6f6f6f'
+  const articles = WL_STOCK_ARTICLES[ticker] ?? []
+
   return (
-    <div className="wl-stock-row">
-      <div className="wl-stock-left">
-        <span className="wl-stock-ticker">{ticker}</span>
-        <span className="wl-stock-name">{name}</span>
-      </div>
-      <WlSparkline direction={direction} />
-      <div className="wl-stock-right">
-        <div className="wl-price-row">
-          <img src={arrowSrc} alt="" className="wl-arrow-icon" />
-          <span className="wl-price">{price}</span>
+    <div className="wl-stock-item">
+      {/* Collapsed row */}
+      <div className="wl-stock-row">
+        <div className="wl-stock-left">
+          <span className="wl-stock-ticker">{ticker}</span>
+          <span className="wl-stock-name">{name}</span>
         </div>
-        <div className="wl-amts" style={{ color: amtColor }}>
-          <span>{change}</span>
-          <span>{pct}</span>
+        <WlSparkline direction={direction} />
+        <div className="wl-stock-right">
+          <div className="wl-price-row">
+            <img src={arrowSrc} alt="" className="wl-arrow-icon" />
+            <span className="wl-price">{price}</span>
+          </div>
+          <div className="wl-amts" style={{ color: amtColor }}>
+            <span>{change}</span>
+            <span>{pct}</span>
+          </div>
+        </div>
+        <button className="wl-caret-btn" onClick={() => setOpen(o => !o)}>
+          <img src={open ? imgWlCaretDown : imgWlCaretDown} alt="" className={`wl-caret-icon${open ? ' wl-caret-icon--open' : ''}`} />
+        </button>
+      </div>
+
+      {/* Expanded panel */}
+      <div className={`wl-expanded-wrapper${open ? ' wl-expanded-wrapper--open' : ''}`}>
+        <div className="wl-expanded">
+          {/* After hours bar */}
+          <div className="wl-after-hours">
+            <div className="wl-after-hours-left">
+              <img src={imgWlMinusMinus} alt="" className="wl-moon-icon" style={{ width: 16, height: 16 }} />
+              <span className="wl-after-hours-label">AFTER HOURS</span>
+            </div>
+            <div className="wl-after-hours-nums">
+              <span className="wl-ah-price">$156.34</span>
+              <span className="wl-ah-change" style={{ color: '#e10000' }}>-1.59</span>
+              <span className="wl-ah-pct" style={{ color: '#e10000' }}>-0.98%</span>
+            </div>
+          </div>
+
+          {/* Volume + Holdings row */}
+          <div className="wl-stats-row">
+            <div className="wl-stats-left">
+              <div className="wl-stat-block">
+                <span className="wl-stat-label">Volume</span>
+                <div className="wl-stat-value-row">
+                  <span className="wl-stat-value">19.61M</span>
+                  <span className="wl-stat-sub">(64% of average)</span>
+                </div>
+              </div>
+              <button className="wl-view-more">View more stats</button>
+            </div>
+            <div className="wl-stats-right">
+              <div className="wl-stat-block">
+                <span className="wl-stat-label">My 8 holdings</span>
+                <span className="wl-stat-value">$628.230</span>
+                <div className="wl-amts" style={{ color: '#0a8200' }}>
+                  <span>+24.10%</span>
+                  <span>+47.9157</span>
+                </div>
+              </div>
+              <button className="wl-edit-btn">Edit holdings</button>
+            </div>
+          </div>
+
+          {/* Updated timestamp */}
+          <div className="wl-updated-row">
+            <span className="wl-updated-text">Updated Oct 20, 2025 at 8:47 p.m. EDT</span>
+          </div>
+
+          {/* Related articles */}
+          <div className="wl-related-articles">
+            {articles.map((headline, i) => (
+              <div key={i} className="wl-article-card">
+                <p className="wl-article-headline">{headline}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <button className="wl-caret-btn">
-        <img src={imgWlCaretDown} alt="" className="wl-caret-icon" />
-      </button>
     </div>
   )
 }
@@ -317,38 +396,91 @@ function WlNewsCard({ headline, tickers, time, timeRed }: WlNewsArticle) {
       <div className="wl-news-footer">
         <span className="wl-news-time" style={{ color: timeRed ? '#e10000' : '#6f6f6f' }}>{time}</span>
         <div className="md-footer-actions">
-          <button className="md-action-btn"><img src={imgWlHeadphones} alt="Listen" /></button>
-          <button className="md-action-btn"><img src={imgWlBookmark} alt="Save" /></button>
+          <button className="md-action-btn"><Headphones size={24} color="#6f6f6f" weight="regular" /></button>
+          <button className="md-action-btn"><BookmarkSimple size={24} color="#6f6f6f" weight="regular" /></button>
         </div>
       </div>
     </div>
   )
 }
 
-function WatchlistContent() {
+function WatchlistContent({ onWatchlistPicker, onAddSymbols }: { onWatchlistPicker: () => void; onAddSymbols: () => void }) {
+  const [showSortMenu, setShowSortMenu] = useState(false)
+  const [sortBy, setSortBy] = useState('Symbol')
+  const [sortDir, setSortDir] = useState('Ascending')
+  const SORT_BY = ['Symbol', 'Price', 'Price, Change', 'Volume', 'Custom']
+  const SORT_DIR = ['Ascending', 'Decending']
+
+  const sortedStocks = [...WL_STOCKS].sort((a, b) => {
+    let cmp = 0
+    if (sortBy === 'Symbol') {
+      cmp = a.ticker.localeCompare(b.ticker)
+    } else if (sortBy === 'Price') {
+      const pa = parseFloat(a.price.replace(/[^0-9.-]/g, ''))
+      const pb = parseFloat(b.price.replace(/[^0-9.-]/g, ''))
+      cmp = pa - pb
+    } else if (sortBy === 'Price, Change') {
+      const ca = parseFloat(a.change.replace(/[^0-9.-]/g, ''))
+      const cb = parseFloat(b.change.replace(/[^0-9.-]/g, ''))
+      cmp = ca - cb
+    } else if (sortBy === 'Volume') {
+      // proxy: sort by pct change as volume stand-in
+      const va = parseFloat(a.pct.replace(/[^0-9.-]/g, ''))
+      const vb = parseFloat(b.pct.replace(/[^0-9.-]/g, ''))
+      cmp = va - vb
+    } else {
+      // Custom — keep original order
+      return 0
+    }
+    return sortDir === 'Ascending' ? cmp : -cmp
+  })
+
   return (
     <>
       {/* Header strap */}
       <div className="wl-strap">
         <div className="wl-strap-left">
-          <span className="wl-strap-title">My demo picks</span>
-          <button className="wl-icon-btn">
-            <img src={imgWlCaretUpDown} alt="Sort" className="wl-icon-24" />
+          <button className="wl-strap-title-btn" onClick={onWatchlistPicker}>
+            <span className="wl-strap-title">My demo picks</span>
+          </button>
+          <button className="wl-icon-btn" style={{ marginLeft: '-12px', marginTop: '-1px' }} onClick={onWatchlistPicker}>
+            <CaretUpDown size={24} color="#6f6f6f" weight="regular" />
           </button>
         </div>
-        <div className="wl-strap-right">
-          <button className="wl-icon-btn">
-            <img src={imgWlFunnelSimple} alt="Filter" className="wl-icon-24" />
+        <div className="wl-strap-right" style={{ position: 'relative' }}>
+          <button className="wl-icon-btn" onClick={() => setShowSortMenu(m => !m)}>
+            <FunnelSimple size={24} color="#6f6f6f" weight="regular" />
           </button>
-          <button className="wl-icon-btn">
-            <img src={imgWlPlus} alt="Add" className="wl-icon-24" />
+          {showSortMenu && (
+            <>
+              <div className="wl-sort-backdrop" onClick={() => setShowSortMenu(false)} />
+              <div className="wl-sort-menu">
+                <span className="wl-sort-section-label">Sort By</span>
+                {SORT_BY.map(opt => (
+                  <button key={opt} className="wl-sort-row" onClick={() => { setSortBy(opt); setShowSortMenu(false) }}>
+                    <span className="wl-sort-check">{sortBy === opt ? '✓' : ''}</span>
+                    <span className="wl-sort-option">{opt}</span>
+                  </button>
+                ))}
+                <div className="wl-sort-divider" />
+                {SORT_DIR.map(opt => (
+                  <button key={opt} className="wl-sort-row" onClick={() => { setSortDir(opt); setShowSortMenu(false) }}>
+                    <span className="wl-sort-check">{sortDir === opt ? '✓' : ''}</span>
+                    <span className="wl-sort-option">{opt}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+          <button className="wl-icon-btn" onClick={onAddSymbols}>
+            <Plus size={24} color="#6f6f6f" weight="regular" />
           </button>
         </div>
       </div>
 
       {/* Stock rows */}
       <div className="wl-stock-list">
-        {WL_STOCKS.map((s, i) => (
+        {sortedStocks.map((s, i) => (
           <div key={s.ticker}>
             {i > 0 && <div className="md-row-divider" />}
             <WlStockRow {...s} />
@@ -386,7 +518,170 @@ function WatchlistContent() {
   )
 }
 
-function OverviewContent() {
+const imgMdXClose = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
+
+const ADD_SYMBOLS_ALL = [
+  { ticker: 'NWS',      boldPart: 'NWS',    name: 'News Corp Cl B',       exchange: 'U.S.: Nasdaq',          added: true  },
+  { ticker: 'DE:NWS',   boldPart: 'NWS',    name: 'CTF Services Ltd.',     exchange: 'Germany: Frankfurt',    added: false },
+  { ticker: 'AU:NWS',   boldPart: 'NWS',    name: 'News Corp CDI Cl B',    exchange: 'Australia',             added: false },
+  { ticker: 'NWSA',     boldPart: 'NWS',    name: 'News Corp Cl A',        exchange: 'U.S.: Nasdaq',          added: false },
+  { ticker: 'CA:NWST',  boldPart: 'NWS',    name: 'Northwest Copper..',    exchange: 'Canada: TSX Vent..',    added: false },
+  { ticker: 'AU:NWSLV', boldPart: 'NWS',    name: 'News Corp CDI A',       exchange: 'Australia',             added: false },
+  { ticker: 'NWSGY',    boldPart: 'NWS',    name: 'CTF Services Ltd. A..', exchange: 'U.S.: OTC',             added: false },
+]
+
+export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  const [query, setQuery] = useState('NWS')
+  const [added, setAdded] = useState<Set<string>>(new Set(['NWS']))
+
+  const results = query.trim()
+    ? ADD_SYMBOLS_ALL.filter(s =>
+        s.ticker.toLowerCase().includes(query.toLowerCase()) ||
+        s.name.toLowerCase().includes(query.toLowerCase())
+      )
+    : ADD_SYMBOLS_ALL
+
+  const toggleAdded = (ticker: string) => {
+    setAdded(prev => {
+      const next = new Set(prev)
+      if (next.has(ticker)) next.delete(ticker)
+      else next.add(ticker)
+      return next
+    })
+  }
+
+  return (
+    <>
+      <div className={`md-info-scrim${visible ? ' md-info-scrim--visible' : ''}`} onClick={onClose} />
+      <div className={`md-info-sheet${visible ? ' md-info-sheet--visible' : ''}`}>
+        <div className="md-info-grabber" />
+        <div className="md-info-toolbar">
+          <span className="md-info-title">Add Symbols</span>
+          <button className="md-info-close-btn" onClick={onClose}>
+            <div className="md-info-close-glass">
+              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+            </div>
+          </button>
+        </div>
+
+        {/* Search bar */}
+        <div className="add-sym-search-wrap">
+          <MagnifyingGlass size={18} color="#6f6f6f" weight="regular" />
+          <input
+            className="add-sym-input"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search symbols"
+            autoComplete="off"
+            spellCheck={false}
+          />
+          {query.length > 0 && (
+            <button className="add-sym-clear" onClick={() => setQuery('')}>
+              <XCircle size={18} color="#6f6f6f" weight="fill" />
+            </button>
+          )}
+        </div>
+
+        {/* Results list */}
+        <div className="add-sym-list">
+          {results.map((s, i) => {
+            const isAdded = added.has(s.ticker)
+            const prefix = s.ticker.slice(0, s.ticker.indexOf(s.boldPart) + s.boldPart.length)
+            const suffix = s.ticker.slice(s.ticker.indexOf(s.boldPart) + s.boldPart.length)
+            return (
+              <div key={s.ticker}>
+                {i > 0 && <div className="md-row-divider" />}
+                <div className="add-sym-row">
+                  <button
+                    className={`add-sym-toggle${isAdded ? ' add-sym-toggle--added' : ''}`}
+                    onClick={() => toggleAdded(s.ticker)}
+                  >
+                    {isAdded
+                      ? <Check size={16} color="#fff" weight="bold" />
+                      : <Plus size={16} color="#6f6f6f" weight="regular" />
+                    }
+                  </button>
+                  <div className="add-sym-info">
+                    <span className="add-sym-ticker">
+                      <span className="add-sym-ticker-bold">{prefix}</span>
+                      {suffix && <span className="add-sym-ticker-rest">{suffix}</span>}
+                    </span>
+                    <span className="add-sym-name">{s.name}</span>
+                  </div>
+                  <span className="add-sym-exchange">{s.exchange}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export function WatchlistPickerSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  const WATCHLISTS = [
+    { label: 'MY DEMO PICKS', active: true },
+    { label: "Pat's Cryptic List", active: false },
+    { label: "Pat's Tech Picks", active: false },
+  ]
+  return (
+    <>
+      <div className={`md-info-scrim${visible ? ' md-info-scrim--visible' : ''}`} onClick={onClose} />
+      <div className={`md-info-sheet${visible ? ' md-info-sheet--visible' : ''}`}>
+        <div className="md-info-grabber" />
+        <div className="md-info-toolbar">
+          <span className="md-info-title">My Watchlists</span>
+          <button className="md-info-close-btn" onClick={onClose}>
+            <div className="md-info-close-glass">
+              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+            </div>
+          </button>
+        </div>
+        <div className="wl-picker-list">
+          {WATCHLISTS.map((w) => (
+            <div key={w.label} className={`wl-picker-row${w.active ? ' wl-picker-row--active' : ''}`}>
+              <span className={`wl-picker-label${w.active ? ' wl-picker-label--active' : ''}`}>{w.label}</span>
+              <button className="wl-picker-edit-btn">
+                <PencilSimple size={20} color="#6f6f6f" weight="regular" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="wl-picker-footer">
+          <button className="wl-picker-new-btn">New watchlist</button>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export function MdInfoSheet({ visible, onClose, title, body }: {
+  visible: boolean
+  onClose: () => void
+  title: string
+  body: string
+}) {
+  return (
+    <>
+      <div className={`md-info-scrim${visible ? ' md-info-scrim--visible' : ''}`} onClick={onClose} />
+      <div className={`md-info-sheet${visible ? ' md-info-sheet--visible' : ''}`}>
+        <div className="md-info-grabber" />
+        <div className="md-info-toolbar">
+          <span className="md-info-title">{title}</span>
+          <button className="md-info-close-btn" onClick={onClose}>
+            <div className="md-info-close-glass">
+              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+            </div>
+          </button>
+        </div>
+        <p className="md-info-body">{body}</p>
+      </div>
+    </>
+  )
+}
+
+function OverviewContent({ onVolumeInfo }: { onVolumeInfo: () => void }) {
   const [region, setRegion] = useState<Region>('U.S.')
   const cards = REGION_CARDS[region]
 
@@ -480,7 +775,9 @@ function OverviewContent() {
         <StockRow ticker="REIT" name="Reitar Logtech Holdings Ltd."  price="3.47M"    change="-115,739.30"  pctChange="-32.32%" direction="down" />
       </div>
       <div className="md-how-volume">
-        <span>How do we track volume?</span>
+        <button className="md-how-volume-btn" onClick={onVolumeInfo}>
+          How do we track volume?
+        </button>
       </div>
       <SectionDivider />
 
@@ -587,7 +884,7 @@ function OverviewContent() {
   )
 }
 
-export default function MarketDataPage({ slidePos, onBellTap }: { slidePos?: 'left' | 'center' | 'right'; onBellTap?: () => void }) {
+export default function MarketDataPage({ slidePos, onBellTap, onSearchTap, onVolumeInfo, onWatchlistPicker, onAddSymbols }: { slidePos?: 'left' | 'center' | 'right'; onBellTap?: () => void; onSearchTap?: () => void; onVolumeInfo?: () => void; onWatchlistPicker?: () => void; onAddSymbols?: () => void }) {
   const [activeTab, setActiveTab] = useState(0)
   const scrollRef  = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
@@ -622,7 +919,7 @@ export default function MarketDataPage({ slidePos, onBellTap }: { slidePos?: 'le
         </div>
         <span className="md-toolbar-title">Market Data</span>
         <div className="md-toolbar-trailing">
-          <button className="md-glass-btn">
+          <button className="md-glass-btn" onClick={onSearchTap}>
             <img src={imgMagnifyingGlass} alt="Search" className="md-btn-icon" />
           </button>
         </div>
@@ -642,10 +939,11 @@ export default function MarketDataPage({ slidePos, onBellTap }: { slidePos?: 'le
       </div>
 
       <div className="md-scroll" ref={scrollRef}>
-        {activeTab === 0 && <OverviewContent />}
-        {activeTab === 1 && <WatchlistContent />}
+        {activeTab === 0 && <OverviewContent onVolumeInfo={() => onVolumeInfo?.()} />}
+        {activeTab === 1 && <WatchlistContent onWatchlistPicker={() => onWatchlistPicker?.()} onAddSymbols={() => onAddSymbols?.()} />}
         <div className="md-bottom-pad" />
       </div>
+
     </div>
   )
 }

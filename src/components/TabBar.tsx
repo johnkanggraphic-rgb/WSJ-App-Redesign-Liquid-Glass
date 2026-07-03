@@ -32,7 +32,7 @@ export default function TabBar({ dark = false, onTabChange }: { dark?: boolean; 
   }, [active])
 
   return (
-    <div className="tabbar-wrapper">
+    <div className={`tabbar-wrapper${dark ? ' tabbar--dark' : ''}`}>
       <div className="tabbar-buttons" ref={buttonsRef}>
         {/* Glass pill background */}
         <div className="tabbar-bg">
@@ -55,7 +55,7 @@ export default function TabBar({ dark = false, onTabChange }: { dark?: boolean; 
             onClick={() => { setActive(i); onTabChange?.(i) }}
           >
             <div className="tab-icon">
-              <tab.Icon active={i === active} dark={dark && i !== active} />
+              <tab.Icon active={i === active} dark={dark} />
             </div>
             <span className={`tab-label${i === active ? ' tab-label--active' : ''}${tab.labelWide ? ' tab-label--wide' : ''}${dark && i !== active ? ' tab-label--dark-bg' : ''}`}>
               {tab.label}

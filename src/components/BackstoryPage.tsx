@@ -1,9 +1,9 @@
 import { useState, useRef } from 'react'
+import { CaretLeft } from '@phosphor-icons/react'
 import './BackstoryPage.css'
 import StatusBar from './StatusBar'
 import FeedbackSheet from './FeedbackSheet'
 
-const imgCaretLeft  = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 const imgChatDots   = 'https://www.figma.com/api/mcp/asset/86300a7a-8d27-4fb4-bdd5-a24197d5fb83'
 
 // Key player avatars
@@ -167,7 +167,7 @@ export default function BackstoryPage({ visible, onBack }: {
       <div className="backstory-toolbar">
         <button className="notif-back-btn" onClick={onBack}>
           <div className="notif-back-glass backstory-back-glass">
-            <img src={imgCaretLeft} alt="Back" className="titlebar-icon" />
+            <CaretLeft size={20} weight="bold" color="#222" />
           </div>
         </button>
         <button className="backstory-feedback-btn" onClick={() => setFeedbackVisible(true)}>

@@ -2,9 +2,9 @@ import './StatusBar.css'
 
 const imgSignalWifiBattery = "https://www.figma.com/api/mcp/asset/4c444ad0-43e5-42bf-aa14-c94c72fe815a"
 
-export default function StatusBar({ transparent = false }: { transparent?: boolean }) {
+export default function StatusBar({ transparent = false, dark = false }: { transparent?: boolean; dark?: boolean }) {
   return (
-    <div className={`statusbar${transparent ? ' statusbar--transparent' : ''}`}>
+    <div className={`statusbar${transparent ? ' statusbar--transparent' : ''}${dark ? ' statusbar--dark' : ''}`}>
       {/* Left — time */}
       <div className="statusbar-left">
         <div className="statusbar-time">
@@ -14,10 +14,7 @@ export default function StatusBar({ transparent = false }: { transparent?: boole
 
       {/* Center — Dynamic Island */}
       <div className="statusbar-center">
-        <div className="statusbar-dynamic-island">
-          <div className="statusbar-di-camera" />
-          <div className="statusbar-di-facetime" />
-        </div>
+        <div className="statusbar-dynamic-island" />
       </div>
 
       {/* Right — Signal/Wifi/Battery */}

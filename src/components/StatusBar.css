@@ -9,6 +9,7 @@
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  z-index: 10;
 }
 
 .statusbar--transparent {
@@ -18,6 +19,7 @@
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  z-index: 10;
 }
 
 /* Left third — time */
@@ -76,26 +78,15 @@
   flex-shrink: 0;
 }
 
-.statusbar-di-camera {
-  position: absolute;
-  top: 50%;
-  left: calc(50% - 22.5px);
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 37px;
-  background: black;
-  border-radius: 100px;
+
+/* Dark mode — white text and icons */
+.statusbar--dark .statusbar-time-text {
+  color: #fff;
+  -webkit-text-stroke: 0.3px #fff;
 }
 
-.statusbar-di-facetime {
-  position: absolute;
-  top: 50%;
-  left: calc(50% + 44px);
-  transform: translate(-50%, -50%);
-  width: 37px;
-  height: 37px;
-  background: black;
-  border-radius: 100px;
+.statusbar--dark .statusbar-icons img {
+  filter: invert(1) brightness(2);
 }
 
 /* Right third — signal/wifi/battery */

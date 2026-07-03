@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { Pause, X, BookmarkSimple } from '@phosphor-icons/react'
+import { Pause, X, BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
@@ -7,7 +7,6 @@ import BackstoryPage from './BackstoryPage'
 import CommentSheet from './CommentSheet'
 import ShareSheet from './ShareSheet'
 
-const imgCaretLeft      = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 const imgEnvelope       = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b0-b7d4-4304d3926780'
 const imgXLogo          = 'https://www.figma.com/api/mcp/asset/a2b9f7e5-0d5d-4cb6-89fa-e6cee2561b93'
 const imgBackstory      = 'https://www.figma.com/api/mcp/asset/2f8632c6-9e38-4e33-9a03-4251935aac93'
@@ -272,7 +271,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         <div className="article-toolbar-leading">
           <button className="notif-back-btn" onClick={onBack}>
             <div className="notif-back-glass">
-              <img src={imgCaretLeft} alt="Back" className="titlebar-icon" />
+              <CaretLeft size={20} weight="bold" color="#222" />
             </div>
           </button>
         </div>

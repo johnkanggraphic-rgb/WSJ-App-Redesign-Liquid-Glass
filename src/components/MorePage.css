@@ -1,0 +1,298 @@
+/* MorePage */
+.more-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f4f5f7;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.more-page--center {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.more-page--left,
+.more-page--right {
+  opacity: 0;
+}
+
+/* ── Top blur + gradient (reversed from Media bottom) ── */
+.more-top-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  z-index: 18;
+  pointer-events: none;
+}
+
+.more-top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, rgba(244,245,247,0.65) 0%, rgba(244,245,247,0) 100%);
+  z-index: 19;
+  pointer-events: none;
+}
+
+/* ── Toolbar — floats over scroll content ── */
+.more-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 115px;
+  padding: 59px 16px 0;
+  gap: 10px;
+  background: transparent;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.more-toolbar-leading,
+.more-toolbar-trailing {
+  pointer-events: auto;
+}
+
+.more-toolbar .more-glass-btn {
+  pointer-events: auto;
+}
+
+.more-toolbar-leading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.more-toolbar-trailing {
+  flex: 1;
+  min-width: 0;
+}
+
+.more-toolbar-title {
+  font-family: 'Retina', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Glass button — identical to md-glass-btn */
+.more-glass-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.more-btn-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Scroll area ── */
+.more-scroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 131px 16px 0;
+}
+
+.more-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Puzzles hero card ── */
+.more-hero-card {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.more-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 32px;
+}
+
+.more-hero-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.more-hero-headline {
+  font-family: 'DJ5 Escrow Comp', 'DJ5EscrowComp', Georgia, serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 42px;
+  color: #111;
+  text-align: center;
+  margin: 0;
+}
+
+.more-hero-sub {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  text-align: center;
+  margin: 0;
+}
+
+.more-hero-btn {
+  background: #222;
+  color: #fff;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 112px;
+}
+
+/* ── Print Edition row ── */
+.more-card-row {
+  background: #fff;
+  border: 1px solid #dadee1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 12px 0 0;
+  margin-bottom: 12px;
+  min-height: 56px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.more-card-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.more-card-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.more-card-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #1a222b;
+}
+
+/* ── Profile section ── */
+.more-section-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #778694;
+  letter-spacing: 0.3px;
+  padding: 4px 0 8px;
+  text-align: left;
+}
+
+.more-group {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  padding: 0 16px;
+}
+
+.more-group-divider {
+  height: 1px;
+  background: #ebebeb;
+}
+
+.more-group-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.more-group-row-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #1a222b;
+}
+
+.more-group-row-label--red {
+  color: #e10000;
+}
+
+/* ── Bottom padding ── */
+.more-bottom-pad {
+  height: 120px;
+}
