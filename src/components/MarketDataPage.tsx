@@ -939,8 +939,8 @@ export default function MarketDataPage({ slidePos, onBellTap, onSearchTap, onVol
       </div>
 
       <div className="md-scroll" ref={scrollRef}>
-        {activeTab === 0 && <OverviewContent onVolumeInfo={() => onVolumeInfo?.()} />}
-        {activeTab === 1 && <WatchlistContent onWatchlistPicker={() => onWatchlistPicker?.()} onAddSymbols={() => onAddSymbols?.()} />}
+        {activeTab === 0 && <div className="md-tab-panel"><OverviewContent onVolumeInfo={() => onVolumeInfo?.()} /></div>}
+        {activeTab === 1 && <div className="md-tab-panel"><WatchlistContent onWatchlistPicker={() => onWatchlistPicker?.()} onAddSymbols={() => onAddSymbols?.()} /></div>}
         <div className="md-bottom-pad" />
       </div>
 

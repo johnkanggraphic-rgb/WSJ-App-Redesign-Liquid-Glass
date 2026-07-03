@@ -85,55 +85,63 @@ export default function MyWSJPage({ slidePos, onBellTap }: { slidePos?: 'left' |
 
       {/* Scrollable content */}
       <div className="mywsj-scroll" ref={scrollRef}>
-        {activeTab === 1 && <MyWSJShortlist key={shortlistKey} />}
-        {activeTab === 2 && (
-          <div className="mywsj-section-zone">
-            {INITIAL_CURRENT.slice(0, 2).map((item, i) => (
-              <div key={item.id}>
-                {i > 0 && <div className="mywsj-divider" />}
-                <ShortlistCard {...item} onRemove={() => {}} />
+        {activeTab === 0 && (
+          <div className="mywsj-tab-panel">
+            <div className="mywsj-section-zone">
+              <div className="mywsj-section-header">
+                <p className="mywsj-section-title">Recommended for you</p>
+                <p className="mywsj-section-subtitle">Stories picked for you based on your reading history</p>
               </div>
-            ))}
+              {stories.map((story, i) => (
+                <div key={i}>
+                  {i > 0 && <div className="mywsj-divider" />}
+                  <div className="mywsj-card">
+                    <p className="mywsj-flashline">{story.flashline}</p>
+                    <div className="mywsj-space-8" />
+                    <h2 className="mywsj-headline">{story.headline}</h2>
+                    <div className="mywsj-space-8" />
+                    <p className="mywsj-summary">{story.summary}</p>
+                    <div className="mywsj-space-16" />
+                    <div className="mywsj-card-image">
+                      <img src={story.image} alt="" />
+                    </div>
+                    <div className="mywsj-space-8" />
+                    <div className="mywsj-card-footer">
+                      <span className="mywsj-read-time">6 min read</span>
+                      <div className="mywsj-footer-actions">
+                        <button className="mywsj-footer-btn">
+                          <img src={imgHeadphones} alt="Listen" />
+                        </button>
+                        <button className="mywsj-footer-btn">
+                          <img src={imgBookmark} alt="Save" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="mywsj-bottom-pad" />
           </div>
         )}
-        <div className="mywsj-section-zone" style={{ display: activeTab === 0 ? undefined : 'none' }}>
-          <div className="mywsj-section-header">
-            <p className="mywsj-section-title">Recommended for you</p>
-            <p className="mywsj-section-subtitle">Stories picked for you based on your reading history</p>
+        {activeTab === 1 && (
+          <div className="mywsj-tab-panel">
+            <MyWSJShortlist key={shortlistKey} />
           </div>
-
-          {stories.map((story, i) => (
-            <div key={i}>
-              {i > 0 && <div className="mywsj-divider" />}
-              <div className="mywsj-card">
-                <p className="mywsj-flashline">{story.flashline}</p>
-                <div className="mywsj-space-8" />
-                <h2 className="mywsj-headline">{story.headline}</h2>
-                <div className="mywsj-space-8" />
-                <p className="mywsj-summary">{story.summary}</p>
-                <div className="mywsj-space-16" />
-                <div className="mywsj-card-image">
-                  <img src={story.image} alt="" />
+        )}
+        {activeTab === 2 && (
+          <div className="mywsj-tab-panel">
+            <div className="mywsj-section-zone">
+              {INITIAL_CURRENT.slice(0, 2).map((item, i) => (
+                <div key={item.id}>
+                  {i > 0 && <div className="mywsj-divider" />}
+                  <ShortlistCard {...item} onRemove={() => {}} />
                 </div>
-                <div className="mywsj-space-8" />
-                <div className="mywsj-card-footer">
-                  <span className="mywsj-read-time">6 min read</span>
-                  <div className="mywsj-footer-actions">
-                    <button className="mywsj-footer-btn">
-                      <img src={imgHeadphones} alt="Listen" />
-                    </button>
-                    <button className="mywsj-footer-btn">
-                      <img src={imgBookmark} alt="Save" />
-                    </button>
-                  </div>
-                </div>
-              </div>
+              ))}
+              <div className="mywsj-bottom-pad" />
             </div>
-          ))}
-        </div>
-
-        {activeTab === 0 && <div className="mywsj-bottom-pad" />}
+          </div>
+        )}
       </div>
     </div>
   )

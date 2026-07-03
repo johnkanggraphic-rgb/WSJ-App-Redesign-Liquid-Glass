@@ -106,58 +106,66 @@ export default function BackstoryPage({ visible, onBack }: {
 
         {/* Background */}
         {activeTab === 0 && (
-          <div className="backstory-body">
-            <p>Recent technology outages, staffing shortages and ongoing construction at Newark Liberty International Airport have caused widespread flight delays and cancellations, frustrating travelers and raising safety concerns. The Federal Aviation Administration is working to address these issues, but the problems have prompted airlines to reduce flights and travelers to seek alternative airports.</p>
-            <p>The problems at Newark stem from multiple factors. Air traffic control issues, including two technology outages in recent weeks, have disrupted radar and communication systems. Staffing shortages, exacerbated by the high-pressure environment, have led to trauma leave for controllers. Runway construction further limits capacity. The FAA has ordered airlines to reduce flights to alleviate congestion, capping arrivals and departures until late October.</p>
-            <p>Jonathan Stewart, an air-traffic controller on trauma leave, has spoken out about the intense pressure and mental strain caused by understaffing, outdated technology and the constant threat of near miss incidents. He advocates for better pay, adequate staffing and improved equipment to ensure controller well-being and passenger safety. While the FAA is implementing fixes, including software patches and increased staffing, the long-term solution requires comprehensive upgrades to the air-traffic control system and a commitment to supporting the well-being of air-traffic controllers.</p>
+          <div className="bs-tab-panel">
+            <div className="backstory-body">
+              <p>Recent technology outages, staffing shortages and ongoing construction at Newark Liberty International Airport have caused widespread flight delays and cancellations, frustrating travelers and raising safety concerns. The Federal Aviation Administration is working to address these issues, but the problems have prompted airlines to reduce flights and travelers to seek alternative airports.</p>
+              <p>The problems at Newark stem from multiple factors. Air traffic control issues, including two technology outages in recent weeks, have disrupted radar and communication systems. Staffing shortages, exacerbated by the high-pressure environment, have led to trauma leave for controllers. Runway construction further limits capacity. The FAA has ordered airlines to reduce flights to alleviate congestion, capping arrivals and departures until late October.</p>
+              <p>Jonathan Stewart, an air-traffic controller on trauma leave, has spoken out about the intense pressure and mental strain caused by understaffing, outdated technology and the constant threat of near miss incidents. He advocates for better pay, adequate staffing and improved equipment to ensure controller well-being and passenger safety. While the FAA is implementing fixes, including software patches and increased staffing, the long-term solution requires comprehensive upgrades to the air-traffic control system and a commitment to supporting the well-being of air-traffic controllers.</p>
+            </div>
           </div>
         )}
 
         {/* Timeline */}
         {activeTab === 1 && (
-          <div className="backstory-timeline">
-            {timelineItems.map((item, i) => (
-              <div key={i}>
-                <div className="bs-timeline-item">
-                  <p className="bs-timeline-date">{item.date}</p>
-                  <p className="bs-timeline-text">{item.text}</p>
+          <div className="bs-tab-panel">
+            <div className="backstory-timeline">
+              {timelineItems.map((item, i) => (
+                <div key={i}>
+                  <div className="bs-timeline-item">
+                    <p className="bs-timeline-date">{item.date}</p>
+                    <p className="bs-timeline-text">{item.text}</p>
+                  </div>
+                  {i < timelineItems.length - 1 && <div className="bs-divider" />}
                 </div>
-                {i < timelineItems.length - 1 && <div className="bs-divider" />}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
         {/* Key Players */}
         {activeTab === 2 && (
-          <div className="backstory-key-players">
-            {keyPlayers.map((player, i) => (
-              <div key={i}>
-                <div className="bs-player-tile">
-                  <div className="bs-player-header">
-                    {player.avatar && (
-                      <img src={player.avatar} alt="" className="bs-player-avatar" />
-                    )}
-                    <span className="bs-player-name">{player.name}</span>
+          <div className="bs-tab-panel">
+            <div className="backstory-key-players">
+              {keyPlayers.map((player, i) => (
+                <div key={i}>
+                  <div className="bs-player-tile">
+                    <div className="bs-player-header">
+                      {player.avatar && (
+                        <img src={player.avatar} alt="" className="bs-player-avatar" />
+                      )}
+                      <span className="bs-player-name">{player.name}</span>
+                    </div>
+                    <p className="bs-player-bio">{player.bio}</p>
                   </div>
-                  <p className="bs-player-bio">{player.bio}</p>
+                  {i < keyPlayers.length - 1 && <div className="bs-divider" />}
                 </div>
-                {i < keyPlayers.length - 1 && <div className="bs-divider" />}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
         {/* Sources */}
         {activeTab === 3 && (
-          <div className="backstory-sources">
-            <ul className="bs-sources-list">
-              {sources.map((source, i) => (
-                <li key={i} className="bs-source-item">
-                  <span className="bs-source-link">{source}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="bs-tab-panel">
+            <div className="backstory-sources">
+              <ul className="bs-sources-list">
+                {sources.map((source, i) => (
+                  <li key={i} className="bs-source-item">
+                    <span className="bs-source-link">{source}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
 
