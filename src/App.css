@@ -21,7 +21,7 @@ body {
 
 /* iPhone 16: screen 393x852, frame adds 6px each side → 405x864 */
 .iphone {
-  position: relative;
+  flex-shrink: 0;
 }
 
 .iphone-frame {
