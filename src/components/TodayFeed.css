@@ -336,9 +336,7 @@
 .opinion-pkg {
   width: 100%;
   background: #f5f0eb;
-  border-top: 8px solid #f4f5f7;
   border-bottom: 1px solid #e7ded2;
-  box-shadow: inset 0 1px 0 0 #e7ded2;
 }
 
 .opinion-strap {
