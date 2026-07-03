@@ -75,7 +75,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
           <div className="ns-header-middle">
             <div className="ns-header-titles" />
             <button className="ns-collaborate-btn" onClick={() => setCollaborated(!collaborated)}>
-              <Users size={15} weight="fill" color="#1a1a1a" />
+              <Users size={15} weight="fill" color="#222222" />
               <span className="ns-collaborate-label">Collaborate</span>
               <CaretRight size={13} weight="bold" color="#727272" />
             </button>
@@ -83,7 +83,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
           </div>
           <button className="ns-close-btn" onClick={onClose}>
             <div className="ns-close-pill">
-              <X size={17} weight="bold" color="#1a1a1a" />
+              <X size={17} weight="bold" color="#222222" />
             </div>
           </button>
         </div>
@@ -129,7 +129,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
           {ROUND_ACTIONS.map(({ Icon, label }) => (
             <div key={label} className="ns-round-action-item">
               <div className="ns-round-action-btn">
-                <Icon size={24} weight="regular" color="#1a1a1a" />
+                <Icon size={24} weight="regular" color="#222222" />
               </div>
               <p className="ns-round-action-label">{label}</p>
             </div>
@@ -141,7 +141,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
           <div className="ns-action-group">
             {LIST_GROUP_1.map(({ Icon, label }, i) => (
               <div key={label} className="ns-action-row">
-                <Icon size={22} weight="regular" color="#1a1a1a" className="ns-action-icon" />
+                <Icon size={22} weight="regular" color="#222222" className="ns-action-icon" />
                 <div className="ns-action-text">
                   {i > 0 && <div className="ns-action-divider" />}
                   <p className="ns-action-label">{label}</p>
@@ -153,7 +153,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
           <div className="ns-action-group">
             {LIST_GROUP_2.map(({ Icon, label }, i) => (
               <div key={label} className="ns-action-row">
-                <Icon size={22} weight="regular" color="#1a1a1a" className="ns-action-icon" />
+                <Icon size={22} weight="regular" color="#222222" className="ns-action-icon" />
                 <div className="ns-action-text">
                   {i > 0 && <div className="ns-action-divider" />}
                   <p className="ns-action-label">{label}</p>

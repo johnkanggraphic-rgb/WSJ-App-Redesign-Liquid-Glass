@@ -396,8 +396,8 @@ function WlNewsCard({ headline, tickers, time, timeRed }: WlNewsArticle) {
       <div className="wl-news-footer">
         <span className="wl-news-time" style={{ color: timeRed ? '#e10000' : '#6f6f6f' }}>{time}</span>
         <div className="md-footer-actions">
-          <button className="md-action-btn"><Headphones size={24} color="#6f6f6f" weight="regular" /></button>
-          <button className="md-action-btn"><BookmarkSimple size={24} color="#6f6f6f" weight="regular" /></button>
+          <button className="md-action-btn"><Headphones size={24} color="#222222" weight="regular" /></button>
+          <button className="md-action-btn"><BookmarkSimple size={24} color="#222222" weight="regular" /></button>
         </div>
       </div>
     </div>
@@ -444,12 +444,12 @@ function WatchlistContent({ onWatchlistPicker, onAddSymbols }: { onWatchlistPick
             <span className="wl-strap-title">My demo picks</span>
           </button>
           <button className="wl-icon-btn" style={{ marginLeft: '-12px', marginTop: '-1px' }} onClick={onWatchlistPicker}>
-            <CaretUpDown size={24} color="#6f6f6f" weight="regular" />
+            <CaretUpDown size={24} color="#222222" weight="regular" />
           </button>
         </div>
         <div className="wl-strap-right" style={{ position: 'relative' }}>
           <button className="wl-icon-btn" onClick={() => setShowSortMenu(m => !m)}>
-            <FunnelSimple size={24} color="#6f6f6f" weight="regular" />
+            <FunnelSimple size={24} color="#222222" weight="regular" />
           </button>
           {showSortMenu && (
             <>
@@ -473,7 +473,7 @@ function WatchlistContent({ onWatchlistPicker, onAddSymbols }: { onWatchlistPick
             </>
           )}
           <button className="wl-icon-btn" onClick={onAddSymbols}>
-            <Plus size={24} color="#6f6f6f" weight="regular" />
+            <Plus size={24} color="#222222" weight="regular" />
           </button>
         </div>
       </div>
@@ -566,7 +566,7 @@ export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClos
 
         {/* Search bar */}
         <div className="add-sym-search-wrap">
-          <MagnifyingGlass size={18} color="#6f6f6f" weight="regular" />
+          <MagnifyingGlass size={18} color="#222222" weight="regular" />
           <input
             className="add-sym-input"
             value={query}
@@ -577,7 +577,7 @@ export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClos
           />
           {query.length > 0 && (
             <button className="add-sym-clear" onClick={() => setQuery('')}>
-              <XCircle size={18} color="#6f6f6f" weight="fill" />
+              <XCircle size={18} color="#222222" weight="fill" />
             </button>
           )}
         </div>
@@ -598,7 +598,7 @@ export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClos
                   >
                     {isAdded
                       ? <Check size={16} color="#fff" weight="bold" />
-                      : <Plus size={16} color="#6f6f6f" weight="regular" />
+                      : <Plus size={16} color="#222222" weight="regular" />
                     }
                   </button>
                   <div className="add-sym-info">
@@ -643,7 +643,7 @@ export function WatchlistPickerSheet({ visible, onClose }: { visible: boolean; o
             <div key={w.label} className={`wl-picker-row${w.active ? ' wl-picker-row--active' : ''}`}>
               <span className={`wl-picker-label${w.active ? ' wl-picker-label--active' : ''}`}>{w.label}</span>
               <button className="wl-picker-edit-btn">
-                <PencilSimple size={20} color="#6f6f6f" weight="regular" />
+                <PencilSimple size={20} color="#222222" weight="regular" />
               </button>
             </div>
           ))}

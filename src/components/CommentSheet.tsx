@@ -23,7 +23,7 @@ function CommentCard({ initials, name, time, text }: {
         <div className="comment-card-actions">
           <button className="comment-card-action-btn">Reply</button>
           <button className="comment-card-action-btn comment-card-action-btn--like">
-            <ThumbsUp size={16} weight="regular" color="#6f6f6f" />
+            <ThumbsUp size={16} weight="regular" color="#222222" />
           </button>
           <button className="comment-card-action-btn">Share</button>
         </div>

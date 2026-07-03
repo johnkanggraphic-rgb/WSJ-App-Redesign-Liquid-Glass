@@ -36,10 +36,10 @@ export default function PrintEditionReadPage({ visible, onBack }: {
         <div className="per-pill">
           <div className="per-pill-bg" />
           <button className="per-pill-btn">
-            <DownloadSimple size={24} color="#6f6f6f" />
+            <DownloadSimple size={24} color="#222222" />
           </button>
           <button className="per-pill-btn" onClick={() => setOptionsVisible(v => !v)}>
-            <DotsThree size={24} weight="bold" color="#6f6f6f" />
+            <DotsThree size={24} weight="bold" color="#222222" />
           </button>
         </div>
       </div>

@@ -258,10 +258,10 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         </div>
         <div className="mini-player-actions">
           <button className="mini-player-btn">
-            <Pause size={20} weight="fill" color="#111" />
+            <Pause size={20} weight="fill" color="#222222" />
           </button>
           <button className="mini-player-btn" onClick={hidePlayer}>
-            <X size={20} weight="bold" color="#111" />
+            <X size={20} weight="bold" color="#222222" />
           </button>
         </div>
       </div>
