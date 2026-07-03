@@ -32,7 +32,6 @@ function App() {
   const [showArticle, setShowArticle] = useState(false)
   const [openComments, setOpenComments] = useState(false)
   const [articleHeadline, setArticleHeadline] = useState('')
-  const [tabBarDark, setTabBarDark] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
   const [showVolumeSheet, setShowVolumeSheet] = useState(false)
   const [showWatchlistSheet, setShowWatchlistSheet] = useState(false)
@@ -70,7 +69,7 @@ function App() {
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
-                onDarkBg={setTabBarDark}
+
               />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
