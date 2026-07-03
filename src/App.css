@@ -73,7 +73,7 @@ body {
 .content-area {
   flex: 1;
   position: relative;
-  overflow: clip;
+  overflow: visible;
   min-height: 0;
 }
 
