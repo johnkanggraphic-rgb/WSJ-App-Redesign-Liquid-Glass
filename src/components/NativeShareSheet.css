@@ -16,18 +16,18 @@
 /* ── Sheet ───────────────────────────────────────────────────────────────── */
 .ns-sheet {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
   z-index: 83;
   background: #f2f2f7;
-  border-radius: 38px 38px 0 0;
-  transform: translateY(calc(100% + 20px));
+  border-radius: 38px;
+  transform: translateY(calc(100% + 36px));
   transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
-  max-height: 92%;
+  max-height: calc(92% - 16px);
   padding-bottom: 32px;
 }
 
