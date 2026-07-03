@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import './ShareSheet.css'
 import { X } from '@phosphor-icons/react'
 
-const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
-const imgEmail       = 'https://www.figma.com/api/mcp/asset/53d15a72-78d5-44b6-9769-83aef97c229d'
-const imgMessage     = 'https://www.figma.com/api/mcp/asset/ba77d48d-55cd-4602-9e70-1959855fdd8f'
-const imgXLogo       = 'https://www.figma.com/api/mcp/asset/bdc07f4a-d3ef-4fc9-a6d9-2d1350688d1a'
-const imgInstagram   = 'https://www.figma.com/api/mcp/asset/10c25830-eacf-4b38-b07b-3ba2c0af4d6d'
-const imgLinkedin    = 'https://www.figma.com/api/mcp/asset/d5b369de-24f3-49cf-8dea-ad0a572d71b3'
-const imgMore        = 'https://www.figma.com/api/mcp/asset/382b761d-7417-4712-91a3-c02fb61fd480'
-const imgNativeShare = 'https://www.figma.com/api/mcp/asset/2fcd8c52-e5cc-4073-9a18-4bdfaae91138'
+const imgHero     = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
+const imgEmail    = 'https://www.figma.com/api/mcp/asset/53d15a72-78d5-44b6-9769-83aef97c229d'
+const imgMessage  = 'https://www.figma.com/api/mcp/asset/ba77d48d-55cd-4602-9e70-1959855fdd8f'
+const imgXLogo    = 'https://www.figma.com/api/mcp/asset/bdc07f4a-d3ef-4fc9-a6d9-2d1350688d1a'
+const imgInstagram= 'https://www.figma.com/api/mcp/asset/10c25830-eacf-4b38-b07b-3ba2c0af4d6d'
+const imgLinkedin = 'https://www.figma.com/api/mcp/asset/d5b369de-24f3-49cf-8dea-ad0a572d71b3'
+const imgMore     = 'https://www.figma.com/api/mcp/asset/382b761d-7417-4712-91a3-c02fb61fd480'
 
 const SHARE_ACTIONS = [
   { src: imgEmail,     label: 'Email' },
@@ -21,8 +19,6 @@ const SHARE_ACTIONS = [
 ]
 
 export default function ShareSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
-  const [nativeVisible, setNativeVisible] = useState(false)
-
   return (
     <>
       <div className={`share-sheet-scrim${visible ? ' share-sheet-scrim--visible' : ''}`} onClick={onClose} />
@@ -52,10 +48,7 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
           <div className="share-actions-row">
             {SHARE_ACTIONS.map(({ src, label }) => (
               <div key={label} className="share-action-item">
-                <button
-                  className="share-action-btn"
-                  onClick={label === 'More' ? () => setNativeVisible(true) : undefined}
-                >
+                <button className="share-action-btn">
                   <img src={src} alt={label} className="share-action-icon" />
                 </button>
                 <span className="share-action-label">{label}</span>
@@ -63,12 +56,6 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Native iOS share sheet */}
-      <div className={`native-share-scrim${nativeVisible ? ' native-share-scrim--visible' : ''}`} onClick={() => setNativeVisible(false)} />
-      <div className={`native-share-sheet${nativeVisible ? ' native-share-sheet--visible' : ''}`}>
-        <img src={imgNativeShare} alt="iOS Share" className="native-share-img" />
       </div>
     </>
   )

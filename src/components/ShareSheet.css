@@ -182,37 +182,3 @@
   text-align: center;
   white-space: nowrap;
 }
-
-/* ── Native iOS share sheet ──────────────────────────────────────────────── */
-.native-share-scrim {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-  z-index: 82;
-  pointer-events: none;
-  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.native-share-scrim--visible {
-  background: rgba(0, 0, 0, 0.4);
-  pointer-events: auto;
-}
-
-.native-share-sheet {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 83;
-  transform: translateY(calc(100% + 20px));
-  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.native-share-sheet--visible {
-  transform: translateY(0);
-}
-
-.native-share-img {
-  width: 100%;
-  display: block;
-}
