@@ -160,13 +160,14 @@
 }
 
 .ns-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 8px;
   background: none;
   border: none;
   padding: 0;
-  padding: 10px 16px 10px 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,8 +184,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  top: -4px;
 }
 
 /* ── Separator ───────────────────────────────────────────────────────────── */
