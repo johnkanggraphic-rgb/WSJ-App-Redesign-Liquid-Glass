@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import StatusBar from './components/StatusBar'
 import TitleBar from './components/TitleBar'
@@ -16,7 +16,12 @@ import PuzzlesPage from './components/PuzzlesPage'
 import PrintEditionPage from './components/PrintEditionPage'
 import PrintEditionReadPage from './components/PrintEditionReadPage'
 
+const PHONE_W = 405
+const PHONE_H = 864
+const PAD = 96
+
 function App() {
+  const [scale, setScale] = useState(1)
   const [showNotifs, setShowNotifs] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
@@ -31,8 +36,20 @@ function App() {
   const [showPrintEdition, setShowPrintEdition] = useState(false)
   const [showPrintRead, setShowPrintRead] = useState(false)
 
+  useEffect(() => {
+    const compute = () => {
+      const scaleX = window.innerWidth / PHONE_W
+      const scaleY = (window.innerHeight - PAD * 2) / PHONE_H
+      setScale(Math.min(scaleX, scaleY, 1))
+    }
+    compute()
+    window.addEventListener('resize', compute)
+    return () => window.removeEventListener('resize', compute)
+  }, [])
+
   return (
     <div className="stage">
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: 'center center' }}>
       <div className="iphone">
         <div className="iphone-frame">
           <div className="btn-power" />
@@ -41,6 +58,7 @@ function App() {
           <div className="btn-mute" />
 
           <div className="iphone-screen">
+            <div className="iphone-screen-mask" />
             <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3} />
             <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
             <TopNav />
@@ -72,6 +90,7 @@ function App() {
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
