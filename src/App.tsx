@@ -49,13 +49,14 @@ function App() {
 
   return (
     <div className="stage">
-      <div style={{
-        position: 'absolute',
-        left: `calc(50% - ${PHONE_W / 2}px)`,
-        top: `calc(50% - ${PHONE_H / 2}px)`,
-        transform: `scale(${scale})`,
-        transformOrigin: 'center center',
-      }}>
+      {/* Wrapper sized to scaled footprint so flexbox centers correctly */}
+      <div style={{ width: PHONE_W * scale, height: PHONE_H * scale, position: 'relative', flexShrink: 0 }}>
+        <div style={{
+          position: 'absolute',
+          top: 0, left: 0,
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left',
+        }}>
       <div className="iphone">
         <div className="iphone-frame">
           <div className="btn-power" />
@@ -97,6 +98,7 @@ function App() {
           </div>
         </div>
       </div>
+        </div>
       </div>
     </div>
   )
