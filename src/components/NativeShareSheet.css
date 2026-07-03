@@ -1,0 +1,444 @@
+/* ── Scrim ───────────────────────────────────────────────────────────────── */
+.ns-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 82;
+  pointer-events: none;
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ns-scrim--visible {
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+/* ── Sheet ───────────────────────────────────────────────────────────────── */
+.ns-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 83;
+  background: #f2f2f7;
+  border-radius: 38px 38px 0 0;
+  transform: translateY(calc(100% + 20px));
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  max-height: 92%;
+  padding-bottom: 32px;
+}
+
+.ns-sheet::-webkit-scrollbar { display: none; }
+
+.ns-sheet--visible {
+  transform: translateY(0);
+}
+
+/* ── Grabber ─────────────────────────────────────────────────────────────── */
+.ns-grabber {
+  width: 58px;
+  height: 4px;
+  background: rgba(60, 60, 67, 0.3);
+  border-radius: 2.5px;
+  margin: 5px auto 0;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.ns-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+}
+
+.ns-header-thumb {
+  padding: 14px 0 0 12px;
+  flex-shrink: 0;
+}
+
+.ns-thumb-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.15);
+}
+
+.ns-header-middle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.ns-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ns-header-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 510;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.23px;
+  color: #1a1a1a;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ns-header-subtitle {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.08px;
+  color: #727272;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ns-collaborate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 6px 10px 6px 14px;
+  border-radius: 1000px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 0 0.5px #e8e8e8, 0px 8px 15px 0px rgba(0, 0, 0, 0.02);
+}
+
+.ns-collaborate-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 510;
+  font-size: 15px;
+  line-height: 18px;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.ns-header-hint {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: -0.08px;
+  color: #727272;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ns-close-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  padding: 10px 16px 10px 0;
+}
+
+.ns-close-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 1000px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 0.5px #e8e8e8, 0px 8px 15px 0px rgba(0, 0, 0, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Separator ───────────────────────────────────────────────────────────── */
+.ns-separator {
+  height: 1px;
+  background: #e6e6e6;
+  margin: 0 24px;
+}
+
+/* ── Contacts row ────────────────────────────────────────────────────────── */
+.ns-contacts-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0 16px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ns-contacts-row::-webkit-scrollbar { display: none; }
+
+.ns-contact {
+  position: relative;
+  width: 78px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ns-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.ns-avatar-group {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.ns-avatar-group-back {
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  border-radius: 100px;
+  object-fit: cover;
+  top: 9px;
+  left: 9px;
+}
+
+.ns-avatar-group-front {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 100px;
+  object-fit: cover;
+  bottom: 9px;
+  right: 9px;
+}
+
+.ns-contact-badge {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  top: 50px;
+  right: 4px;
+}
+
+.ns-contact-name {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.ns-contact-name p {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: 0.06px;
+  color: #000;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78px;
+}
+
+/* ── App icons row ───────────────────────────────────────────────────────── */
+.ns-app-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 0 20px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ns-app-row::-webkit-scrollbar { display: none; }
+
+.ns-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  width: 78px;
+  flex-shrink: 0;
+}
+
+.ns-app-icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 15px;
+  object-fit: cover;
+  display: block;
+}
+
+.ns-app-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: 0.06px;
+  color: #000;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78px;
+}
+
+/* ── Round actions row ───────────────────────────────────────────────────── */
+.ns-round-actions-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0 20px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ns-round-actions-row::-webkit-scrollbar { display: none; }
+
+.ns-round-action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 78px;
+  flex-shrink: 0;
+}
+
+.ns-round-action-btn {
+  width: 66px;
+  height: 66px;
+  border-radius: 1000px;
+  background: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ns-round-action-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.1px;
+  color: #1a1a1a;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78px;
+}
+
+/* ── List actions ────────────────────────────────────────────────────────── */
+.ns-list-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 2px 16px 20px;
+}
+
+.ns-action-group {
+  width: 100%;
+  background: rgba(120, 120, 128, 0.16);
+  border-radius: 26px;
+  overflow: clip;
+}
+
+.ns-action-row {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding-left: 8px;
+  padding-right: 16px;
+}
+
+.ns-action-row svg {
+  flex-shrink: 0;
+  width: 48px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.ns-action-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  padding-bottom: 1px;
+  position: relative;
+}
+
+.ns-action-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+.ns-action-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.43px;
+  color: #000;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Edit Actions ────────────────────────────────────────────────────────── */
+.ns-edit-actions-row {
+  display: flex;
+  justify-content: center;
+}
+
+.ns-edit-actions-btn {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 510;
+  font-size: 17px;
+  line-height: 18px;
+  color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 1000px;
+  padding: 16px 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 0 0.5px #e8e8e8, 0px 8px 15px 0px rgba(0, 0, 0, 0.02);
+}

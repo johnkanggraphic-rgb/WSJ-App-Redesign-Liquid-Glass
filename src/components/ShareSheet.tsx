@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import './ShareSheet.css'
 import { X } from '@phosphor-icons/react'
+import NativeShareSheet from './NativeShareSheet'
 
 const imgHero     = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
 const imgEmail    = 'https://www.figma.com/api/mcp/asset/53d15a72-78d5-44b6-9769-83aef97c229d'
@@ -19,6 +21,8 @@ const SHARE_ACTIONS = [
 ]
 
 export default function ShareSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  const [nativeVisible, setNativeVisible] = useState(false)
+
   return (
     <>
       <div className={`share-sheet-scrim${visible ? ' share-sheet-scrim--visible' : ''}`} onClick={onClose} />
@@ -48,7 +52,10 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
           <div className="share-actions-row">
             {SHARE_ACTIONS.map(({ src, label }) => (
               <div key={label} className="share-action-item">
-                <button className="share-action-btn">
+                <button
+                  className="share-action-btn"
+                  onClick={label === 'More' ? () => setNativeVisible(true) : undefined}
+                >
                   <img src={src} alt={label} className="share-action-icon" />
                 </button>
                 <span className="share-action-label">{label}</span>
@@ -57,6 +64,7 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
           </div>
         </div>
       </div>
+      <NativeShareSheet visible={nativeVisible} onClose={() => setNativeVisible(false)} />
     </>
   )
 }
