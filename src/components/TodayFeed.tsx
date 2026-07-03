@@ -683,7 +683,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
         <FeedDivider />
         <NewsPackageCard />
         <FeedDivider />
-        <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%' }} />
+        <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%', borderBottom: '1px solid #ebebeb' }} />
         <OpinionPackage />
         <FeedDivider />
         <WorldPackage />
