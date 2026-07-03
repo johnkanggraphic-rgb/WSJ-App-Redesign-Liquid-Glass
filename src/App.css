@@ -10,18 +10,18 @@ body {
 }
 
 .stage {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
   background: #222222;
   overflow: hidden;
 }
 
 /* iPhone 16: screen 393x852, frame adds 6px each side → 405x864 */
 .iphone {
-  flex-shrink: 0;
+  width: 405px;
+  height: 864px;
 }
 
 .iphone-frame {
