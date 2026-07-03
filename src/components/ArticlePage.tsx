@@ -43,6 +43,7 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
   const [toastVisible, setToastVisible] = useState(false)
   const [toastHiding, setToastHiding] = useState(false)
   const [toastLinkLabel, setToastLinkLabel] = useState<string | null>(null)
+  const [toastMessage, setToastMessage] = useState<string>('Successfully added')
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const toastHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -53,12 +54,10 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
     toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false) }, 220)
   }, [])
 
-  const handleBookmark = useCallback(() => {
-    const next = !bookmarked
-    setBookmarked(next)
-    const linkLabel = next ? 'Go to Save' : null
+  const showToast = useCallback((message: string, linkLabel: string | null) => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
     if (toastHideTimer.current) clearTimeout(toastHideTimer.current)
+    setToastMessage(message)
     setToastLinkLabel(linkLabel)
     setToastHiding(false)
     setToastVisible(true)
@@ -66,7 +65,17 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
       setToastHiding(true)
       toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false) }, 220)
     }, 2000)
-  }, [bookmarked])
+  }, [])
+
+  const handleBookmark = useCallback(() => {
+    const next = !bookmarked
+    setBookmarked(next)
+    showToast(next ? 'Successfully added' : 'Item successfully removed', next ? 'Go to Save' : null)
+  }, [bookmarked, showToast])
+
+  const handleGift = useCallback(() => {
+    showToast('Gift link copied', null)
+  }, [showToast])
 
   const [playerVisible, setPlayerVisible] = useState(false)
   const [playerHiding, setPlayerHiding] = useState(false)
@@ -210,9 +219,7 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
         className={`bookmark-toast${toastVisible ? ' bookmark-toast--visible' : ''}${toastHiding ? ' bookmark-toast--hiding' : ''}`}
         style={{ bottom: toolbarHidden ? 44 : 92 }}
       >
-        <span className="bookmark-toast-text">
-          {toastLinkLabel !== null ? 'Successfully added' : 'Item successfully removed'}
-        </span>
+        <span className="bookmark-toast-text">{toastMessage}</span>
         {toastLinkLabel !== null && (
           <a href="#" className="bookmark-toast-link">{toastLinkLabel}</a>
         )}
@@ -274,14 +281,12 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
           <button className="article-pill-btn" onClick={handleBookmark}>
             <BookmarkSimple size={24} weight={bookmarked ? 'fill' : 'regular'} color={bookmarked ? '#222' : '#6f6f6f'} />
           </button>
-          {[
-            { src: imgGift,     alt: 'Gift' },
-            { src: imgShareFat, alt: 'Share' },
-          ].map(({ src, alt }) => (
-            <button key={alt} className="article-pill-btn">
-              <img src={src} alt={alt} className="article-pill-icon" />
-            </button>
-          ))}
+          <button className="article-pill-btn" onClick={handleGift}>
+            <img src={imgGift} alt="Gift" className="article-pill-icon" />
+          </button>
+          <button className="article-pill-btn">
+            <img src={imgShareFat} alt="Share" className="article-pill-icon" />
+          </button>
         </div>
       </div>
     </div>
