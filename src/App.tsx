@@ -49,15 +49,7 @@ function App() {
 
   return (
     <div className="stage">
-      {/* Wrapper sized to scaled footprint so flexbox centers correctly */}
-      <div style={{ width: PHONE_W * scale, height: PHONE_H * scale, position: 'relative', flexShrink: 0 }}>
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0,
-          transform: `scale(${scale})`,
-          transformOrigin: 'top left',
-        }}>
-      <div className="iphone">
+      <div className="iphone" style={{ zoom: scale }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />
@@ -96,8 +88,6 @@ function App() {
             <WatchlistPickerSheet visible={showWatchlistSheet} onClose={() => setShowWatchlistSheet(false)} />
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
           </div>
-        </div>
-      </div>
         </div>
       </div>
     </div>
