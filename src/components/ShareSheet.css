@@ -1,0 +1,177 @@
+/* ── Scrim ───────────────────────────────────────────────────────────────── */
+.share-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 80;
+  pointer-events: none;
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-sheet-scrim--visible {
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+/* ── Sheet ───────────────────────────────────────────────────────────────── */
+.share-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 81;
+  border-radius: 34px 34px 0 0;
+  background: #fff;
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12);
+  transform: translateY(calc(100% + 20px));
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: clip;
+  padding-bottom: 48px;
+}
+
+.share-sheet--visible {
+  transform: translateY(0);
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.share-sheet-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 10px;
+}
+
+.share-sheet-grabber {
+  width: 36px;
+  height: 5px;
+  background: #ccc;
+  border-radius: 100px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.share-sheet-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  position: relative;
+}
+
+.share-sheet-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 22px;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.share-sheet-close-btn {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-sheet-close-glass {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -4px;
+}
+
+/* ── Content ─────────────────────────────────────────────────────────────── */
+.share-sheet-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 16px;
+}
+
+/* ── Article card ────────────────────────────────────────────────────────── */
+.share-article-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.share-article-headline {
+  font-family: 'DJ5 Escrow Comp', serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  color: #111;
+  margin: 0;
+  text-align: left;
+}
+
+.share-article-img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+/* ── Share actions ───────────────────────────────────────────────────────── */
+.share-actions-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.share-action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+.share-action-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #f4f5f7;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.share-action-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.share-action-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #222;
+  text-align: center;
+  white-space: nowrap;
+}

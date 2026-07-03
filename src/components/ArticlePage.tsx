@@ -5,6 +5,7 @@ import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
 import BackstoryPage from './BackstoryPage'
 import CommentSheet from './CommentSheet'
+import ShareSheet from './ShareSheet'
 
 const imgCaretLeft      = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 const imgEnvelope       = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b0-b7d4-4304d3926780'
@@ -28,6 +29,7 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
   const [authorSheetVisible, setAuthorSheetVisible] = useState(false)
   const [showBackstory, setShowBackstory] = useState(false)
   const [commentSheetVisible, setCommentSheetVisible] = useState(false)
+  const [shareSheetVisible, setShareSheetVisible] = useState(false)
 
   useEffect(() => {
     if (visible && openComments) {
@@ -237,6 +239,9 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
       {/* Comment sheet */}
       <CommentSheet visible={commentSheetVisible} onClose={() => setCommentSheetVisible(false)} />
 
+      {/* Share sheet */}
+      <ShareSheet visible={shareSheetVisible} onClose={() => setShareSheetVisible(false)} />
+
       {/* Article mini player */}
       <div
         className={`article-mini-player${playerVisible ? ' article-mini-player--visible' : ''}${playerHiding ? ' article-mini-player--hiding' : ''}`}
@@ -284,7 +289,7 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
           <button className="article-pill-btn" onClick={handleGift}>
             <img src={imgGift} alt="Gift" className="article-pill-icon" />
           </button>
-          <button className="article-pill-btn">
+          <button className="article-pill-btn" onClick={() => setShareSheetVisible(true)}>
             <img src={imgShareFat} alt="Share" className="article-pill-icon" />
           </button>
         </div>
