@@ -32,7 +32,7 @@ const stories = [
 
 const TABS = ['For You', 'Shortlist', 'Saved']
 
-export default function MyWSJPage({ visible, onBellTap }: { visible: boolean; onBellTap?: () => void }) {
+export default function MyWSJPage({ slidePos, onBellTap }: { slidePos?: 'left' | 'center' | 'right'; onBellTap?: () => void }) {
   const [activeTab, setActiveTab] = useState(0)
   const [shortlistKey, setShortlistKey] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -58,7 +58,7 @@ export default function MyWSJPage({ visible, onBellTap }: { visible: boolean; on
   }, [])
 
   return (
-    <div className={`mywsj-page${visible ? ' mywsj-page--visible' : ''}`}>
+    <div className={`mywsj-page mywsj-page--${slidePos ?? 'right'}`}>
       {/* Toolbar */}
       <div className="mywsj-toolbar">
         <div className="mywsj-toolbar-leading">

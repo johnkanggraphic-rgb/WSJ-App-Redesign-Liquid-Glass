@@ -1,7 +1,7 @@
 /* MyWSJPage — Figma node 2096:35088 */
 .mywsj-page {
   position: absolute;
-  top: 59px; /* below StatusBar — matches StatusBar height so toolbar aligns with TitleBar */
+  top: 59px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -9,14 +9,17 @@
   z-index: 8;
   display: flex;
   flex-direction: column;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
 }
 
-.mywsj-page--visible {
+.mywsj-page--center {
   opacity: 1;
   pointer-events: auto;
+}
+
+.mywsj-page--left,
+.mywsj-page--right {
+  opacity: 0;
 }
 
 /* ── Toolbar — height/padding identical to TitleBar ── */

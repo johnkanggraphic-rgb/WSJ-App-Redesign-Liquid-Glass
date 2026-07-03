@@ -9,6 +9,7 @@ import NotificationsPage from './components/NotificationsPage'
 import SearchPage from './components/SearchPage'
 import ArticlePage from './components/ArticlePage'
 import MyWSJPage from './components/MyWSJPage'
+import MarketDataPage from './components/MarketDataPage'
 
 function App() {
   const [showNotifs, setShowNotifs] = useState(false)
@@ -42,7 +43,8 @@ function App() {
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
-            <MyWSJPage visible={activeTab === 1} onBellTap={() => setShowNotifs(true)} />
+            <MyWSJPage slidePos={activeTab === 1 ? 'center' : activeTab > 1 ? 'left' : 'right'} onBellTap={() => setShowNotifs(true)} />
+            <MarketDataPage slidePos={activeTab === 2 ? 'center' : activeTab > 2 ? 'left' : 'right'} onBellTap={() => setShowNotifs(true)} />
             <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
           </div>
         </div>
