@@ -72,7 +72,7 @@ function App() {
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
                 onDarkBg={setTabBarDark}
               />
-              <TabBar dark={tabBarDark || activeTab === 3} onTabChange={setActiveTab} />
+              <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
