@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './ShareSheet.css'
 import { X } from '@phosphor-icons/react'
 import NativeShareSheet from './NativeShareSheet'
@@ -22,6 +22,13 @@ const SHARE_ACTIONS = [
 
 export default function ShareSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   const [nativeVisible, setNativeVisible] = useState(false)
+  const actionsRowRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (visible && actionsRowRef.current) {
+      actionsRowRef.current.scrollLeft = 0
+    }
+  }, [visible])
 
   return (
     <>
@@ -49,7 +56,7 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
           </div>
 
           {/* Share actions */}
-          <div className="share-actions-row">
+          <div className="share-actions-row" ref={actionsRowRef}>
             {SHARE_ACTIONS.map(({ src, label }) => (
               <div key={label} className="share-action-item">
                 <button
