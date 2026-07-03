@@ -69,7 +69,7 @@
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(24px) saturate(1.8);
   -webkit-backdrop-filter: blur(24px) saturate(1.8);
-  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 1);
   /* shift up 6px so center aligns with bell icon (59+22=81px vs 59+28=87px) */
   margin-top: -12px;
 }
