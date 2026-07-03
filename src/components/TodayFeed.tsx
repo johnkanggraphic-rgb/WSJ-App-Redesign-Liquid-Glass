@@ -644,7 +644,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
         threshold: 0,
       }
     )
-    el.querySelectorAll('.card-image').forEach(img => observer.observe(img))
+    el.querySelectorAll('.card-image, .promo-fill').forEach(img => observer.observe(img))
 
     return () => {
       el.removeEventListener('scroll', onScroll)
