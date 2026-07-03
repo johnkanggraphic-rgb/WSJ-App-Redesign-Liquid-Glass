@@ -112,7 +112,7 @@ export default function SearchPage({ visible, onBack }: {
             </div>
           </button>
         </div>
-        <span className="search-toolbar-title"></span>
+        <span className="search-toolbar-title">Search</span>
         <div className="search-toolbar-trailing" />
       </div>
 

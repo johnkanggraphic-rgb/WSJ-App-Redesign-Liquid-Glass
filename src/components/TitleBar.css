@@ -2,7 +2,7 @@
    full width, 44px height, px-16px, gap-10px */
 .titlebar {
   width: 100%;
-  height: 44px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;

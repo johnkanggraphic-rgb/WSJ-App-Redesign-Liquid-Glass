@@ -10,7 +10,7 @@ const tabs = [
   { label: 'More',        Icon: MoreIcon },
 ]
 
-export default function TabBar({ dark = false }: { dark?: boolean }) {
+export default function TabBar({ dark = false, onTabChange }: { dark?: boolean; onTabChange?: (index: number) => void }) {
   const [active, setActive] = useState(0)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const pillRef = useRef<HTMLDivElement>(null)
@@ -22,11 +22,8 @@ export default function TabBar({ dark = false }: { dark?: boolean }) {
     const pill = pillRef.current
     if (!activeTab || !container || !pill) return
 
-    const tabRect = activeTab.getBoundingClientRect()
-    const containerRect = container.getBoundingClientRect()
-
-    pill.style.left = `${tabRect.left - containerRect.left - 2}px`
-    pill.style.width = `${tabRect.width + 3.8}px`
+    pill.style.left = `${activeTab.offsetLeft - 2}px`
+    pill.style.width = `${activeTab.offsetWidth + 3.8}px`
 
     // Trigger bounce: remove class, force reflow, re-add
     pill.classList.remove('tab-selection-pill--bounce')
@@ -55,7 +52,7 @@ export default function TabBar({ dark = false }: { dark?: boolean }) {
             key={tab.label}
             ref={el => { tabRefs.current[i] = el }}
             className={`tab${i === active ? ' tab--active' : ''}${i === tabs.length - 1 ? ' tab--last' : ''}`}
-            onClick={() => setActive(i)}
+            onClick={() => { setActive(i); onTabChange?.(i) }}
           >
             <div className="tab-icon">
               <tab.Icon active={i === active} dark={dark && i !== active} />

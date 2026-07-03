@@ -8,6 +8,7 @@ import TabBar from './components/TabBar'
 import NotificationsPage from './components/NotificationsPage'
 import SearchPage from './components/SearchPage'
 import ArticlePage from './components/ArticlePage'
+import MyWSJPage from './components/MyWSJPage'
 
 function App() {
   const [showNotifs, setShowNotifs] = useState(false)
@@ -16,6 +17,7 @@ function App() {
   const [openComments, setOpenComments] = useState(false)
   const [articleHeadline, setArticleHeadline] = useState('')
   const [tabBarDark, setTabBarDark] = useState(false)
+  const [activeTab, setActiveTab] = useState(0)
 
   return (
     <div className="stage">
@@ -36,10 +38,11 @@ function App() {
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
                 onDarkBg={setTabBarDark}
               />
-              <TabBar dark={tabBarDark} />
+              <TabBar dark={tabBarDark} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
+            <MyWSJPage visible={activeTab === 1} onBellTap={() => setShowNotifs(true)} />
             <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
           </div>
         </div>

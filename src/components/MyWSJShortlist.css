@@ -1,0 +1,256 @@
+/* MyWSJ Shortlist tab — Figma node 2097:40155 */
+
+.sl-root {
+  width: 100%;
+}
+
+/* Info bar */
+.sl-info-bar {
+  padding: 12px 16px;
+  background: #fff;
+}
+
+.sl-info-text {
+  font-family: 'Retina', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #6f6f6f;
+  text-align: left;
+}
+
+.sl-info-link {
+  text-decoration: underline;
+  color: #6f6f6f;
+}
+
+/* Listen row */
+.sl-listen-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+}
+
+.sl-listen-label {
+  font-family: 'Retina', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #222;
+}
+
+.sl-play-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Retina', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sl-play-icon {
+  font-size: 10px;
+}
+
+/* Section wrapper */
+.sl-section {
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  background: #fff;
+  overflow: clip;
+}
+
+/* Card */
+.sl-card {
+  padding: 24px 20px 4px;
+  background: #fff;
+}
+
+.sl-card--opinion {
+  background: #f5f0eb;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.sl-card-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.sl-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sl-thumb-gap {
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.sl-thumb {
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: clip;
+}
+
+.sl-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Flashline */
+.sl-flashline-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sl-flashline {
+  font-family: 'Retina Narrow', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #6f6f6f;
+}
+
+.sl-flashline--opinion {
+  color: #865a1c;
+}
+
+.sl-flashline-dot {
+  display: flex;
+  align-items: center;
+  margin: 0 4px;
+}
+
+.sl-flashline-dot img {
+  width: 3px;
+  height: 3px;
+  display: block;
+}
+
+/* Headline */
+.sl-headline {
+  font-family: 'Escrow Condensed', 'EscrowCondensed', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #111;
+  text-align: left;
+}
+
+/* Footer */
+.sl-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0;
+}
+
+.sl-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sl-date,
+.sl-read-time {
+  font-family: 'Retina', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  white-space: nowrap;
+}
+
+.sl-sep {
+  display: flex;
+  align-items: center;
+  margin: 0 4px;
+}
+
+.sl-sep img {
+  width: 3px;
+  height: 3px;
+  display: block;
+}
+
+.sl-footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.sl-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.sl-action-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Expired header */
+.sl-expired-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 4px 12px 16px;
+  background: #fff;
+}
+
+.sl-expired-title {
+  font-family: 'Retina Narrow', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.116px;
+  text-transform: uppercase;
+  color: #222;
+}
+
+/* Divider */
+.sl-divider {
+  height: 1px;
+  background: #ebebeb;
+}
+
+/* 8px spacer between sections */
+.sl-spacer {
+  height: 8px;
+  background: #f4f5f7;
+}
+
+/* Spacing helpers */
+.sl-space-8 { height: 8px; }
+
+/* Bottom padding for tab bar */
+.sl-bottom-pad {
+  height: 100px;
+}
