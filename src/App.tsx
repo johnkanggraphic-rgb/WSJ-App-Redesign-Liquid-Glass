@@ -20,8 +20,17 @@ const PHONE_W = 405
 const PHONE_H = 864
 const PAD = 96
 
+function computePos() {
+  const scale = Math.min(window.innerWidth / PHONE_W, (window.innerHeight - PAD * 2) / PHONE_H, 1)
+  return {
+    scale,
+    left: Math.round((window.innerWidth - PHONE_W * scale) / 2),
+    top: Math.round((window.innerHeight - PHONE_H * scale) / 2),
+  }
+}
+
 function App() {
-  const [pos, setPos] = useState({ scale: 1, left: 0, top: 0 })
+  const [pos, setPos] = useState(computePos)
   const [showNotifs, setShowNotifs] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
@@ -37,15 +46,9 @@ function App() {
   const [showPrintRead, setShowPrintRead] = useState(false)
 
   useEffect(() => {
-    const compute = () => {
-      const scale = Math.min(window.innerWidth / PHONE_W, (window.innerHeight - PAD * 2) / PHONE_H, 1)
-      const left = Math.round((window.innerWidth - PHONE_W * scale) / 2)
-      const top = Math.round((window.innerHeight - PHONE_H * scale) / 2)
-      setPos({ scale, left, top })
-    }
-    compute()
-    window.addEventListener('resize', compute)
-    return () => window.removeEventListener('resize', compute)
+    const onResize = () => setPos(computePos())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
   }, [])
 
   return (
