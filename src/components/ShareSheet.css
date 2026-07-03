@@ -135,6 +135,13 @@
   display: flex;
   align-items: flex-start;
   gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.share-actions-row::-webkit-scrollbar {
+  display: none;
 }
 
 .share-action-item {
