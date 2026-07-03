@@ -1,0 +1,603 @@
+/* ── Live Coverage page — slides in from right ──────────────────────────── */
+.lc-page {
+  position: absolute;
+  inset: 0;
+  background: #f4f5f7;
+  display: flex;
+  flex-direction: column;
+  z-index: 65;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  overflow: clip;
+}
+
+.lc-page--visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* ── Scrollable content ─────────────────────────────────────────────────── */
+.lc-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.lc-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Top gradient/status overlay ────────────────────────────────────────── */
+.lc-statusbar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.lc-statusbar-overlay .statusbar {
+  background: transparent !important;
+  pointer-events: auto;
+}
+
+.lc-top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 100%);
+  z-index: 9;
+  pointer-events: none;
+}
+
+/* ── Featured header (top) ──────────────────────────────────────────────── */
+.lc-featured {
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+  padding: 80px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── LC Header row: LIVE tag + timestamp ────────────────────────────────── */
+.lc-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lc-live-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fce6e6;
+  border-radius: 2px;
+  padding: 1px 4px;
+  flex-shrink: 0;
+}
+
+.lc-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e10000;
+  flex-shrink: 0;
+}
+
+.lc-live-text {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #e10000;
+}
+
+.lc-timestamp {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #e10000;
+}
+
+/* ── Featured headline ──────────────────────────────────────────────────── */
+.lc-featured-headline {
+  font-family: 'DJ5 Escrow Comp', serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 42px;
+  color: #111;
+  margin: 0 0 12px;
+}
+
+/* ── Featured summary ───────────────────────────────────────────────────── */
+.lc-featured-summary {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222;
+  margin: 0 0 24px;
+}
+
+/* ── Widget cards (Event Timeline / Notifications) ──────────────────────── */
+.lc-widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.lc-widget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 6px 0 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.lc-widget-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lc-widget-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lc-widget-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lc-widget-meta-text {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+.lc-widget-meta-live {
+  color: #e10000;
+}
+
+.lc-widget-meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #6f6f6f;
+  flex-shrink: 0;
+}
+
+.lc-widget-caret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  color: #222;
+}
+
+.lc-widget-notif {
+  padding: 0 16px;
+}
+
+.lc-widget-notif .lc-widget-title {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.lc-widget-toggle {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Toggle switch */
+.lc-toggle {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lc-toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.lc-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: #e2e2e2;
+  transition: background 0.2s;
+}
+
+.lc-toggle-input:checked + .lc-toggle-track {
+  background: #222222;
+}
+
+.lc-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.lc-toggle-input:checked ~ .lc-toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* ── Featured image ─────────────────────────────────────────────────────── */
+.lc-featured-img-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.lc-featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #f4f5f7;
+}
+
+.lc-img-caption-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.lc-img-caption {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+.lc-img-credit {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #6f6f6f;
+  text-transform: uppercase;
+}
+
+/* ── Featured body text ─────────────────────────────────────────────────── */
+.lc-featured-body {
+  font-family: 'Exchange', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #222;
+  margin: 0 0 8px;
+}
+
+/* ── Bullet list ────────────────────────────────────────────────────────── */
+.lc-bullets {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.lc-bullet {
+  font-family: 'Exchange', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #222;
+  margin-bottom: 8px;
+  list-style-type: disc;
+}
+
+.lc-bullet strong {
+  font-weight: 700;
+}
+
+/* ── Stock tickers ──────────────────────────────────────────────────────── */
+.lc-stocks {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.lc-stock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.lc-stock-name {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+}
+
+.lc-stock-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lc-stock-price {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+}
+
+.lc-stock-change {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0a8200;
+}
+
+.lc-stock-arrow {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* ── Updates section label ──────────────────────────────────────────────── */
+.lc-updates-label {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #6f6f6f;
+  padding: 16px 16px 0;
+  margin-bottom: 8px;
+}
+
+/* ── Update card ────────────────────────────────────────────────────────── */
+.lc-update-card {
+  margin: 0 16px 16px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lc-update-card--opinion {
+  background: #f5f0eb;
+  border-color: #e7ded2;
+}
+
+.lc-update-timestamp {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #e10000;
+  margin-bottom: 8px;
+}
+
+.lc-update-opinion-tag {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #865a1c;
+  margin-bottom: 4px;
+}
+
+.lc-update-headline {
+  font-family: 'Escrow Condensed', 'DJ5 Escrow Cond', serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #111;
+  margin: 0 0 16px;
+}
+
+.lc-update-byline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.lc-update-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f4f5f7;
+}
+
+.lc-update-byline-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lc-update-author {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lc-update-author--opinion {
+  color: #865a1c;
+}
+
+.lc-update-img-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.lc-update-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #f4f5f7;
+}
+
+.lc-update-body {
+  font-family: 'Exchange', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #222;
+  margin: 0 0 8px;
+}
+
+.lc-update-bullets {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.lc-update-bullet {
+  font-family: 'Exchange', 'Georgia', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #222;
+  list-style-type: disc;
+  margin-bottom: 8px;
+}
+
+.lc-update-bullet strong {
+  font-weight: 700;
+}
+
+.lc-update-stocks {
+  margin-top: 0;
+}
+
+.lc-update-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+}
+
+.lc-update-show-more {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #222;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lc-update-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lc-update-share-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.4;
+}
+
+/* ── Bottom CTA ─────────────────────────────────────────────────────────── */
+.lc-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 16px 8px;
+}
+
+.lc-cta-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Reset notif-back-glass margin inside article-toolbar on this page */
+.lc-page .article-toolbar .notif-back-glass {
+  margin-top: 0;
+}
+
+/* ── Bottom safe-area pad ───────────────────────────────────────────────── */
+.lc-bottom-pad {
+  height: 52px;
+}
