@@ -284,7 +284,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
             <img src={imgChat} alt="Chat" className="article-pill-icon" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>
-            <BookmarkSimple size={24} weight={bookmarked ? 'fill' : 'regular'} color={bookmarked ? '#222' : '#6f6f6f'} />
+            <BookmarkSimple size={24} weight={bookmarked ? 'fill' : 'regular'} color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={handleGift}>
             <img src={imgGift} alt="Gift" className="article-pill-icon" />
