@@ -29,7 +29,7 @@
   gap: 9px;
   border: none;
   border-radius: 8px;
-  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 1);
   padding: 8px 6px 8px 8px;
   transform: translateY(calc(100% + 120px));
   opacity: 0;
@@ -105,7 +105,7 @@
   padding: 0 14px;
   height: 48px;
   border-radius: 296px;
-  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 1);
 }
 
 /* Blur layer — separate child so overflow:hidden doesn't block backdrop-filter */
