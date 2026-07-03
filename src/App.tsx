@@ -22,7 +22,11 @@ const PAD = 96
 
 function computePos() {
   const scale = Math.min(window.innerWidth / PHONE_W, (window.innerHeight - PAD * 2) / PHONE_H, 1)
-  return { scale }
+  return {
+    scale,
+    left: Math.round((window.innerWidth - PHONE_W * scale) / 2),
+    top: Math.round((window.innerHeight - PHONE_H * scale) / 2),
+  }
 }
 
 function App() {
@@ -49,7 +53,13 @@ function App() {
 
   return (
     <div className="stage">
-      <div className="iphone" style={{ zoom: pos.scale }}>
+      <div className="iphone" style={{
+        position: 'absolute',
+        left: pos.left,
+        top: pos.top,
+        transform: `scale(${pos.scale})`,
+        transformOrigin: 'top left',
+      }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />
