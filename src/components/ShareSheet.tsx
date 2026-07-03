@@ -54,7 +54,7 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
               <div key={label} className="share-action-item">
                 <button
                   className="share-action-btn"
-                  onClick={label === 'More' ? () => setNativeVisible(true) : undefined}
+                  onClick={label === 'More' ? () => { setNativeVisible(true); onClose() } : undefined}
                 >
                   <img src={src} alt={label} className="share-action-icon" />
                 </button>
