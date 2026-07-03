@@ -1,0 +1,124 @@
+/* StatusBar — Figma node 2070:34859
+   Full width, white bg, items aligned to bottom */
+.statusbar {
+  width: 100%;
+  height: 59px;
+  background: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.statusbar--transparent {
+  background: transparent;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Left third — time */
+.statusbar-left {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.statusbar-time {
+  position: relative;
+  width: 54px;
+  height: 21px;
+  border-radius: 24px;
+}
+
+.statusbar-time-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 1px;
+  width: 54px;
+  height: 20px;
+  font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  -webkit-text-stroke: 0.3px #000;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  color: #000;
+  text-align: center;
+  margin: 0;
+  font-feature-settings: "case" 1;
+  white-space: nowrap;
+}
+
+/* Center — Dynamic Island */
+.statusbar-center {
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.statusbar-dynamic-island {
+  position: relative;
+  width: 125px;
+  height: 37px;
+  background: black;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.statusbar-di-camera {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 22.5px);
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 37px;
+  background: black;
+  border-radius: 100px;
+}
+
+.statusbar-di-facetime {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 44px);
+  transform: translate(-50%, -50%);
+  width: 37px;
+  height: 37px;
+  background: black;
+  border-radius: 100px;
+}
+
+/* Right third — signal/wifi/battery */
+.statusbar-right {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.statusbar-icons {
+  position: relative;
+  width: 78.401px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.statusbar-icons img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}

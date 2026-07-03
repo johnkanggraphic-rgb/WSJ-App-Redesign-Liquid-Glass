@@ -1,0 +1,218 @@
+/* ── Notifications page — slides in from right over the screen ─────────── */
+.notif-page {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.notif-page--visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.notif-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.notif-toolbar-leading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.notif-toolbar-trailing {
+  flex: 1;
+}
+
+.notif-toolbar-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  text-align: left;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notif-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.notif-back-glass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 296px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  /* shift up 6px so center aligns with bell icon (59+22=81px vs 59+28=87px) */
+  margin-top: -12px;
+}
+
+/* ── Filters ─────────────────────────────────────────────────────────────── */
+.notif-filters {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px;
+  gap: 8px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.notif-filter-btn {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1a222b;
+  background: none;
+  border: 1px solid #778694;
+  border-radius: 16px;
+  padding: 6px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.notif-filter-btn--active {
+  background: #e8ebed;
+  border-color: transparent;
+}
+
+/* ── Feed ────────────────────────────────────────────────────────────────── */
+.notif-feed {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.notif-feed::-webkit-scrollbar {
+  display: none;
+}
+
+.notif-divider {
+  width: 100%;
+  height: 1px;
+  background: #ebebeb;
+  flex-shrink: 0;
+}
+
+/* ── Notification card ───────────────────────────────────────────────────── */
+.notif-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px 16px 16px 4px;
+  background: #fff;
+}
+
+.notif-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+.notif-card-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.notif-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notif-headline {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0b1118;
+  margin: 0;
+  text-align: left;
+}
+
+.notif-author {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0b1118;
+}
+
+.notif-body {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0b1118;
+}
+
+.notif-time {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #778694;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* ── Avatar ──────────────────────────────────────────────────────────────── */
+.notif-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.notif-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

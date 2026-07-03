@@ -1,0 +1,265 @@
+/* ── Search page — slides in from right, same as notifications ───────────── */
+.search-page {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.search-page--visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.search-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.search-toolbar-leading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.search-toolbar-trailing {
+  flex: 1;
+}
+
+.search-toolbar-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Search bar ──────────────────────────────────────────────────────────── */
+.search-bar-wrap {
+  padding: 8px 16px;
+  flex-shrink: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  background: #f4f5f7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-bar-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  flex-shrink: 0;
+}
+
+.search-bar-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: 0.5;
+}
+
+
+/* ── Search input ────────────────────────────────────────────────────────── */
+.search-bar-field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* align contents from the left */
+  justify-content: flex-start;
+}
+
+/* invisible span that mirrors typed text to drive input width */
+.search-bar-sizer {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  pointer-events: none;
+}
+
+.search-bar-input {
+  width: 0;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #111;
+  caret-color: transparent;
+  padding: 0;
+}
+
+.search-bar-input::placeholder {
+  color: #6f6f6f;
+}
+
+.search-bar-caret {
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+  background: #000;
+  border-radius: 1px;
+  flex-shrink: 0;
+  margin-left: 0;
+  animation: caret-blink 1s step-start infinite;
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.search-bar-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.search-bar-clear-x {
+  font-size: 14px;
+  color: #6f6f6f;
+  line-height: 1;
+}
+
+/* ── Keyboard wrapper — pinned to bottom ─────────────────────────────────── */
+.kb-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ── iOS Keyboard ────────────────────────────────────────────────────────── */
+.kb-root {
+  background: #d1d5db;
+  padding: 32px 3px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+}
+
+.kb-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.kb-key {
+  min-width: 32px;
+  height: 42px;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: -apple-system, 'SF Pro', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  flex: 1;
+  max-width: 34px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  text-transform: uppercase;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.kb-key--special {
+  background: #adb5bd;
+  color: #000;
+  font-size: 14px;
+  flex: 1.4;
+  max-width: 44px;
+  text-transform: none;
+}
+
+.kb-key--space {
+  flex: 5;
+  max-width: 180px;
+  font-size: 14px;
+  color: #000;
+  text-transform: none;
+  background: #fff;
+}
+
+.kb-key--return {
+  flex: 2.2;
+  max-width: 90px;
+  font-size: 14px;
+  color: #000;
+  text-transform: none;
+  background: #adb5bd;
+}
+
+.kb-key--active {
+  background: #555;
+  color: #fff;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.search-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 180px 48px 0;
+  text-align: center;
+}
+
+.search-empty-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #1a222b;
+  margin: 0;
+}
+
+.search-empty-body {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #778694;
+  margin: 0;
+}

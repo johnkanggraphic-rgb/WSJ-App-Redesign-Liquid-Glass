@@ -1,0 +1,90 @@
+/* StockBar — Figma node 2070:34814
+   border-top + border-bottom #ebebeb, h-40px, bg #f4f5f7 */
+.stockbar {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #f4f5f7;
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.stockbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual cell — px-16px, h-40px, centered */
+.stock-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Ticker + arrow + percent row */
+.stock-ticker-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4px spacer */
+.stock-space-4 {
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+}
+
+.stock-ticker {
+  font-family: 'Retina', Georgia, serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #222;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.stock-change {
+  display: flex;
+  align-items: center;
+}
+
+/* Arrow icon — 16x16 */
+.stock-arrow {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.stock-arrow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stock-percent {
+  font-family: 'Retina', Georgia, serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.stock-percent--positive { color: #0a8200; }
+.stock-percent--negative { color: #e10000; }
