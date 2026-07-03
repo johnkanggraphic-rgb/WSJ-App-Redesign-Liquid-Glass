@@ -63,17 +63,14 @@
 
 /* ── Header ──────────────────────────────────────────────────────────────── */
 .ns-header {
-  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 16px 16px 16px 96px;
+  padding: 16px;
 }
 
 .ns-header-thumb {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+  padding: 14px 0 0 12px;
   flex-shrink: 0;
 }
 
