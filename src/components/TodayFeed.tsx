@@ -614,33 +614,35 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
     const el = feedRef.current
     if (!el) return
     const checkDarkBg = () => {
-      const images = el.querySelectorAll<HTMLElement>('.card-image, .card-image-wrap img')
-      const feedRect = el.getBoundingClientRect()
-      // tab bar occupies roughly the bottom 80px of the feed container
-      const tabZoneTop = feedRect.bottom - 80
-      const tabZoneBottom = feedRect.bottom
+      if (!onDarkBg) return
+      const images = el.querySelectorAll<HTMLElement>('.card-image')
+      const elRect = el.getBoundingClientRect()
+      const tabZoneTop = elRect.bottom - 100
+      const tabZoneBottom = elRect.bottom
       let isDark = false
       images.forEach(img => {
         const r = img.getBoundingClientRect()
-        if (r.bottom > tabZoneTop && r.top < tabZoneBottom) isDark = true
+        if (r.top < tabZoneBottom && r.bottom > tabZoneTop) isDark = true
       })
-      onDarkBg?.(isDark)
+      onDarkBg(isDark)
     }
     const onScroll = () => {
       const tabbar = el.closest('.content-area')?.querySelector('.tabbar-wrapper') as HTMLElement | null
-      if (!tabbar) return
       const current = el.scrollTop
-      if (current > lastScrollY.current && current > 40) {
-        tabbar.classList.add('tabbar--scrolled-down')
-        setNavDown(true)
-      } else {
-        tabbar.classList.remove('tabbar--scrolled-down')
-        setNavDown(false)
+      if (tabbar) {
+        if (current > lastScrollY.current && current > 40) {
+          tabbar.classList.add('tabbar--scrolled-down')
+          setNavDown(true)
+        } else {
+          tabbar.classList.remove('tabbar--scrolled-down')
+          setNavDown(false)
+        }
       }
       lastScrollY.current = current
       checkDarkBg()
     }
     el.addEventListener('scroll', onScroll, { passive: true })
+    checkDarkBg()
     return () => el.removeEventListener('scroll', onScroll)
   }, [onDarkBg])
 
