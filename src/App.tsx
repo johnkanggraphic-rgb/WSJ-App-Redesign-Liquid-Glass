@@ -21,7 +21,7 @@ const PHONE_H = 864
 const PAD = 96
 
 function App() {
-  const [scale, setScale] = useState(1)
+  const [pos, setPos] = useState({ scale: 1, left: 0, top: 0 })
   const [showNotifs, setShowNotifs] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
@@ -38,9 +38,10 @@ function App() {
 
   useEffect(() => {
     const compute = () => {
-      const scaleX = window.innerWidth / PHONE_W
-      const scaleY = (window.innerHeight - PAD * 2) / PHONE_H
-      setScale(Math.min(scaleX, scaleY, 1))
+      const scale = Math.min(window.innerWidth / PHONE_W, (window.innerHeight - PAD * 2) / PHONE_H, 1)
+      const left = Math.round((window.innerWidth - PHONE_W * scale) / 2)
+      const top = Math.round((window.innerHeight - PHONE_H * scale) / 2)
+      setPos({ scale, left, top })
     }
     compute()
     window.addEventListener('resize', compute)
@@ -49,7 +50,13 @@ function App() {
 
   return (
     <div className="stage">
-      <div className="iphone" style={{ zoom: scale }}>
+      <div className="iphone" style={{
+        position: 'absolute',
+        left: pos.left,
+        top: pos.top,
+        transform: `scale(${pos.scale})`,
+        transformOrigin: 'top left',
+      }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />
