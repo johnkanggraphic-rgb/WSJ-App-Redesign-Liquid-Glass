@@ -18,10 +18,11 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack, openComments = false }: {
+export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly' }: {
   visible: boolean
   onBack: () => void
   openComments?: boolean
+  headline?: string
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
@@ -112,7 +113,7 @@ export default function ArticlePage({ visible, onBack, openComments = false }: {
         <div className="article-header">
           <span className="article-flashline">Flashline</span>
           <h1 className="article-headline">
-            Judge Rules Google Operates Illegal Ad Monopoly
+            {headline}
           </h1>
           <p className="article-dek">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique magna eu lacus blandit fringilla.

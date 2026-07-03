@@ -14,6 +14,7 @@ function App() {
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
   const [openComments, setOpenComments] = useState(false)
+  const [articleHeadline, setArticleHeadline] = useState('')
 
   return (
     <div className="stage">
@@ -30,14 +31,14 @@ function App() {
             <TopNav />
             <div className="content-area">
               <TodayFeed
-                onArticleTap={() => { setOpenComments(false); setShowArticle(true) }}
-                onCommentTap={() => { setOpenComments(true); setShowArticle(true) }}
+                onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
+                onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
               />
               <TabBar />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
-            <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} />
+            <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
           </div>
         </div>
       </div>

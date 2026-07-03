@@ -11,8 +11,11 @@ const ToastContext = createContext<(linkLabel: string | null) => void>(() => {})
 interface MiniPlayerInfo { flashline: string; headline: string }
 const MiniPlayerContext = createContext<(info: MiniPlayerInfo) => void>(() => {})
 
+// ── Article tap context ────────────────────────────────────────────────────
+const ArticleTapContext = createContext<(headline: string) => void>(() => {})
+
 // ── Comment tap context ────────────────────────────────────────────────────
-const CommentTapContext = createContext<() => void>(() => {})
+const CommentTapContext = createContext<(headline: string) => void>(() => {})
 
 // ── Icon assets from Figma ─────────────────────────────────────────────────
 // Article card (node 2189:47269)
@@ -96,7 +99,7 @@ function ArticleActions({
         <button className="card-action-btn" onClick={() => showMiniPlayer({ flashline, headline })}>
           <img src={headphones} alt="" className="card-action-icon" />
         </button>
-        <button className="card-action-btn" onClick={onCommentTap}>
+        <button className="card-action-btn" onClick={() => onCommentTap(headline)}>
           <img src={chat} alt="" className="card-action-icon" />
         </button>
         <BookmarkButton />
@@ -107,13 +110,12 @@ function ArticleActions({
 }
 
 // ── Card 1: Article card with full-width 3:2 image ─────────────────────────
-function ArticleCardHero({ onTap }: { onTap?: () => void }) {
+const HERO_HEADLINE = 'Judge Rules Google Operates Illegal Ad Monopoly'
+function ArticleCardHero({ onTap }: { onTap?: (headline: string) => void }) {
   return (
-    <div className="feed-card" style={{ cursor: 'pointer' }} onClick={onTap}>
+    <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onTap?.(HERO_HEADLINE)}>
       <div className="card-flashline">Flashline</div>
-      <h2 className="card-headline-l">
-        Judge Rules Google Operates Illegal Ad Monopoly
-      </h2>
+      <h2 className="card-headline-l">{HERO_HEADLINE}</h2>
       <p className="card-summary">
         Tech giant faces multiple legal threats related to how it wields market power
       </p>
@@ -124,7 +126,7 @@ function ArticleCardHero({ onTap }: { onTap?: () => void }) {
         headphones={imgHeadphones}
         chat={imgChat}
         flashline="Flashline"
-        headline="Judge Rules Google Operates Illegal Ad Monopoly"
+        headline={HERO_HEADLINE}
         readTime="6 min read"
       />
     </div>
@@ -139,9 +141,11 @@ const liveUpdates = [
   { time: '1 hr ago',   headline: 'Markets React: Alphabet Shares Fall 4% After Decision Announced' },
 ]
 
+const LIVE_HEADLINE = 'Google Ad Monopoly Trial: Live Updates From the Courthouse'
 function LiveCard() {
+  const onArticleTap = useContext(ArticleTapContext)
   return (
-    <div className="feed-card feed-card--live">
+    <div className="feed-card feed-card--live" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(LIVE_HEADLINE)}>
       <div className="card-top-section">
         <div className="live-tag">
           <div className="live-dot" />
@@ -167,7 +171,7 @@ function LiveCard() {
           ))}
         </div>
       </div>
-      <div className="card-footer live-card-footer">
+      <div className="card-footer live-card-footer" onClick={e => e.stopPropagation()}>
         <div className="card-footer-left">
           <a href="#" className="view-all-link">View All Updates</a>
         </div>
@@ -190,8 +194,9 @@ function CompactArticleCard({
 }: {
   flashline: string; headline: string; readTime: string
 }) {
+  const onArticleTap = useContext(ArticleTapContext)
   return (
-    <div className="feed-card">
+    <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(headline)}>
       <div className="card-flashline">{flashline}</div>
       <h3 className="card-headline-s">{headline}</h3>
       <ArticleActions
@@ -237,11 +242,15 @@ const pkg2Updates = [
   { time: '1 hr ago',   headline: 'China Signals It Will Match Any Further U.S. Tariff Hikes' },
 ]
 
+const NEWS_PKG_HEADLINE = 'Consumer Sentiment Plunges on Recession Fears; China Hits Back Again on Tariffs'
+const NEWS_PKG_COMPACT_1 = "The 'Hidden Force' That Can Bring Mortgage Rates Down"
+const NEWS_PKG_COMPACT_2 = 'Musk Vaulted to Top of a Popular Game. How Did He Find the Time?'
 function NewsPackageCard() {
+  const onArticleTap = useContext(ArticleTapContext)
   return (
     <div className="pkg-wrapper">
       {/* Live card with image */}
-      <div className="feed-card feed-card--live">
+      <div className="feed-card feed-card--live" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_HEADLINE)}>
         <div className="card-top-section">
           <div className="live-tag">
             <div className="live-dot" />
@@ -270,7 +279,7 @@ function NewsPackageCard() {
             ))}
           </div>
         </div>
-        <div className="card-footer live-card-footer">
+        <div className="card-footer live-card-footer" onClick={e => e.stopPropagation()}>
           <div className="card-footer-left">
             <a href="#" className="view-all-link">View All Updates</a>
           </div>
@@ -283,25 +292,21 @@ function NewsPackageCard() {
       </div>
       {/* Compact card 1 */}
       <div className="feed-divider" />
-      <div className="feed-card">
-        <h3 className="card-headline-s">
-          The 'Hidden Force' That Can Bring Mortgage Rates Down
-        </h3>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_COMPACT_1)}>
+        <h3 className="card-headline-s">{NEWS_PKG_COMPACT_1}</h3>
         <ArticleActions
           headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-
+          headline={NEWS_PKG_COMPACT_1}
           readTime="6 min read"
         />
       </div>
       <div className="feed-divider" />
       {/* Compact card 2 */}
-      <div className="feed-card">
-        <h3 className="card-headline-s">
-          Musk Vaulted to Top of a Popular Game. How Did He Find the Time?
-        </h3>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_COMPACT_2)}>
+        <h3 className="card-headline-s">{NEWS_PKG_COMPACT_2}</h3>
         <ArticleActions
           headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-
+          headline={NEWS_PKG_COMPACT_2}
           readTime="6 min read"
         />
       </div>
@@ -347,8 +352,9 @@ const opinionCards = [
 function OpinionCard({ flashline, headline, readTime, img }: {
   flashline: string; headline: string; readTime: string; img: string
 }) {
+  const onArticleTap = useContext(ArticleTapContext)
   return (
-    <div className="opinion-card">
+    <div className="opinion-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(headline)}>
       <div className="opinion-card-content">
         <div className="opinion-card-text">
           <div className="opinion-flashline">{flashline}</div>
@@ -400,16 +406,18 @@ const worldIcons = {
 }
 const imgWorldHero = 'https://www.figma.com/api/mcp/asset/f47532ee-8c04-46c8-a479-adf9a4df06c1'
 
+const WORLD_HEADLINE_1 = 'For Working Women in India, Staying Safe Can Feel Like a Full-Time Job'
+const WORLD_HEADLINE_2 = 'Flights Redirected From Barcelona as Fresh Storms Lash Spanish Coast'
+const WORLD_HEADLINE_3 = 'Kate Middleton Returns With A New Royal Role'
 function WorldPackage() {
+  const onArticleTap = useContext(ArticleTapContext)
   return (
     <div className="world-pkg">
       <div className="section-strap">World</div>
 
       {/* Hero card with image */}
-      <div className="feed-card">
-        <h2 className="card-headline-l">
-          For Working Women in India, Staying Safe Can Feel Like a Full-Time Job
-        </h2>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_1)}>
+        <h2 className="card-headline-l">{WORLD_HEADLINE_1}</h2>
         <p className="card-summary">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique magna eu lacus blandit fringilla.
         </p>
@@ -418,30 +426,26 @@ function WorldPackage() {
         </div>
         <ArticleActions
           headphones={worldIcons.headphones} chat={worldIcons.chat}
-         
+          headline={WORLD_HEADLINE_1}
           readTime="6 min read"
         />
       </div>
 
       <div className="feed-divider" />
-      <div className="feed-card">
-        <h3 className="card-headline-s">
-          Flights Redirected From Barcelona as Fresh Storms Lash Spanish Coast
-        </h3>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_2)}>
+        <h3 className="card-headline-s">{WORLD_HEADLINE_2}</h3>
         <ArticleActions
           headphones={worldIcons.headphones} chat={worldIcons.chat}
-
+          headline={WORLD_HEADLINE_2}
           readTime="6 min read"
         />
       </div>
       <div className="feed-divider" />
-      <div className="feed-card">
-        <h3 className="card-headline-s">
-          Kate Middleton Returns With A New Royal Role
-        </h3>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_3)}>
+        <h3 className="card-headline-s">{WORLD_HEADLINE_3}</h3>
         <ArticleActions
           headphones={worldIcons.headphones} chat={worldIcons.chat}
-         
+          headline={WORLD_HEADLINE_3}
           readTime="6 min read"
         />
       </div>
@@ -556,7 +560,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap?: () => void; onCommentTap?: () => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -628,6 +632,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
 
   return (
     <MiniPlayerContext.Provider value={showMiniPlayer}>
+    <ArticleTapContext.Provider value={onArticleTap ?? (() => {})}>
     <CommentTapContext.Provider value={onCommentTap ?? (() => {})}>
     <ToastContext.Provider value={showToast}>
       <div className="today-feed" ref={feedRef}>
@@ -686,6 +691,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
       <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} navDown={navDown} />
     </ToastContext.Provider>
     </CommentTapContext.Provider>
+    </ArticleTapContext.Provider>
     </MiniPlayerContext.Provider>
   )
 }
