@@ -126,6 +126,7 @@
 .ns-collaborate-btn {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 4px;
   height: 34px;
   padding: 6px 10px 6px 14px;
