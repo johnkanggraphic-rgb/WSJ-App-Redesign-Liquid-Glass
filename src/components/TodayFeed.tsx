@@ -282,6 +282,7 @@ function NewsPackageCard() {
         </div>
       </div>
       {/* Compact card 1 */}
+      <div className="feed-divider" />
       <div className="feed-card">
         <h3 className="card-headline-s">
           The 'Hidden Force' That Can Bring Mortgage Rates Down
@@ -292,6 +293,7 @@ function NewsPackageCard() {
           readTime="6 min read"
         />
       </div>
+      <div className="feed-divider" />
       {/* Compact card 2 */}
       <div className="feed-card">
         <h3 className="card-headline-s">
@@ -421,6 +423,7 @@ function WorldPackage() {
         />
       </div>
 
+      <div className="feed-divider" />
       <div className="feed-card">
         <h3 className="card-headline-s">
           Flights Redirected From Barcelona as Fresh Storms Lash Spanish Coast
@@ -431,7 +434,7 @@ function WorldPackage() {
           readTime="6 min read"
         />
       </div>
-
+      <div className="feed-divider" />
       <div className="feed-card">
         <h3 className="card-headline-s">
           Kate Middleton Returns With A New Royal Role
@@ -630,40 +633,51 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
       <div className="today-feed" ref={feedRef}>
         <StockBar />
         <ArticleCardHero onTap={onArticleTap} />
+        <div className="feed-divider" />
         <LiveCard />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="Technology"
           headline="Trump Exempts Smartphones, Other Electronics From Chinese Tariffs"
           readTime="4 min read"
         />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="Markets &amp; Finance"
           headline="Fed Minutes Reveal Deep Divide Over When to Cut Rates This Year"
           readTime="5 min read"
         />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="Business"
           headline="Boeing Reaches $1.1 Billion Settlement With Families of 737 MAX Crash Victims"
           readTime="7 min read"
         />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="World"
           headline="Ukraine Strikes Russian Oil Depot Deep Inside Enemy Territory With Long-Range Drones"
           readTime="3 min read"
         />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="U.S."
           headline="Senate Passes Sweeping Infrastructure Bill in Rare Bipartisan Vote"
           readTime="6 min read"
         />
+        <div className="feed-divider" />
         <CompactArticleCard
           flashline="Opinion"
           headline="The Fed Is Running Out of Time to Get Inflation Right"
           readTime="8 min read"
         />
+        <div className="feed-divider" />
         <AdCard />
+        <div className="feed-divider" />
         <NewsPackageCard />
+        <div className="feed-divider" />
         <OpinionPackage />
+        <div className="feed-divider" />
         <WorldPackage />
         <div className="feed-bottom-pad" />
       </div>
