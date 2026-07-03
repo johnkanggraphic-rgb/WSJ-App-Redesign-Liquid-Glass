@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { X, CaretRight, Users, CopySimple, Star, Eyeglasses, BookOpen, PlusSquare, PencilSimple, Printer } from '@phosphor-icons/react'
 import './NativeShareSheet.css'
 
-const imgThumbnail  = 'https://www.figma.com/api/mcp/asset/c404890c-087c-43c1-99dc-1bdff08a5d76'
+const imgThumbnail  = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
 const imgAvatar0    = 'https://www.figma.com/api/mcp/asset/fc7e0d2d-7497-46af-93b2-94fafe2e80aa'
 const imgAvatar1    = 'https://www.figma.com/api/mcp/asset/c4102b8b-d755-4370-8449-25ae3be87a8e'
 const imgAvatar2    = 'https://www.figma.com/api/mcp/asset/518dc051-4d26-455f-8b1c-012ff8d785f4'
