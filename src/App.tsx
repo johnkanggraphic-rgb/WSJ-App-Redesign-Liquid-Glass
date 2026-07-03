@@ -20,18 +20,13 @@ const PHONE_W = 405
 const PHONE_H = 864
 const PAD = 96
 
-function computePos(w: number, h: number) {
-  const scale = Math.min(w / PHONE_W, (h - PAD * 2) / PHONE_H, 1)
-  return {
-    scale,
-    left: (w - PHONE_W * scale) / 2,
-    top: (h - PHONE_H * scale) / 2,
-  }
+function computeScale(w: number, h: number) {
+  return Math.min(w / PHONE_W, (h - PAD * 2) / PHONE_H, 1)
 }
 
 function App() {
   const stageRef = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState(() => computePos(window.innerWidth, window.innerHeight))
+  const [scale, setScale] = useState(() => computeScale(window.innerWidth, window.innerHeight))
   const [showNotifs, setShowNotifs] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
@@ -51,7 +46,7 @@ function App() {
     if (!el) return
     const ro = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect
-      setPos(computePos(width, height))
+      setScale(computeScale(width, height))
     })
     ro.observe(el)
     return () => ro.disconnect()
@@ -59,12 +54,7 @@ function App() {
 
   return (
     <div className="stage" ref={stageRef}>
-      <div className="iphone" style={{
-        left: pos.left,
-        top: pos.top,
-        transform: `scale(${pos.scale})`,
-        transformOrigin: 'top left',
-      }}>
+      <div className="iphone" style={{ zoom: scale }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />

@@ -12,15 +12,16 @@ body {
 .stage {
   width: 100vw;
   height: 100vh;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #222222;
   overflow: hidden;
-  touch-action: none;
 }
 
 /* iPhone 16: screen 393x852, frame adds 6px each side → 405x864 */
 .iphone {
-  position: absolute;
+  flex-shrink: 0;
 }
 
 .iphone-frame {
