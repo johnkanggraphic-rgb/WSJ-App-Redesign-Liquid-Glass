@@ -22,6 +22,7 @@ body {
 .iphone {
   width: 405px;
   height: 864px;
+  flex-shrink: 0;
 }
 
 .iphone-frame {

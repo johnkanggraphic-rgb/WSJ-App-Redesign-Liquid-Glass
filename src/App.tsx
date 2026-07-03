@@ -53,7 +53,8 @@ function App() {
 
   return (
     <div className="stage" ref={stageRef}>
-      <div className="iphone" style={{ zoom: scale }}>
+      <div style={{ width: PHONE_W * scale, height: PHONE_H * scale, flexShrink: 0, position: 'relative' }}>
+      <div className="iphone" style={{ transform: `scale(${scale})`, transformOrigin: 'top left', position: 'absolute', top: 0, left: 0 }}>
         <div className="iphone-frame">
           <div className="btn-power" />
           <div className="btn-vol-up" />
@@ -93,6 +94,7 @@ function App() {
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
