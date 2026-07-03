@@ -560,7 +560,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -613,6 +613,19 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
   useEffect(() => {
     const el = feedRef.current
     if (!el) return
+    const checkDarkBg = () => {
+      const images = el.querySelectorAll<HTMLElement>('.card-image, .card-image-wrap img')
+      const feedRect = el.getBoundingClientRect()
+      // tab bar occupies roughly the bottom 80px of the feed container
+      const tabZoneTop = feedRect.bottom - 80
+      const tabZoneBottom = feedRect.bottom
+      let isDark = false
+      images.forEach(img => {
+        const r = img.getBoundingClientRect()
+        if (r.bottom > tabZoneTop && r.top < tabZoneBottom) isDark = true
+      })
+      onDarkBg?.(isDark)
+    }
     const onScroll = () => {
       const tabbar = el.closest('.content-area')?.querySelector('.tabbar-wrapper') as HTMLElement | null
       if (!tabbar) return
@@ -625,10 +638,11 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
         setNavDown(false)
       }
       lastScrollY.current = current
+      checkDarkBg()
     }
     el.addEventListener('scroll', onScroll, { passive: true })
     return () => el.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [onDarkBg])
 
   return (
     <MiniPlayerContext.Provider value={showMiniPlayer}>

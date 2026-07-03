@@ -10,7 +10,7 @@ const tabs = [
   { label: 'More',        Icon: MoreIcon },
 ]
 
-export default function TabBar() {
+export default function TabBar({ dark = false }: { dark?: boolean }) {
   const [active, setActive] = useState(0)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const pillRef = useRef<HTMLDivElement>(null)
@@ -58,9 +58,9 @@ export default function TabBar() {
             onClick={() => setActive(i)}
           >
             <div className="tab-icon">
-              <tab.Icon active={i === active} />
+              <tab.Icon active={i === active} dark={dark && i !== active} />
             </div>
-            <span className={`tab-label${i === active ? ' tab-label--active' : ''}${tab.labelWide ? ' tab-label--wide' : ''}`}>
+            <span className={`tab-label${i === active ? ' tab-label--active' : ''}${tab.labelWide ? ' tab-label--wide' : ''}${dark && i !== active ? ' tab-label--dark-bg' : ''}`}>
               {tab.label}
             </span>
           </button>

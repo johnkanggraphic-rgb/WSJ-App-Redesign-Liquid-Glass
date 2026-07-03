@@ -180,3 +180,12 @@
   width: 76px;
   min-width: unset;
 }
+
+.tab-label--dark-bg {
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.tab-label {
+  transition: color 0.2s ease;
+}

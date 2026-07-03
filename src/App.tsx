@@ -15,6 +15,7 @@ function App() {
   const [showArticle, setShowArticle] = useState(false)
   const [openComments, setOpenComments] = useState(false)
   const [articleHeadline, setArticleHeadline] = useState('')
+  const [tabBarDark, setTabBarDark] = useState(false)
 
   return (
     <div className="stage">
@@ -33,8 +34,9 @@ function App() {
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
+                onDarkBg={setTabBarDark}
               />
-              <TabBar />
+              <TabBar dark={tabBarDark} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
