@@ -58,8 +58,14 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
       <div className={`ns-scrim${visible ? ' ns-scrim--visible' : ''}`} onClick={onClose} />
       <div className={`ns-sheet${visible ? ' ns-sheet--visible' : ''}`}>
 
-        {/* Grabber */}
-        <div className="ns-grabber" />
+        {/* Grabber row — titles centered here */}
+        <div className="ns-grabber-row">
+          <div className="ns-grabber" />
+          <div className="ns-grabber-titles">
+            <p className="ns-header-title">WSJ</p>
+            <p className="ns-header-subtitle">wsj.com</p>
+          </div>
+        </div>
 
         {/* Header */}
         <div className="ns-header">
@@ -67,10 +73,7 @@ export default function NativeShareSheet({ visible, onClose }: { visible: boolea
             <img src={imgThumbnail} alt="" className="ns-thumb-img" />
           </div>
           <div className="ns-header-middle">
-            <div className="ns-header-titles">
-              <p className="ns-header-title">WSJ</p>
-              <p className="ns-header-subtitle">wsj.com</p>
-            </div>
+            <div className="ns-header-titles" />
             <button className="ns-collaborate-btn" onClick={() => setCollaborated(!collaborated)}>
               <Users size={15} weight="fill" color="#1a1a1a" />
               <span className="ns-collaborate-label">Collaborate</span>
