@@ -684,6 +684,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap
         <NewsPackageCard />
         <FeedDivider />
         <OpinionPackage />
+        <FeedDivider />
         <WorldPackage />
         <div className="feed-bottom-pad" />
       </div>
