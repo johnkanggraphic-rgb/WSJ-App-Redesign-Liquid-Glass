@@ -48,11 +48,7 @@
   position: absolute;
   inset: 0;
   border-radius: 296px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
-  isolation: isolate;
-  transform: translateZ(0);
+  background: #ffffff;
   pointer-events: none;
 }
 
@@ -193,7 +189,7 @@
 
 /* Dark mode (Media tab) */
 .tabbar--dark .tabbar-glass {
-  background: rgba(0, 0, 0, 0.6);
+  background: #1a1a1a;
 }
 
 .tabbar--dark .tabbar-bg {
@@ -201,7 +197,7 @@
 }
 
 .tabbar--dark .tab-selection-pill {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .tabbar--dark .tab-label {
