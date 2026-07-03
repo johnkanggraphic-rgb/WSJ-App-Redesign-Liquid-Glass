@@ -205,10 +205,6 @@ function CompactArticleCard({
   )
 }
 
-// ── Divider ────────────────────────────────────────────────────────────────
-function FeedDivider() {
-  return <div className="feed-divider" />
-}
 
 // ── Ad Container ───────────────────────────────────────────────────────────
 const imgAdFill = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'
