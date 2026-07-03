@@ -57,7 +57,7 @@ export default function NotificationsPage({ visible, onBack }: {
 
       {/* Feed */}
       <div className="notif-feed">
-        {notifications.map((n, i) => (
+        {notifications.map((n) => (
           <div key={n.id}>
             <div className="notif-divider" />
             <div className="notif-card">

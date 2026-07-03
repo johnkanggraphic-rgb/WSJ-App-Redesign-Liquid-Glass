@@ -19,19 +19,14 @@ const CommentTapContext = createContext<() => void>(() => {})
 const imgArticlePhoto = 'https://www.figma.com/api/mcp/asset/e85a6828-768e-417b-aae7-b49e1fbd8ee8'
 const imgHeadphones   = 'https://www.figma.com/api/mcp/asset/a06853eb-5018-4679-ae5a-6b8d116e13e8'
 const imgChat         = 'https://www.figma.com/api/mcp/asset/8cc66f6a-c736-4150-b45e-e146c0f176d5'
-const imgBookmark     = 'https://www.figma.com/api/mcp/asset/8a1d01f4-f40a-4a18-a8dd-a93a65213ff2'
-const imgPlusCircle   = 'https://www.figma.com/api/mcp/asset/2aafec8f-000c-4230-975b-6a521267da72'
 
 // Live card (node 2189:47327)
-const imgLiveDot  = 'https://www.figma.com/api/mcp/asset/ddeab408-f832-410c-b283-656e3abdd5aa'
 const imgChatLive = 'https://www.figma.com/api/mcp/asset/4d9ffed9-96a9-43e8-9323-80496988fe1b'
 const imgShareFat = 'https://www.figma.com/api/mcp/asset/1b7c231c-ed8f-47f5-9b23-cc6559938601'
 
 // Compact article card icons (node 2189:47364)
 const imgHeadphones2 = 'https://www.figma.com/api/mcp/asset/8195a4cb-5dba-4fa0-8fb7-915488948945'
 const imgChat2       = 'https://www.figma.com/api/mcp/asset/2b67c32e-bd1f-4986-b060-cd1011692615'
-const imgBookmark2   = 'https://www.figma.com/api/mcp/asset/c6a99bdb-3aa7-443c-89aa-ac251eda71e9'
-const imgPlusCircle2 = 'https://www.figma.com/api/mcp/asset/24e62732-e33d-4572-a7c2-1bd1a88657b2'
 
 // ── Plus button with filled toggle ────────────────────────────────────────
 function PlusButton() {
@@ -238,8 +233,6 @@ const imgPkg2LivePhoto = 'https://images.unsplash.com/photo-1611974789855-9c2a0a
 const imgPkg2ShareFat  = 'https://www.figma.com/api/mcp/asset/4b381112-91c0-488d-bc0e-33eb8b057e97'
 const imgPkg2Headphones = 'https://www.figma.com/api/mcp/asset/07615240-36d9-4b57-9b67-68c7bb5a224e'
 const imgPkg2Chat       = 'https://www.figma.com/api/mcp/asset/dfe26845-9ea3-4be0-854d-e6ec2104802a'
-const imgPkg2Bookmark   = 'https://www.figma.com/api/mcp/asset/7213844e-99ee-431e-a229-c79ac01ecd8f'
-const imgPkg2Plus       = 'https://www.figma.com/api/mcp/asset/a6fa7223-f538-4146-8284-24567c642aa7'
 
 const pkg2Updates = [
   { time: '13 min ago', headline: 'Inflation Outlook Reaches 44-Year High' },

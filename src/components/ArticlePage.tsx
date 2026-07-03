@@ -11,7 +11,6 @@ const imgEnvelope       = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b
 const imgXLogo          = 'https://www.figma.com/api/mcp/asset/a2b9f7e5-0d5d-4cb6-89fa-e6cee2561b93'
 const imgBackstory      = 'https://www.figma.com/api/mcp/asset/2f8632c6-9e38-4e33-9a03-4251935aac93'
 const imgChat           = 'https://www.figma.com/api/mcp/asset/68f3f97c-39f3-4cf3-ba6a-35627736d87c'
-const imgBookmarkSimple = 'https://www.figma.com/api/mcp/asset/e0e2e17c-de36-42c5-9330-0f84f15324e0'
 const imgGift           = 'https://www.figma.com/api/mcp/asset/bf11000f-09f0-43e8-a543-e1299559894c'
 const imgShareFat       = 'https://www.figma.com/api/mcp/asset/9bdb2d0a-0424-42ad-bc28-61639c781bb0'
 const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
