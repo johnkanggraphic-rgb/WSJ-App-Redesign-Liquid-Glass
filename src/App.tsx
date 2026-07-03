@@ -13,6 +13,7 @@ function App() {
   const [showNotifs, setShowNotifs] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showArticle, setShowArticle] = useState(false)
+  const [openComments, setOpenComments] = useState(false)
 
   return (
     <div className="stage">
@@ -28,12 +29,15 @@ function App() {
             <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
             <TopNav />
             <div className="content-area">
-              <TodayFeed onArticleTap={() => setShowArticle(true)} />
+              <TodayFeed
+                onArticleTap={() => { setOpenComments(false); setShowArticle(true) }}
+                onCommentTap={() => { setOpenComments(true); setShowArticle(true) }}
+              />
               <TabBar />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
-            <ArticlePage visible={showArticle} onBack={() => setShowArticle(false)} />
+            <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} />
           </div>
         </div>
       </div>

@@ -11,6 +11,9 @@ const ToastContext = createContext<(linkLabel: string | null) => void>(() => {})
 interface MiniPlayerInfo { flashline: string; headline: string }
 const MiniPlayerContext = createContext<(info: MiniPlayerInfo) => void>(() => {})
 
+// ── Comment tap context ────────────────────────────────────────────────────
+const CommentTapContext = createContext<() => void>(() => {})
+
 // ── Icon assets from Figma ─────────────────────────────────────────────────
 // Article card (node 2189:47269)
 const imgArticlePhoto = 'https://www.figma.com/api/mcp/asset/e85a6828-768e-417b-aae7-b49e1fbd8ee8'
@@ -88,6 +91,7 @@ function ArticleActions({
   headphones: string; chat: string; readTime: string; flashline?: string; headline?: string
 }) {
   const showMiniPlayer = useContext(MiniPlayerContext)
+  const onCommentTap   = useContext(CommentTapContext)
   return (
     <div className="card-footer" onClick={e => e.stopPropagation()}>
       <div className="card-footer-left">
@@ -97,7 +101,7 @@ function ArticleActions({
         <button className="card-action-btn" onClick={() => showMiniPlayer({ flashline, headline })}>
           <img src={headphones} alt="" className="card-action-icon" />
         </button>
-        <button className="card-action-btn">
+        <button className="card-action-btn" onClick={onCommentTap}>
           <img src={chat} alt="" className="card-action-icon" />
         </button>
         <BookmarkButton />
@@ -566,7 +570,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap }: { onArticleTap?: () => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap }: { onArticleTap?: () => void; onCommentTap?: () => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -638,6 +642,7 @@ export default function TodayFeed({ onArticleTap }: { onArticleTap?: () => void 
 
   return (
     <MiniPlayerContext.Provider value={showMiniPlayer}>
+    <CommentTapContext.Provider value={onCommentTap ?? (() => {})}>
     <ToastContext.Provider value={showToast}>
       <div className="today-feed" ref={feedRef}>
         <StockBar />
@@ -692,6 +697,7 @@ export default function TodayFeed({ onArticleTap }: { onArticleTap?: () => void 
       <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} />
       <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} navDown={navDown} />
     </ToastContext.Provider>
+    </CommentTapContext.Provider>
     </MiniPlayerContext.Provider>
   )
 }

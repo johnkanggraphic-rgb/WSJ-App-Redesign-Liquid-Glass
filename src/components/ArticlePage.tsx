@@ -3,6 +3,8 @@ import { Pause, X, BookmarkSimple } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
+import BackstoryPage from './BackstoryPage'
+import CommentSheet from './CommentSheet'
 
 const imgCaretLeft      = 'https://www.figma.com/api/mcp/asset/c8603a11-02ff-4cbd-b52f-bb960da640c7'
 const imgEnvelope       = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b0-b7d4-4304d3926780'
@@ -16,14 +18,26 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack }: {
+export default function ArticlePage({ visible, onBack, openComments = false }: {
   visible: boolean
   onBack: () => void
+  openComments?: boolean
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
   const [toolbarHidden, setToolbarHidden] = useState(false)
   const [authorSheetVisible, setAuthorSheetVisible] = useState(false)
+  const [showBackstory, setShowBackstory] = useState(false)
+  const [commentSheetVisible, setCommentSheetVisible] = useState(false)
+
+  useEffect(() => {
+    if (visible && openComments) {
+      setCommentSheetVisible(true)
+    }
+    if (!visible) {
+      setCommentSheetVisible(false)
+    }
+  }, [visible, openComments])
 
   // Bookmark + toast
   const [bookmarked, setBookmarked] = useState(false)
@@ -211,6 +225,12 @@ export default function ArticlePage({ visible, onBack }: {
       {/* Author bottom sheet */}
       <AuthorSheet visible={authorSheetVisible} onClose={() => setAuthorSheetVisible(false)} />
 
+      {/* Backstory page */}
+      <BackstoryPage visible={showBackstory} onBack={() => setShowBackstory(false)} />
+
+      {/* Comment sheet */}
+      <CommentSheet visible={commentSheetVisible} onClose={() => setCommentSheetVisible(false)} />
+
       {/* Article mini player */}
       <div
         className={`article-mini-player${playerVisible ? ' article-mini-player--visible' : ''}${playerHiding ? ' article-mini-player--hiding' : ''}`}
@@ -246,10 +266,10 @@ export default function ArticlePage({ visible, onBack }: {
         </div>
         <div className="article-bottom-pill">
           <div className="article-bottom-pill-bg" />
-          <button className="article-pill-btn">
+          <button className="article-pill-btn" onClick={() => setShowBackstory(true)}>
             <img src={imgBackstory} alt="Backstory" className="article-pill-icon" />
           </button>
-          <button className="article-pill-btn">
+          <button className="article-pill-btn" onClick={() => setCommentSheetVisible(true)}>
             <img src={imgChat} alt="Chat" className="article-pill-icon" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>

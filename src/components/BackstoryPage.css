@@ -1,0 +1,345 @@
+/* ── Backstory page — slides in from right ───────────────────────────────── */
+.backstory-page {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 65;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  text-align: left;
+}
+
+.backstory-page--visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* ── Fixed header ────────────────────────────────────────────────────────── */
+.backstory-header {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.backstory-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 16px 0;
+}
+
+/* ── Content tag ─────────────────────────────────────────────────────────── */
+.backstory-content-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 6px 6px;
+  background: #ebebeb;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.backstory-content-tag-text {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #222;
+  white-space: nowrap;
+}
+
+/* ── Title section ───────────────────────────────────────────────────────── */
+.backstory-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.backstory-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #111;
+  margin: 0;
+  text-align: left;
+}
+
+.backstory-ai-text {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #6f6f6f;
+  margin: 0;
+  text-align: left;
+}
+
+.backstory-ai-link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: #6f6f6f;
+  cursor: pointer;
+}
+
+.backstory-timestamp {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #6f6f6f;
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.backstory-tabs {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.backstory-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.backstory-tab {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #6f6f6f;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.backstory-tab--active {
+  font-weight: 500;
+  color: #222;
+  border-bottom-color: #222;
+}
+
+/* ── Scrollable body ─────────────────────────────────────────────────────── */
+.backstory-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.backstory-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.backstory-body {
+  padding: 24px 16px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.backstory-body p {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Timeline ────────────────────────────────────────────────────────────── */
+.backstory-timeline {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 120px;
+}
+
+.bs-timeline-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px 16px;
+}
+
+.bs-timeline-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.bs-timeline-text {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Key Players ─────────────────────────────────────────────────────────── */
+.backstory-key-players {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 120px;
+}
+
+.bs-player-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 16px;
+}
+
+.bs-player-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bs-player-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #fff;
+  display: block;
+}
+
+.bs-player-name {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #111;
+  text-align: left;
+}
+
+.bs-player-bio {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Sources ─────────────────────────────────────────────────────────────── */
+.backstory-sources {
+  padding: 24px 16px 120px 8px;
+}
+
+.bs-sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 20px;
+  margin: 0;
+  list-style: disc;
+}
+
+.bs-source-item {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+}
+
+.bs-source-link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* ── Shared divider ──────────────────────────────────────────────────────── */
+.bs-divider {
+  width: 100%;
+  height: 1px;
+  background: #ebebeb;
+  flex-shrink: 0;
+}
+
+/* ── Bottom toolbar ──────────────────────────────────────────────────────── */
+.backstory-toolbar {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.backstory-toolbar .notif-back-btn {
+  pointer-events: auto;
+}
+
+.backstory-back-glass {
+  margin-top: 0 !important;
+}
+
+/* ── Share Feedback button ───────────────────────────────────────────────── */
+.backstory-feedback-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+}
+
+.backstory-feedback-glass {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+  height: 44px;
+  border-radius: 296px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.backstory-feedback-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(44%) sepia(10%) saturate(500%) hue-rotate(170deg) brightness(90%);
+}
+
+.backstory-feedback-label {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #6f6f6f;
+  white-space: nowrap;
+}
