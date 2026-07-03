@@ -27,14 +27,10 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  background: rgba(255, 255, 255, 0.12);
   border: none;
   border-radius: 8px;
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
   padding: 8px 6px 8px 8px;
-  overflow: hidden;
   transform: translateY(calc(100% + 120px));
   opacity: 0;
   transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
@@ -45,6 +41,23 @@
 .article-mini-player--visible {
   transform: translateY(0);
   opacity: 1;
+}
+
+.article-mini-player::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.article-mini-player > * {
+  position: relative;
+  z-index: 1;
 }
 
 .article-mini-player--hiding {
@@ -92,15 +105,18 @@
   padding: 0 14px;
   height: 48px;
   border-radius: 296px;
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Blur layer — separate child so overflow:hidden doesn't block backdrop-filter */
+.article-bottom-pill-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 296px;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(24px) saturate(1.8);
   -webkit-backdrop-filter: blur(24px) saturate(1.8);
-  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-  overflow: hidden;
-}
-
-.article-bottom-pill-bg {
-  display: none;
+  pointer-events: none;
 }
 
 .article-pill-btn {
