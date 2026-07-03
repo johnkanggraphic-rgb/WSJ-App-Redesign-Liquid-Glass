@@ -11,12 +11,12 @@
   box-sizing: border-box;
   flex-shrink: 0;
   background: white;
-  /* Position above iphone-screen overflow:hidden so button shadows aren't clipped */
+  /* Sits outside iphone-screen, positioned over it so shadows never get masked */
   position: absolute;
-  top: 59px;
-  left: 0;
-  right: 0;
-  z-index: 5;
+  top: calc(6px + 59px);
+  left: 6px;
+  right: 6px;
+  z-index: 20;
 }
 
 .titlebar-leading {

@@ -67,9 +67,7 @@ function App() {
           <div className="btn-mute" />
 
           <div className="iphone-screen">
-            <div className="iphone-screen-mask" />
             <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3} />
-            <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
             <TopNav />
             <div className="content-area">
               <TodayFeed
@@ -98,6 +96,8 @@ function App() {
             <WatchlistPickerSheet visible={showWatchlistSheet} onClose={() => setShowWatchlistSheet(false)} />
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
           </div>
+          {/* TitleBar outside iphone-screen so its shadows aren't clipped by overflow:hidden */}
+          <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
         </div>
       </div>
     </div>
