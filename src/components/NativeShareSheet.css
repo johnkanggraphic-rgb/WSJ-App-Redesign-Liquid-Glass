@@ -27,7 +27,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
-  max-height: calc(92% - 16px);
+  max-height: calc(50% - 16px);
   padding-bottom: 32px;
 }
 
