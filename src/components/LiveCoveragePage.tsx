@@ -5,6 +5,7 @@ import './LiveCoveragePage.css'
 import StatusBar from './StatusBar'
 import EventTimelineSheet from './EventTimelineSheet'
 import ShareSheet from './ShareSheet'
+import CommentSheet from './CommentSheet'
 
 // ── Figma asset URLs (icons only) ─────────────────────────────────────────
 const imgArrowUp        = 'https://www.figma.com/api/mcp/asset/56a51659-2606-4cfa-b379-fd1ef6d5b404'
@@ -326,6 +327,7 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
   const [toastLinkLabel, setToastLinkLabel] = useState<string | null>(null)
   const [showTimeline, setShowTimeline] = useState(false)
   const [shareSheetVisible, setShareSheetVisible] = useState(false)
+  const [commentSheetVisible, setCommentSheetVisible] = useState(false)
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const toastHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -417,7 +419,7 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
         </div>
         <div className="article-bottom-pill">
           <div className="article-bottom-pill-bg" />
-          <button className="article-pill-btn">
+          <button className="article-pill-btn" onClick={() => setCommentSheetVisible(true)}>
             <img src={imgChat} alt="" className="article-pill-icon" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>
@@ -431,6 +433,9 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
 
       {/* Event Timeline bottom sheet */}
       <EventTimelineSheet visible={showTimeline} onClose={() => setShowTimeline(false)} />
+
+      {/* Comment bottom sheet */}
+      <CommentSheet visible={commentSheetVisible} onClose={() => setCommentSheetVisible(false)} />
 
       {/* Share bottom sheet */}
       <ShareSheet
