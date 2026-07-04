@@ -577,7 +577,7 @@ export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClos
           />
           {query.length > 0 && (
             <button className="add-sym-clear" onClick={() => setQuery('')}>
-              <XCircle size={18} color="#222222" weight="fill" />
+              <XCircle size={24} color="#222222" weight="fill" />
             </button>
           )}
         </div>
