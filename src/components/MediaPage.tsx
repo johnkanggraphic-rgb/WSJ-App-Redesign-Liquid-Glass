@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { SpeakerHigh, SpeakerSlash, ClosedCaptioning, ShareFat, Play, Pause } from '@phosphor-icons/react'
+import { SpeakerHigh, SpeakerSlash, ClosedCaptioning, ShareFat, Play, Pause, MagnifyingGlass } from '@phosphor-icons/react'
 import './MediaPage.css'
+import StatusBar from './StatusBar'
+
+const AV_TABS = ['Discover', 'Watch', 'Listen']
 
 const VIDEOS = [
   'https://videos.pexels.com/video-files/2795405/2795405-uhd_1440_2560_25fps.mp4',
@@ -17,9 +20,12 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
   const [index, setIndex] = useState(0)
   const [progress, setProgress] = useState(0)
   const [muted, setMuted] = useState(true)
+  const [activeTab, setActiveTab] = useState(0)
   const [paused, setPaused] = useState(false)
   const [showPlayPause, setShowPlayPause] = useState(false)
+  const [navVisible, setNavVisible] = useState(true)
   const playPauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const navTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const idxRef = useRef(0)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const rafRef = useRef<number | null>(null)
@@ -27,6 +33,20 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
   const startY = useRef(0)
   const dragging = useRef(false)
   const currentTranslate = useRef(0)
+
+  const showNavBriefly = useCallback((isPaused: boolean) => {
+    setNavVisible(true)
+    if (navTimerRef.current) clearTimeout(navTimerRef.current)
+    if (!isPaused) {
+      navTimerRef.current = setTimeout(() => setNavVisible(false), 3000)
+    }
+  }, [])
+
+  // Show nav on mount, auto-hide after 3s
+  useEffect(() => {
+    navTimerRef.current = setTimeout(() => setNavVisible(false), 3000)
+    return () => { if (navTimerRef.current) clearTimeout(navTimerRef.current) }
+  }, [])
 
   const trackProgress = useCallback(() => {
     const video = videoRefs.current[idxRef.current]
@@ -93,9 +113,13 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
     if (!dragging.current) return
     dragging.current = false
     const delta = e.clientY - startY.current
-    if (delta < -50) snapTo(idxRef.current + 1)
-    else if (delta > 50) snapTo(idxRef.current - 1)
-    else {
+    if (delta < -50) {
+      snapTo(idxRef.current + 1)
+      showNavBriefly(false)
+    } else if (delta > 50) {
+      snapTo(idxRef.current - 1)
+      showNavBriefly(false)
+    } else {
       snapTo(idxRef.current)
       // Tap — toggle pause
       const video = videoRefs.current[idxRef.current]
@@ -110,10 +134,10 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
         }
         setShowPlayPause(true)
         if (playPauseTimerRef.current) clearTimeout(playPauseTimerRef.current)
-        // Auto-hide only when resuming; keep play icon visible while paused
         if (!nowPaused) {
           playPauseTimerRef.current = setTimeout(() => setShowPlayPause(false), 1200)
         }
+        showNavBriefly(nowPaused)
       }
     }
   }
@@ -125,6 +149,34 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
     >
+      {/* AV Navigation — top gradient + title + tabs, behind status bar */}
+      <div className={`av-nav${navVisible ? ' av-nav--visible' : ''}`}>
+        <div className="av-nav-gradient" />
+        <div className="av-nav-statusbar">
+          <StatusBar transparent />
+        </div>
+        <div className="av-nav-top-row">
+          <div className="av-nav-leading" />
+          <span className="av-nav-title">Media</span>
+          <div className="av-nav-trailing">
+            <button className="av-nav-icon-btn" style={{ opacity: 0, pointerEvents: 'none' }}>
+              <MagnifyingGlass size={24} color="#fff" weight="regular" />
+            </button>
+          </div>
+        </div>
+        <div className="av-nav-tabs">
+          {AV_TABS.map((tab, i) => (
+            <button
+              key={tab}
+              className={`av-tab${activeTab === i ? ' av-tab--active' : ''}`}
+              onClick={e => { e.stopPropagation(); setActiveTab(i) }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Play/Pause tap feedback */}
       <div className={`media-playpause${showPlayPause ? ' media-playpause--visible' : ''}`}>
         {paused

@@ -30,6 +30,124 @@
 }
 
 
+/* ── AV Navigation ───────────────────────────────────────────────────────── */
+.av-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 205;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.av-nav--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.av-nav-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.99) 0%, rgba(10,10,10,0) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.av-nav-statusbar {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.av-nav-top-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px;
+  pointer-events: auto;
+}
+
+.av-nav-leading {
+  width: 48px;
+}
+
+.av-nav-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #fff;
+  text-align: center;
+}
+
+.av-nav-trailing {
+  width: 48px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.av-nav-icon-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.av-nav-tabs {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 16px;
+  pointer-events: auto;
+}
+
+.av-tab {
+  background: none;
+  border: none;
+  padding: 13px 2px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ccc;
+  margin-right: 24px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.av-tab--active {
+  font-weight: 500;
+  line-height: 18px;
+  color: #fff;
+  border-bottom-color: #f4f5f7;
+}
+
+.av-nav-divider {
+  position: relative;
+  z-index: 2;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+}
+
 /* Play/Pause center overlay */
 .media-playpause {
   position: absolute;

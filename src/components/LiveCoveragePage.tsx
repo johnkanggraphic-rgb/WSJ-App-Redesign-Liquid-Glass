@@ -27,8 +27,8 @@ const imgStdPost1      = 'https://images.unsplash.com/photo-1611974789855-9c2a0a
 const imgStdPost2      = 'https://images.unsplash.com/photo-1570126618953-d437176e8c79?w=800&q=80'  // judge gavel
 const imgOpinionPost   = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80'  // newspaper/media
 const imgArticlePost   = 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80'  // person on laptop
-const imgAuthor1       = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face'
-const imgOpinionAuthor = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face'
+const imgAuthor1       = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=top'
+const imgOpinionAuthor = 'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=200&h=200&fit=crop&crop=top'
 
 // ── Stock row ─────────────────────────────────────────────────────────────
 function StockRow({ arrow }: { arrow: string }) {
