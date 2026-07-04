@@ -80,12 +80,12 @@ function FeaturedPost({ onTimelineTap }: { onTimelineTap: () => void }) {
 
       {/* Headline */}
       <h1 className="lc-headline">
-        Large Unified News Story Card Headline Goes Here, Extended Headline
+        Google Antitrust Trial: DOJ Rests Case After Key Witness Testimony on Ad Auction Manipulation
       </h1>
 
       {/* Summary */}
       <p className="lc-summary">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique magna eu lacus blandit fringilla.
+        The Justice Department closed its antitrust case against Google as testimony revealed the tech giant paid billions to lock competitors out of the search and ad markets.
       </p>
 
       {/* Actions: Event Timeline + Notifications */}
@@ -153,7 +153,7 @@ function FeaturedPost({ onTimelineTap }: { onTimelineTap: () => void }) {
 }
 
 // ── Standard post ─────────────────────────────────────────────────────────
-function StandardPost({ time, image }: { time: string; image: string }) {
+function StandardPost({ time, image, headline }: { time: string; image: string; headline: string }) {
   return (
     <div className="lc-post lc-post--standard">
       {/* Timestamp */}
@@ -163,7 +163,7 @@ function StandardPost({ time, image }: { time: string; image: string }) {
 
       {/* Headline */}
       <h3 className="lc-post-headline">
-        Small Unified News Story Card Headline Goes Here, Extended Headline
+        {headline}
       </h3>
 
       {/* Byline */}
@@ -228,7 +228,7 @@ function OpinionPost({ time }: { time: string }) {
 
       {/* Headline */}
       <h3 className="lc-post-headline">
-        Small Unified News Story Card Headline Goes Here, Extended Headline
+        Big Tech's Day of Reckoning Has Finally Arrived
       </h3>
 
       {/* Byline */}
@@ -276,7 +276,7 @@ function ArticlePost({ time }: { time: string }) {
 
       {/* Headline — larger size */}
       <h3 className="lc-post-headline lc-post-headline--lg">
-        Small Unified News Story Card Headline Goes Here, Extended Headline
+        Judge Weighs Sweeping Remedies That Could Break Up Google's Ad Business
       </h3>
 
       {/* Image */}
@@ -373,11 +373,11 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
 
         {/* Updates: gray bg container with post cards */}
         <div className="lc-updates">
-          <StandardPost time="13 min ago" image={imgStdPost1} />
+          <StandardPost time="13 min ago" image={imgStdPost1} headline="DOJ Rests Case After Key Witness Testimony on Ad Auction Manipulation" />
           <div className="lc-post-gap" />
           <OpinionPost time="13 min ago" />
           <div className="lc-post-gap" />
-          <StandardPost time="45 min ago" image={imgStdPost2} />
+          <StandardPost time="45 min ago" image={imgStdPost2} headline="Google Executive Admits Search Deal Locked Out Rivals for Years" />
           <div className="lc-post-gap" />
           <ArticlePost time="1 hr ago" />
         </div>
@@ -436,7 +436,7 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
       <ShareSheet
         visible={shareSheetVisible}
         onClose={() => setShareSheetVisible(false)}
-        headline="Large Unified News Story Card Headline Goes Here, Extended Headline"
+        headline="Google Antitrust Trial: DOJ Rests Case After Key Witness Testimony on Ad Auction Manipulation"
         heroImage={imgFeatured}
       />
     </div>
