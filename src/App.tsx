@@ -15,6 +15,7 @@ import MorePage from './components/MorePage'
 import PuzzlesPage from './components/PuzzlesPage'
 import PrintEditionPage from './components/PrintEditionPage'
 import PrintEditionReadPage from './components/PrintEditionReadPage'
+import LiveCoveragePage from './components/LiveCoveragePage'
 
 const PHONE_W = 405
 const PHONE_H = 864
@@ -39,6 +40,7 @@ function App() {
   const [showPuzzles, setShowPuzzles] = useState(false)
   const [showPrintEdition, setShowPrintEdition] = useState(false)
   const [showPrintRead, setShowPrintRead] = useState(false)
+  const [showLiveCoverage, setShowLiveCoverage] = useState(false)
 
   useEffect(() => {
     const el = stageRef.current
@@ -69,7 +71,7 @@ function App() {
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
-
+                onLiveTap={() => setShowLiveCoverage(true)}
               />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
@@ -82,7 +84,8 @@ function App() {
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-            <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
+<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
+            <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <MdInfoSheet
               visible={showVolumeSheet}
               onClose={() => setShowVolumeSheet(false)}

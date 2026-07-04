@@ -17,6 +17,9 @@ const ArticleTapContext = createContext<(headline: string) => void>(() => {})
 // ── Comment tap context ────────────────────────────────────────────────────
 const CommentTapContext = createContext<(headline: string) => void>(() => {})
 
+// ── Live coverage tap context ──────────────────────────────────────────────
+const LiveCoverageTapContext = createContext<() => void>(() => {})
+
 // ── Icon assets from Figma ─────────────────────────────────────────────────
 // Article card (node 2189:47269)
 const imgArticlePhoto = 'https://www.figma.com/api/mcp/asset/e85a6828-768e-417b-aae7-b49e1fbd8ee8'
@@ -141,11 +144,10 @@ const liveUpdates = [
   { time: '1 hr ago',   headline: 'Markets React: Alphabet Shares Fall 4% After Decision Announced' },
 ]
 
-const LIVE_HEADLINE = 'Google Ad Monopoly Trial: Live Updates From the Courthouse'
 function LiveCard() {
-  const onArticleTap = useContext(ArticleTapContext)
+  const onLiveTap = useContext(LiveCoverageTapContext)
   return (
-    <div className="feed-card feed-card--live" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(LIVE_HEADLINE)}>
+    <div className="feed-card feed-card--live" style={{ cursor: 'pointer' }} onClick={onLiveTap}>
       <div className="card-top-section">
         <div className="live-tag">
           <div className="live-dot" />
@@ -560,7 +562,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -656,7 +658,8 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
     <MiniPlayerContext.Provider value={showMiniPlayer}>
     <ArticleTapContext.Provider value={onArticleTap ?? (() => {})}>
     <CommentTapContext.Provider value={onCommentTap ?? (() => {})}>
-    <ToastContext.Provider value={showToast}>
+    <LiveCoverageTapContext.Provider value={onLiveTap ?? (() => {})}>
+<ToastContext.Provider value={showToast}>
       <div className="today-feed" ref={feedRef}>
         <StockBar />
         <ArticleCardHero onTap={onArticleTap} />
@@ -712,7 +715,8 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg }: { on
       <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} />
       <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} navDown={navDown} />
     </ToastContext.Provider>
-    </CommentTapContext.Provider>
+    </LiveCoverageTapContext.Provider>
+</CommentTapContext.Provider>
     </ArticleTapContext.Provider>
     </MiniPlayerContext.Provider>
   )

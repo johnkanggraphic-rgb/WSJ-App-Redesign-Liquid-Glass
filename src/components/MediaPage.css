@@ -21,6 +21,12 @@
 .media-page--left,
 .media-page--right {
   opacity: 0;
+  pointer-events: none !important;
+}
+
+.media-page--left *,
+.media-page--right * {
+  pointer-events: none !important;
 }
 
 
@@ -169,6 +175,8 @@
   left: 0;
   right: 0;
   height: 220px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   mask-image: linear-gradient(to top, black 40%, transparent 100%);
   -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
   z-index: 198;

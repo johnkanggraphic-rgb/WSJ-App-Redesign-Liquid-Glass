@@ -1,0 +1,149 @@
+/* ── Scrim ───────────────────────────────────────────────────────────────── */
+.et-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 80;
+  pointer-events: none;
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.et-scrim--visible {
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+/* ── Sheet ───────────────────────────────────────────────────────────────── */
+.et-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 81;
+  border-radius: 34px 34px 0 0;
+  background: #fff;
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12);
+  transform: translateY(calc(100% + 20px));
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: hidden;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 48px;
+}
+
+.et-sheet--visible {
+  transform: translateY(0);
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.et-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 10px;
+  flex-shrink: 0;
+}
+
+.et-grabber {
+  width: 36px;
+  height: 5px;
+  background: #ccc;
+  border-radius: 100px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.et-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  position: relative;
+}
+
+.et-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+  text-align: center;
+}
+
+.et-close-btn {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.et-close-glass {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -4px;
+}
+
+.et-close-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* ── Scroll area ─────────────────────────────────────────────────────────── */
+.et-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.et-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Timeline item ───────────────────────────────────────────────────────── */
+.et-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+}
+
+.et-item-time {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #e10000;
+}
+
+.et-item-headline {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+  margin: 0;
+}
+
+.et-divider {
+  height: 1px;
+  background: #ebebeb;
+  margin: 0 16px;
+}

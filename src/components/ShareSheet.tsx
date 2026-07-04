@@ -20,7 +20,12 @@ const SHARE_ACTIONS = [
   { src: imgMore,      label: 'More' },
 ]
 
-export default function ShareSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+export default function ShareSheet({ visible, onClose, headline, heroImage }: {
+  visible: boolean
+  onClose: () => void
+  headline?: string
+  heroImage?: string
+}) {
   const [nativeVisible, setNativeVisible] = useState(false)
   const actionsRowRef = useRef<HTMLDivElement>(null)
 
@@ -51,8 +56,8 @@ export default function ShareSheet({ visible, onClose }: { visible: boolean; onC
         <div className="share-sheet-content">
           {/* Article card */}
           <div className="share-article-card">
-            <p className="share-article-headline">Judge Rules Google Operates Illegal Ad Monopoly</p>
-            <img src={imgHero} alt="" className="share-article-img" />
+            <p className="share-article-headline">{headline ?? 'Judge Rules Google Operates Illegal Ad Monopoly'}</p>
+            <img src={heroImage ?? imgHero} alt="" className="share-article-img" />
           </div>
 
           {/* Share actions */}
