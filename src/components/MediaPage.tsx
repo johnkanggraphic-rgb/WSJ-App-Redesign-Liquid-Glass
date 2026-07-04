@@ -115,7 +115,6 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
     const delta = e.clientY - startY.current
     if (delta < -50) {
       snapTo(idxRef.current + 1)
-      showNavBriefly(false)
     } else if (delta > 50) {
       snapTo(idxRef.current - 1)
       showNavBriefly(false)
