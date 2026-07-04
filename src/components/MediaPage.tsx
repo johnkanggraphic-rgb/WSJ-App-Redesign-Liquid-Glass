@@ -42,11 +42,15 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
     }
   }, [])
 
-  // Show nav on mount, auto-hide after 3s
+  // Show nav whenever page becomes active, auto-hide after 3s
   useEffect(() => {
-    navTimerRef.current = setTimeout(() => setNavVisible(false), 3000)
+    if (slidePos === 'center') {
+      setNavVisible(true)
+      if (navTimerRef.current) clearTimeout(navTimerRef.current)
+      navTimerRef.current = setTimeout(() => setNavVisible(false), 3000)
+    }
     return () => { if (navTimerRef.current) clearTimeout(navTimerRef.current) }
-  }, [])
+  }, [slidePos])
 
   const trackProgress = useCallback(() => {
     const video = videoRefs.current[idxRef.current]
