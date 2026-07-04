@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useContext, createContext, useCallback } from 'react'
-import { PlusCircle, BookmarkSimple, X, Pause } from '@phosphor-icons/react'
+import { PlusCircle, MinusCircle, BookmarkSimple, X, Pause } from '@phosphor-icons/react'
 import './TodayFeed.css'
 import StockBar from './StockBar'
 
@@ -55,7 +55,10 @@ function PlusButton() {
       className={`card-action-btn plus-btn${tapping ? ' plus-btn--tapping' : ''}`}
       onClick={handleTap}
     >
-      <PlusCircle size={24} weight={filled ? 'fill' : 'regular'} color={filled ? '#222222' : '#6f6f6f'} />
+      {filled
+        ? <MinusCircle size={24} weight="fill" color="#222222" />
+        : <PlusCircle size={24} weight="regular" color="#6f6f6f" />
+      }
     </button>
   )
 }
