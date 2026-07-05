@@ -16,6 +16,7 @@ import PuzzlesPage from './components/PuzzlesPage'
 import PrintEditionPage from './components/PrintEditionPage'
 import PrintEditionReadPage from './components/PrintEditionReadPage'
 import LiveCoveragePage from './components/LiveCoveragePage'
+import TopNavPage from './components/TopNavPage'
 
 const PHONE_W = 405
 const PHONE_H = 864
@@ -41,6 +42,7 @@ function App() {
   const [showPrintEdition, setShowPrintEdition] = useState(false)
   const [showPrintRead, setShowPrintRead] = useState(false)
   const [showLiveCoverage, setShowLiveCoverage] = useState(false)
+  const [topNavActive, setTopNavActive] = useState(0)
 
   useEffect(() => {
     const el = stageRef.current
@@ -66,13 +68,17 @@ function App() {
             <div className="iphone-screen-mask" />
             <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3} />
             <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
-            <TopNav />
+            <TopNav
+              activeIndex={topNavActive}
+              onTabChange={(i) => setTopNavActive(i)}
+            />
             <div className="content-area">
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
                 onLiveTap={() => setShowLiveCoverage(true)}
               />
+              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />

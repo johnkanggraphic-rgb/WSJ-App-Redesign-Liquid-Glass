@@ -1,0 +1,435 @@
+.sr-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Filter tabs ──────────────────────────────────────────────────────────── */
+.sr-tabs {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  border-bottom: 1px solid #ebebeb;
+  padding-left: 16px;
+}
+.sr-tabs::-webkit-scrollbar { display: none; }
+
+.sr-tab {
+  flex-shrink: 0;
+  padding: 13px 16px;
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #6f6f6f;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  text-align: center;
+}
+
+.sr-tab--active {
+  font-weight: 500;
+  color: #222;
+  border-bottom: 4px solid #222;
+}
+
+/* ── Scroll container ─────────────────────────────────────────────────────── */
+.sr-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+}
+.sr-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Market Data section ──────────────────────────────────────────────────── */
+.sr-md-section {
+  border: 1px solid #ebebeb;
+}
+
+.sr-md-strap {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.116px;
+  text-transform: uppercase;
+  color: #222;
+  padding: 24px 16px 0;
+  background: #fff;
+  text-align: left;
+}
+
+.sr-stock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #fff;
+}
+
+.sr-stock-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sr-stock-ticker-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sr-stock-ticker {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  white-space: nowrap;
+}
+
+.sr-stock-exchange {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #6f6f6f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.sr-stock-name {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #6f6f6f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.sr-stock-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  width: 114px;
+  flex-shrink: 0;
+}
+
+.sr-stock-price-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sr-stock-arrow {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.sr-stock-price {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #222;
+  white-space: nowrap;
+}
+
+.sr-stock-change {
+  display: flex;
+  gap: 12px;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.sr-stock-change--up   { color: #0a8200; }
+.sr-stock-change--down { color: #e10000; }
+
+.sr-md-more {
+  padding: 16px;
+  background: #fff;
+  text-align: left;
+}
+
+.sr-md-more-link {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #222;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Gray spacer ─────────────────────────────────────────────────────────── */
+.sr-spacer {
+  height: 8px;
+  background: #f4f5f7;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── News section ────────────────────────────────────────────────────────── */
+.sr-news-section {
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+.sr-divider {
+  height: 1px;
+  background: #ebebeb;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.sr-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px 4px;
+  background: #fff;
+}
+
+.sr-card--opinion {
+  background: #f5f0eb;
+}
+
+.sr-card-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.sr-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+}
+
+.sr-card-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Labels / tags ───────────────────────────────────────────────────────── */
+.sr-label {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.sr-label--grey    { color: #6f6f6f; }
+.sr-label--opinion { color: #865a1c; font-style: normal; }
+
+.sr-label-sep {
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0 2px;
+}
+
+.sr-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fce6e6;
+  border-radius: 2px;
+  padding: 1px 4px;
+}
+
+.sr-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e10000;
+  flex-shrink: 0;
+}
+
+.sr-live-text {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #e10000;
+}
+
+.sr-breaking-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #e10000;
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.sr-exclusive-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #222;
+  border-radius: 2px;
+  padding: 1px 4px;
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #222;
+}
+
+/* ── Headline ────────────────────────────────────────────────────────────── */
+.sr-headline {
+  font-family: 'DJ5 Escrow Cond', 'Escrow Condensed A', 'Escrow Condensed B', serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #222;
+  margin: 0;
+  text-align: left;
+}
+
+.sr-headline--dark { color: #111; }
+
+.sr-print-note {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #6f6f6f;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.sr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-bottom: 12px;
+}
+
+.sr-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.sr-footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.sr-read-time {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+.sr-timestamp {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  white-space: nowrap;
+}
+
+.sr-timestamp--red { color: #e10000; }
+
+.sr-view-all {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.sr-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sr-action-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* ── Player pill ─────────────────────────────────────────────────────────── */
+.sr-player {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.sr-play-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.sr-player-time {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+  white-space: nowrap;
+}

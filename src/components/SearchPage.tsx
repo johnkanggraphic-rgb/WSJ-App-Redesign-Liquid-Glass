@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
-import { CaretLeft } from '@phosphor-icons/react'
+import { CaretLeft, FunnelSimple } from '@phosphor-icons/react'
 import './SearchPage.css'
 import StatusBar from './StatusBar'
+import SearchResults from './SearchResults'
+import SearchFilterSheet from './SearchFilterSheet'
 
 const imgMagnifyingGlass = 'https://www.figma.com/api/mcp/asset/635ae259-7bba-4786-af71-dc08a91f3e16'
 
@@ -71,6 +73,7 @@ export default function SearchPage({ visible, onBack }: {
   onBack: () => void
 }) {
   const [query, setQuery] = useState('')
+  const [filterOpen, setFilterOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const sizerRef = useRef<HTMLSpanElement>(null)
 
@@ -118,17 +121,18 @@ export default function SearchPage({ visible, onBack }: {
 
       {/* Search bar */}
       <div className="search-bar-wrap">
+        <div className="search-bar-row">
         <div className="search-bar">
           <div className="search-bar-icon-wrap">
             <img src={imgMagnifyingGlass} alt="" className="search-bar-icon" />
           </div>
           <div className="search-bar-field">
-            <span className="search-bar-sizer" aria-hidden ref={sizerRef}>{query || ' '}</span>
+            <span className="search-bar-sizer" aria-hidden ref={sizerRef}>{(query.length > 0 ? 'Richard Boudreaux' : '') || ' '}</span>
             <input
               ref={inputRef}
               className="search-bar-input"
               type="text"
-              value={query}
+              value={query.length > 0 ? 'Richard Boudreaux' : ''}
               placeholder=""
               readOnly
             />
@@ -139,6 +143,10 @@ export default function SearchPage({ visible, onBack }: {
               <span className="search-bar-clear-x">✕</span>
             </button>
           )}
+        </div>
+        <button className="search-filter-btn" onMouseDown={e => { e.preventDefault(); setFilterOpen(true) }}>
+          <FunnelSimple size={24} color="#222222" weight="regular" />
+        </button>
         </div>
       </div>
 
@@ -152,10 +160,18 @@ export default function SearchPage({ visible, onBack }: {
         </div>
       )}
 
+      {/* Search results */}
+      {query.length > 0 && <SearchResults />}
+
       {/* iOS keyboard at bottom */}
-      <div className="kb-wrap">
-        <Keyboard onKey={handleKey} />
-      </div>
+      {query.length === 0 && (
+        <div className="kb-wrap">
+          <Keyboard onKey={handleKey} />
+        </div>
+      )}
+
+      {/* Filter sheet */}
+      <SearchFilterSheet visible={filterOpen} onClose={() => setFilterOpen(false)} />
     </div>
   )
 }

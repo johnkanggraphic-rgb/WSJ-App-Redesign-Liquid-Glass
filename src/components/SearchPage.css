@@ -54,6 +54,30 @@
   flex-shrink: 0;
 }
 
+.search-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.search-bar-row .search-bar {
+  flex: 1;
+}
+
+.search-filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .search-bar {
   display: flex;
   align-items: center;

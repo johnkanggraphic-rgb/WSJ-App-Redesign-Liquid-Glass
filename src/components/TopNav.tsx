@@ -13,23 +13,34 @@ const tabs = [
   'Sections',
 ]
 
-export default function TopNav() {
-  const [active, setActive] = useState(0)
+export default function TopNav({ activeIndex, onTabChange }: {
+  activeIndex?: number
+  onTabChange?: (index: number) => void
+}) {
+  const [internalActive, setInternalActive] = useState(0)
+  const active = activeIndex !== undefined ? activeIndex : internalActive
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const indicatorRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const accentColor = active === 2 ? '#865a1c' : '#222222'
 
   useEffect(() => {
     const tab = tabRefs.current[active]
     const indicator = indicatorRef.current
     if (!tab || !indicator) return
 
-    // offsetLeft/offsetWidth are in CSS coordinate space, unaffected by zoom on ancestors
     indicator.style.left = `${tab.offsetLeft}px`
     indicator.style.width = `${tab.offsetWidth}px`
+    indicator.style.background = active === 2 ? '#865a1c' : '#222222'
 
     tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
   }, [active])
+
+  const handleClick = (i: number) => {
+    setInternalActive(i)
+    onTabChange?.(i)
+  }
 
   return (
     <div className="topnav-container" ref={containerRef}>
@@ -40,7 +51,8 @@ export default function TopNav() {
             <button
               ref={el => { tabRefs.current[i] = el }}
               className={`topnav-tab${i === active ? ' topnav-tab--active' : ''}`}
-              onClick={() => setActive(i)}
+              style={i === active ? { color: accentColor } : undefined}
+              onClick={() => handleClick(i)}
             >
               {tab}
             </button>

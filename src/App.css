@@ -81,7 +81,7 @@ body {
 .content-area {
   flex: 1;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   min-height: 0;
 }
 
