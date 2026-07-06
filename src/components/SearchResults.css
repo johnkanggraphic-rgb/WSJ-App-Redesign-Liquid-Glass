@@ -319,7 +319,7 @@
 
 /* ── Headline ────────────────────────────────────────────────────────────── */
 .sr-headline {
-  font-family: 'DJ5 Escrow Cond', 'Escrow Condensed A', 'Escrow Condensed B', serif;
+  font-family: 'DJ5 Escrow Cond', 'DJ5EscrowCond', Georgia, serif;
   font-weight: 700;
   font-size: 22px;
   line-height: 26px;
