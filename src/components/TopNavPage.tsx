@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { BookmarkSimple, PlusCircle, Headphones, Chat } from '@phosphor-icons/react'
 import './TopNavPage.css'
 import './TodayFeed.css'
@@ -293,12 +294,35 @@ function SectionsList({ onSectionTap }: { onSectionTap?: (section: string) => vo
   )
 }
 
-export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleTap }: { tabIndex: number; visible: boolean; onSectionTap?: (section: string) => void; onArticleTap?: (headline: string) => void }) {
+export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleTap, onNavDown }: { tabIndex: number; visible: boolean; onSectionTap?: (section: string) => void; onArticleTap?: (headline: string) => void; onNavDown?: (down: boolean) => void }) {
   const data = tabData[tabIndex]
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const onScroll = () => {
+      const tabbar = el.closest('.content-area')?.querySelector('.tabbar-wrapper') as HTMLElement | null
+      const current = el.scrollTop
+      if (tabbar) {
+        if (current > lastScrollY.current && current > 40) {
+          tabbar.classList.add('tabbar--scrolled-down')
+          onNavDown?.(true)
+        } else {
+          tabbar.classList.remove('tabbar--scrolled-down')
+          onNavDown?.(false)
+        }
+      }
+      lastScrollY.current = current
+    }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [onNavDown])
 
   if (tabIndex === 8) {
     return (
-      <div className={`topnav-page${visible ? ' topnav-page--visible' : ''}`} style={{ background: '#fff' }}>
+      <div ref={scrollRef} className={`topnav-page${visible ? ' topnav-page--visible' : ''}`} style={{ background: '#fff' }}>
         <SectionsList onSectionTap={onSectionTap} />
         <div className="feed-bottom-pad" style={{ background: '#fff' }} />
       </div>
@@ -308,7 +332,7 @@ export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleT
   if (!data) return null
 
   return (
-    <div className={`topnav-page${visible ? ' topnav-page--visible' : ''}`}>
+    <div ref={scrollRef} className={`topnav-page${visible ? ' topnav-page--visible' : ''}`}>
       <Section hero={data.s1hero} compact={data.s1compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
       <div className="feed-divider" />
       <Section hero={data.s2hero} compact={data.s2compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />

@@ -30,7 +30,6 @@ function computeScale(w: number, h: number) {
   return Math.min(w / PHONE_W, (h - PAD * 2) / PHONE_H, 1)
 }
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
 
 function App() {
   const stageRef = useRef<HTMLDivElement>(null)
@@ -106,12 +105,12 @@ function App() {
   const screenContents = (
     <>
             <div className="iphone-screen-mask" />
-            {!isMobile && <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3 && mediaSubTab === 0} />}
-            {(!isMobile || activeTab === 0) && <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />}
-            {(!isMobile || activeTab === 0) && <TopNav
+            <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3 && mediaSubTab === 0} />
+            <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
+            <TopNav
               activeIndex={topNavActive}
               onTabChange={(i) => setTopNavActive(i)}
-            />}
+            />
             <div className="content-area">
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
@@ -121,7 +120,7 @@ function App() {
                 onNavDown={setNavDown}
                 onToastActive={setFeedToastActive}
               />
-              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
+              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} onNavDown={setNavDown} />
               <TabBar dark={activeTab === 3 && mediaSubTab === 0} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
@@ -162,10 +161,6 @@ function App() {
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
     </>
   )
-
-  if (isMobile) {
-    return <div className="mobile-screen">{screenContents}</div>
-  }
 
   return (
     <div className="stage" ref={stageRef}>
