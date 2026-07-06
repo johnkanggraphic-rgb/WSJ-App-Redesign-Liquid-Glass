@@ -17,6 +17,8 @@ import PrintEditionPage from './components/PrintEditionPage'
 import PrintEditionReadPage from './components/PrintEditionReadPage'
 import LiveCoveragePage from './components/LiveCoveragePage'
 import TopNavPage from './components/TopNavPage'
+import SectionSubPage from './components/SectionSubPage'
+import ExpandedAudioPlayer from './components/ExpandedAudioPlayer'
 
 const PHONE_W = 405
 const PHONE_H = 864
@@ -43,6 +45,8 @@ function App() {
   const [showPrintRead, setShowPrintRead] = useState(false)
   const [showLiveCoverage, setShowLiveCoverage] = useState(false)
   const [topNavActive, setTopNavActive] = useState(0)
+  const [activeSectionPage, setActiveSectionPage] = useState<string | null>(null)
+  const [expandedPlayerInfo, setExpandedPlayerInfo] = useState<{ flashline: string; headline: string } | null>(null)
 
   useEffect(() => {
     const el = stageRef.current
@@ -77,8 +81,9 @@ function App() {
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
                 onLiveTap={() => setShowLiveCoverage(true)}
+                onExpandPlayer={(info) => setExpandedPlayerInfo(info)}
               />
-              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} />
+              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
@@ -92,6 +97,8 @@ function App() {
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
 <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
+            <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
+            <ExpandedAudioPlayer visible={expandedPlayerInfo !== null} info={expandedPlayerInfo ?? { flashline: '', headline: '' }} onClose={() => setExpandedPlayerInfo(null)} />
             <MdInfoSheet
               visible={showVolumeSheet}
               onClose={() => setShowVolumeSheet(false)}

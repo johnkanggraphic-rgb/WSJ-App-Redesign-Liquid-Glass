@@ -516,13 +516,14 @@ function MarqueeHeadline({ text }: { text: string }) {
   )
 }
 
-function MiniPlayer({ visible, hiding, info, onClose, navDown }: {
-  visible: boolean; hiding: boolean; info: MiniPlayerInfo; onClose: () => void; navDown: boolean
+function MiniPlayer({ visible, hiding, info, onClose, onExpand, navDown }: {
+  visible: boolean; hiding: boolean; info: MiniPlayerInfo; onClose: () => void; onExpand: () => void; navDown: boolean
 }) {
   return (
     <div
       className={`mini-player${visible ? ' mini-player--visible' : ''}${hiding ? ' mini-player--hiding' : ''}`}
       style={navDown ? { bottom: 83 } : undefined}
+      onClick={onExpand}
     >
       <div className="mini-player-thumb">
         <img src={imgMiniPlayerThumb} alt="" className="mini-player-thumb-img" />
@@ -532,10 +533,10 @@ function MiniPlayer({ visible, hiding, info, onClose, navDown }: {
         <MarqueeHeadline text={info.headline} />
       </div>
       <div className="mini-player-actions">
-        <button className="mini-player-btn">
+        <button className="mini-player-btn" onClick={e => e.stopPropagation()}>
           <Pause size={20} weight="fill" color="#222222" />
         </button>
-        <button className="mini-player-btn" onClick={onClose}>
+        <button className="mini-player-btn" onClick={e => { e.stopPropagation(); onClose() }}>
           <X size={20} weight="bold" color="#222222" />
         </button>
       </div>
@@ -565,7 +566,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap, onExpandPlayer }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void; onExpandPlayer?: (info: { flashline: string; headline: string }) => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -716,7 +717,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
         <div className="feed-bottom-pad" />
       </div>
       <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} />
-      <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} navDown={navDown} />
+      <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} onExpand={() => onExpandPlayer?.(playerInfo)} navDown={navDown} />
     </ToastContext.Provider>
     </LiveCoverageTapContext.Provider>
 </CommentTapContext.Provider>

@@ -1,0 +1,490 @@
+.exp-player {
+  position: absolute;
+  top: 59px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 82;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.exp-player--visible {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Top nav ─────────────────────────────────────────────────────────────── */
+.exp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  background: #fff;
+  gap: 10px;
+}
+
+.exp-nav-leading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.exp-nav-trailing {
+  flex: 1;
+}
+
+.exp-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.exp-nav-glass {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-nav-title {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+}
+
+/* ── Scroll area ────────────────────────────────────────────────────────── */
+.exp-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+}
+.exp-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Main section ──────────────────────────────────────────────────────── */
+.exp-main {
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0;
+}
+
+/* ── Album art ──────────────────────────────────────────────────────────── */
+.exp-art-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 80px;
+}
+
+.exp-art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.exp-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Controls section ────────────────────────────────────────────────────── */
+.exp-controls {
+  padding: 0 16px 32px;
+  text-align: left;
+}
+
+/* ── Top text ────────────────────────────────────────────────────────────── */
+.exp-flashline-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.exp-flashline {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #6f6f6f;
+}
+
+.exp-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #6f6f6f;
+  flex-shrink: 0;
+}
+
+.exp-headline {
+  font-family: 'DJ5 Escrow Comp', 'DJ5EscrowComp', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #111;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.exp-timestamp {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  margin-bottom: 24px;
+}
+
+/* ── Timeline ────────────────────────────────────────────────────────────── */
+.exp-timeline {
+  margin-bottom: 12px;
+}
+
+.exp-track-wrap {
+  position: relative;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exp-track-bg {
+  position: absolute;
+  left: 0; right: 0;
+  height: 4px;
+  border-radius: 9999px;
+  background: #ccc;
+  overflow: hidden;
+}
+
+.exp-track-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #222;
+  border-radius: 9999px;
+  width: 27%;
+}
+
+.exp-thumb-wrap {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  width: 27%;
+}
+
+.exp-track-indicator {
+  flex: 1;
+  height: 4px;
+  background: #222;
+  border-right: 1px solid #222;
+  border-radius: 100px 0 0 100px;
+}
+
+.exp-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #222;
+  border: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.exp-time-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exp-time {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+/* ── Player controls ────────────────────────────────────────────────────── */
+.exp-player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.exp-ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.exp-ctrl-btn svg {
+  display: block;
+}
+
+.exp-pause-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #222;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* ── Action bar ─────────────────────────────────────────────────────────── */
+.exp-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.exp-action-btn-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+}
+
+.exp-action-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.exp-action-btn-icon--share {
+  background: #f6f6f6;
+  border-color: #f6f6f6;
+}
+
+/* ── Spacer ─────────────────────────────────────────────────────────────── */
+.exp-spacer-8 {
+  height: 8px;
+  background: #f4f5f7;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── About section ─────────────────────────────────────────────────────── */
+.exp-section {
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.exp-section-header {
+  padding: 24px 16px 0;
+}
+
+.exp-section-title {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.116px;
+  text-transform: uppercase;
+  color: #222;
+  text-align: left;
+  display: block;
+}
+
+.exp-about-body {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222;
+  padding: 12px 16px 0;
+  text-align: left;
+}
+
+.exp-host-wrap {
+  padding: 16px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-host-name {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+  text-decoration: underline;
+}
+
+.exp-host-role {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+  margin-top: 4px;
+}
+
+/* ── Episode card ────────────────────────────────────────────────────────── */
+.exp-episode-card {
+  padding: 24px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exp-episode-card-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.exp-episode-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exp-episode-headline {
+  font-family: 'DJ5 Escrow Comp', 'DJ5EscrowComp', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #222;
+  text-align: left;
+}
+
+.exp-episode-img-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.exp-episode-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exp-episode-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp-episode-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exp-play-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+.exp-play-pill-text {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222;
+}
+
+.exp-episode-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+.exp-episode-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 12px;
+}
+
+.exp-episode-share-btn--colored {
+  background: #f6f6f6;
+  border-radius: 8px;
+}
+
+.exp-divider {
+  height: 1px;
+  background: #ebebeb;
+  margin: 0 16px;
+}
+
+.exp-bottom-pad {
+  height: 100px;
+}

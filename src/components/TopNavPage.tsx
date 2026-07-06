@@ -278,11 +278,16 @@ const sectionItems = [
   'Risk & Compliance',
 ]
 
-function SectionsList() {
+function SectionsList({ onSectionTap }: { onSectionTap?: (section: string) => void }) {
   return (
     <div className="sections-list">
       {sectionItems.map((item, i) => (
-        <div key={i} className="sections-list-item">
+        <div
+          key={i}
+          className="sections-list-item"
+          onClick={() => onSectionTap?.(item)}
+          style={{ cursor: 'pointer' }}
+        >
           <span className="sections-list-label">{item}</span>
           {i < sectionItems.length - 1 && <div className="sections-list-divider" />}
         </div>
@@ -291,13 +296,13 @@ function SectionsList() {
   )
 }
 
-export default function TopNavPage({ tabIndex, visible }: { tabIndex: number; visible: boolean }) {
+export default function TopNavPage({ tabIndex, visible, onSectionTap }: { tabIndex: number; visible: boolean; onSectionTap?: (section: string) => void }) {
   const data = tabData[tabIndex]
 
   if (tabIndex === 8) {
     return (
       <div className={`topnav-page${visible ? ' topnav-page--visible' : ''}`} style={{ background: '#fff' }}>
-        <SectionsList />
+        <SectionsList onSectionTap={onSectionTap} />
         <div className="feed-bottom-pad" style={{ background: '#fff' }} />
       </div>
     )
