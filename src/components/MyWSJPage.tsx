@@ -108,10 +108,10 @@ export default function MyWSJPage({ slidePos, onBellTap }: { slidePos?: 'left' |
                       <span className="mywsj-read-time">6 min read</span>
                       <div className="mywsj-footer-actions">
                         <button className="mywsj-footer-btn">
-                          <Headphones size={20} weight="regular" color="#6f6f6f" />
+                          <Headphones size={24} weight="regular" color="#6f6f6f" />
                         </button>
                         <button className="mywsj-footer-btn">
-                          <BookmarkSimple size={20} weight="regular" color="#6f6f6f" />
+                          <BookmarkSimple size={24} weight="regular" color="#6f6f6f" />
                         </button>
                       </div>
                     </div>

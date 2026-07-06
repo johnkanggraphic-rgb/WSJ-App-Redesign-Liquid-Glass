@@ -81,10 +81,10 @@ export function ShortlistCard({ flashline, flashline2, headline, date, readTime,
         </div>
         <div className="sl-footer-right">
           <button className="sl-action-btn">
-            <Headphones size={20} weight="regular" color="#6f6f6f" />
+            <Headphones size={24} weight="regular" color="#6f6f6f" />
           </button>
           <button className="sl-action-btn" onClick={handleRemove}>
-            <MinusCircle size={20} weight="regular" color="#6f6f6f" />
+            <MinusCircle size={24} weight="fill" color="#222222" />
           </button>
         </div>
       </div>
