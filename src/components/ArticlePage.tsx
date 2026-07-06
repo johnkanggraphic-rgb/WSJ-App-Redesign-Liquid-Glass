@@ -17,13 +17,15 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onMiniPlayer, onToolbarChange }: {
+export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onMiniPlayer, onToolbarChange, onSheetChange, onToastChange }: {
   visible: boolean
   onBack: () => void
   openComments?: boolean
   headline?: string
   onMiniPlayer?: (info: { flashline: string; headline: string }) => void
   onToolbarChange?: (hidden: boolean) => void
+  onSheetChange?: (open: boolean) => void
+  onToastChange?: (visible: boolean) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
@@ -33,14 +35,32 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
   const [commentSheetVisible, setCommentSheetVisible] = useState(false)
   const [shareSheetVisible, setShareSheetVisible] = useState(false)
 
+  const openSheet = useCallback((setter: (v: boolean) => void) => {
+    setter(true)
+    onSheetChange?.(true)
+  }, [onSheetChange])
+
+  const closeSheet = useCallback((setter: (v: boolean) => void) => {
+    setter(false)
+    onSheetChange?.(false)
+  }, [onSheetChange])
+
   useEffect(() => {
     if (visible && openComments) {
       setCommentSheetVisible(true)
+      onSheetChange?.(true)
     }
     if (!visible) {
       setCommentSheetVisible(false)
+      setAuthorSheetVisible(false)
+      setShowBackstory(false)
+      setShareSheetVisible(false)
       setToolbarHidden(false)
+      setToastVisible(false)
+      setToastHiding(false)
       onToolbarChange?.(false)
+      onSheetChange?.(false)
+      onToastChange?.(false)
     }
   }, [visible, openComments])
 
@@ -57,8 +77,8 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
     if (toastTimer.current) clearTimeout(toastTimer.current)
     if (toastHideTimer.current) clearTimeout(toastHideTimer.current)
     setToastHiding(true)
-    toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false) }, 220)
-  }, [])
+    toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false); onToastChange?.(false) }, 220)
+  }, [onToastChange])
 
   const showToast = useCallback((message: string, linkLabel: string | null) => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
@@ -67,11 +87,12 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
     setToastLinkLabel(linkLabel)
     setToastHiding(false)
     setToastVisible(true)
+    onToastChange?.(true)
     toastTimer.current = setTimeout(() => {
       setToastHiding(true)
-      toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false) }, 220)
+      toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false); onToastChange?.(false) }, 220)
     }, 2000)
-  }, [])
+  }, [onToastChange])
 
   const handleBookmark = useCallback(() => {
     const next = !bookmarked
@@ -131,7 +152,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
           <img src={imgAvatar} alt="" className="article-avatar" />
           <div className="article-byline-text">
             <p className="article-byline-name">
-              By <span className="article-byline-link" onClick={() => setAuthorSheetVisible(true)}>Hardika Singh</span>
+              By <span className="article-byline-link" onClick={() => openSheet(setAuthorSheetVisible)}>Hardika Singh</span>
             </p>
             <p className="article-byline-date">November 13, 2023</p>
           </div>
@@ -229,16 +250,16 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
       </div>
 
       {/* Author bottom sheet */}
-      <AuthorSheet visible={authorSheetVisible} onClose={() => setAuthorSheetVisible(false)} />
+      <AuthorSheet visible={authorSheetVisible} onClose={() => closeSheet(setAuthorSheetVisible)} />
 
       {/* Backstory page */}
-      <BackstoryPage visible={showBackstory} onBack={() => setShowBackstory(false)} />
+      <BackstoryPage visible={showBackstory} onBack={() => closeSheet(setShowBackstory)} />
 
       {/* Comment sheet */}
-      <CommentSheet visible={commentSheetVisible} onClose={() => setCommentSheetVisible(false)} />
+      <CommentSheet visible={commentSheetVisible} onClose={() => closeSheet(setCommentSheetVisible)} />
 
       {/* Share sheet */}
-      <ShareSheet visible={shareSheetVisible} onClose={() => setShareSheetVisible(false)} />
+      <ShareSheet visible={shareSheetVisible} onClose={() => closeSheet(setShareSheetVisible)} />
 
 
       {/* Bottom toolbar */}
@@ -252,10 +273,10 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         </div>
         <div className="article-bottom-pill">
           <div className="article-bottom-pill-bg" />
-          <button className="article-pill-btn" onClick={() => setShowBackstory(true)}>
+          <button className="article-pill-btn" onClick={() => openSheet(setShowBackstory)}>
             <img src={imgBackstory} alt="Backstory" className="article-pill-icon" />
           </button>
-          <button className="article-pill-btn" onClick={() => setCommentSheetVisible(true)}>
+          <button className="article-pill-btn" onClick={() => openSheet(setCommentSheetVisible)}>
             <img src={imgChat} alt="Chat" className="article-pill-icon" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>
@@ -264,7 +285,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
           <button className="article-pill-btn" onClick={handleGift}>
             <img src={imgGift} alt="Gift" className="article-pill-icon" />
           </button>
-          <button className="article-pill-btn" onClick={() => setShareSheetVisible(true)}>
+          <button className="article-pill-btn" onClick={() => openSheet(setShareSheetVisible)}>
             <img src={imgShareFat} alt="Share" className="article-pill-icon" />
           </button>
         </div>

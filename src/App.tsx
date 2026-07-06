@@ -54,6 +54,8 @@ function App() {
   const miniPlayerTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [navDown, setNavDown] = useState(false)
   const [articleToolbarHidden, setArticleToolbarHidden] = useState(false)
+  const [articleSheetOpen, setArticleSheetOpen] = useState(false)
+  const [articleToastVisible, setArticleToastVisible] = useState(false)
 
   const hideMiniPlayer = useCallback(() => {
     setMiniPlayerHiding(true)
@@ -105,6 +107,7 @@ function App() {
                 onLiveTap={() => setShowLiveCoverage(true)}
                 onMiniPlayer={showMiniPlayer}
                 onNavDown={setNavDown}
+                miniPlayerVisible={miniPlayerVisible}
               />
               <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
@@ -118,10 +121,10 @@ function App() {
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} />
+<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} onSheetChange={setArticleSheetOpen} onToastChange={setArticleToastVisible} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
-            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
+            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3 && !showPrintEdition && !showPrintRead && !articleSheetOpen && !articleToastVisible} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
             <ExpandedAudioPlayer visible={expandedPlayerInfo !== null} info={expandedPlayerInfo ?? { flashline: '', headline: '' }} onClose={() => setExpandedPlayerInfo(null)} />
             <MdInfoSheet
               visible={showVolumeSheet}
