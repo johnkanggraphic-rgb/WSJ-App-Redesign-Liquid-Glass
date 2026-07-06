@@ -508,8 +508,8 @@ export function MiniPlayer({ visible, hiding, info, onClose, onExpand, bottomOff
 
 // ── Bookmark Toast ─────────────────────────────────────────────────────────
 // linkLabel null = "removed" variant (no link); string = "added" variant with link
-function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown, miniPlayerVisible }: { visible: boolean; hiding: boolean; linkLabel: string | null; onClose: () => void; navDown: boolean; miniPlayerVisible?: boolean }) {
-  const bottom = miniPlayerVisible ? (navDown ? 151 : 160) : (navDown ? 83 : 90)
+function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visible: boolean; hiding: boolean; linkLabel: string | null; onClose: () => void; navDown: boolean }) {
+  const bottom = navDown ? 87 : 96
   return (
     <div
       className={`bookmark-toast${visible ? ' bookmark-toast--visible' : ''}${hiding ? ' bookmark-toast--hiding' : ''}`}
@@ -529,7 +529,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown, miniPlaye
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap, onMiniPlayer, onNavDown, miniPlayerVisible }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void; onMiniPlayer?: (info: MiniPlayerInfo) => void; onNavDown?: (down: boolean) => void; miniPlayerVisible?: boolean }) {
+export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap, onMiniPlayer, onNavDown, onToastActive }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void; onMiniPlayer?: (info: MiniPlayerInfo) => void; onNavDown?: (down: boolean) => void; onToastActive?: (active: boolean) => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -547,8 +547,9 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
     toastHideTimer.current = setTimeout(() => {
       setToastVisible(false)
       setToastHiding(false)
+      onToastActive?.(false)
     }, 220)
-  }, [])
+  }, [onToastActive])
 
   const showToast = useCallback((linkLabel: string | null) => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
@@ -556,14 +557,16 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
     setToastLinkLabel(linkLabel)
     setToastHiding(false)
     setToastVisible(true)
+    onToastActive?.(true)
     toastTimer.current = setTimeout(() => {
       setToastHiding(true)
       toastHideTimer.current = setTimeout(() => {
         setToastVisible(false)
         setToastHiding(false)
+        onToastActive?.(false)
       }, 220)
     }, 2000)
-  }, [])
+  }, [onToastActive])
 
   useEffect(() => {
     const el = feedRef.current
@@ -664,7 +667,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
         <WorldSection />
         <div className="feed-bottom-pad" />
       </div>
-      <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} miniPlayerVisible={miniPlayerVisible} />
+      <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} />
     </ToastContext.Provider>
     </LiveCoverageTapContext.Provider>
 </CommentTapContext.Provider>

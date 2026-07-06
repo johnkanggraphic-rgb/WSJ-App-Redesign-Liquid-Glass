@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { X } from '@phosphor-icons/react'
 import './App.css'
 import StatusBar from './components/StatusBar'
 import TitleBar from './components/TitleBar'
@@ -55,7 +56,23 @@ function App() {
   const [navDown, setNavDown] = useState(false)
   const [articleToolbarHidden, setArticleToolbarHidden] = useState(false)
   const [articleSheetOpen, setArticleSheetOpen] = useState(false)
-  const [articleToastVisible, setArticleToastVisible] = useState(false)
+  const [feedToastActive, setFeedToastActive] = useState(false)
+  const [articleToast, setArticleToast] = useState<{ visible: boolean; hiding: boolean; message: string; linkLabel: string | null }>({ visible: false, hiding: false, message: '', linkLabel: null })
+  const articleToastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const articleToastHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleArticleToast = useCallback((opts: { visible: boolean; message?: string; linkLabel?: string | null }) => {
+    if (!opts.visible) {
+      if (articleToastTimer.current) clearTimeout(articleToastTimer.current)
+      if (articleToastHideTimer.current) clearTimeout(articleToastHideTimer.current)
+      setArticleToast(t => ({ ...t, hiding: true }))
+      articleToastHideTimer.current = setTimeout(() => setArticleToast(t => ({ ...t, visible: false, hiding: false })), 220)
+    } else {
+      if (articleToastTimer.current) clearTimeout(articleToastTimer.current)
+      if (articleToastHideTimer.current) clearTimeout(articleToastHideTimer.current)
+      setArticleToast({ visible: true, hiding: false, message: opts.message ?? '', linkLabel: opts.linkLabel ?? null })
+    }
+  }, [])
 
   const hideMiniPlayer = useCallback(() => {
     setMiniPlayerHiding(true)
@@ -107,7 +124,7 @@ function App() {
                 onLiveTap={() => setShowLiveCoverage(true)}
                 onMiniPlayer={showMiniPlayer}
                 onNavDown={setNavDown}
-                miniPlayerVisible={miniPlayerVisible}
+                onToastActive={setFeedToastActive}
               />
               <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
@@ -121,10 +138,24 @@ function App() {
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} onSheetChange={setArticleSheetOpen} onToastChange={setArticleToastVisible} />
+<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} onSheetChange={setArticleSheetOpen} onToast={handleArticleToast} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
-            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3 && !showPrintEdition && !showPrintRead && !articleSheetOpen && !articleToastVisible} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
+            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3 && !showPrintEdition && !showPrintRead && !articleSheetOpen && !feedToastActive && !articleToast.visible} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
+            {showArticle && (
+              <div
+                className={`bookmark-toast${articleToast.visible ? ' bookmark-toast--visible' : ''}${articleToast.hiding ? ' bookmark-toast--hiding' : ''}`}
+                style={{ bottom: articleToolbarHidden ? 16 : 96, zIndex: 70 }}
+              >
+                <span className="bookmark-toast-text">{articleToast.message}</span>
+                {articleToast.linkLabel !== null && (
+                  <a href="#" className="bookmark-toast-link">{articleToast.linkLabel}</a>
+                )}
+                <button className="bookmark-toast-close" onClick={() => handleArticleToast({ visible: false })}>
+                  <X size={20} color="#fff" weight="bold" />
+                </button>
+              </div>
+            )}
             <ExpandedAudioPlayer visible={expandedPlayerInfo !== null} info={expandedPlayerInfo ?? { flashline: '', headline: '' }} onClose={() => setExpandedPlayerInfo(null)} />
             <MdInfoSheet
               visible={showVolumeSheet}

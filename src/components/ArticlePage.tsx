@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { X, BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
+import { BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
@@ -17,7 +17,7 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onMiniPlayer, onToolbarChange, onSheetChange, onToastChange }: {
+export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onMiniPlayer, onToolbarChange, onSheetChange, onToast }: {
   visible: boolean
   onBack: () => void
   openComments?: boolean
@@ -25,7 +25,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
   onMiniPlayer?: (info: { flashline: string; headline: string }) => void
   onToolbarChange?: (hidden: boolean) => void
   onSheetChange?: (open: boolean) => void
-  onToastChange?: (visible: boolean) => void
+  onToast?: (opts: { visible: boolean; message?: string; linkLabel?: string | null }) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
@@ -56,43 +56,23 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
       setShowBackstory(false)
       setShareSheetVisible(false)
       setToolbarHidden(false)
-      setToastVisible(false)
-      setToastHiding(false)
       onToolbarChange?.(false)
       onSheetChange?.(false)
-      onToastChange?.(false)
+      onToast?.({ visible: false })
     }
   }, [visible, openComments])
 
   // Bookmark + toast
   const [bookmarked, setBookmarked] = useState(false)
-  const [toastVisible, setToastVisible] = useState(false)
-  const [toastHiding, setToastHiding] = useState(false)
-  const [toastLinkLabel, setToastLinkLabel] = useState<string | null>(null)
-  const [toastMessage, setToastMessage] = useState<string>('Successfully added')
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const toastHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const hideToast = useCallback(() => {
-    if (toastTimer.current) clearTimeout(toastTimer.current)
-    if (toastHideTimer.current) clearTimeout(toastHideTimer.current)
-    setToastHiding(true)
-    toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false); onToastChange?.(false) }, 220)
-  }, [onToastChange])
 
   const showToast = useCallback((message: string, linkLabel: string | null) => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
-    if (toastHideTimer.current) clearTimeout(toastHideTimer.current)
-    setToastMessage(message)
-    setToastLinkLabel(linkLabel)
-    setToastHiding(false)
-    setToastVisible(true)
-    onToastChange?.(true)
+    onToast?.({ visible: true, message, linkLabel })
     toastTimer.current = setTimeout(() => {
-      setToastHiding(true)
-      toastHideTimer.current = setTimeout(() => { setToastVisible(false); setToastHiding(false); onToastChange?.(false) }, 220)
+      onToast?.({ visible: false })
     }, 2000)
-  }, [onToastChange])
+  }, [onToast])
 
   const handleBookmark = useCallback(() => {
     const next = !bookmarked
@@ -235,19 +215,6 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         <StatusBar transparent />
       </div>
 
-      {/* Bookmark toast */}
-      <div
-        className={`bookmark-toast${toastVisible ? ' bookmark-toast--visible' : ''}${toastHiding ? ' bookmark-toast--hiding' : ''}`}
-        style={{ bottom: toolbarHidden ? 44 : 92 }}
-      >
-        <span className="bookmark-toast-text">{toastMessage}</span>
-        {toastLinkLabel !== null && (
-          <a href="#" className="bookmark-toast-link">{toastLinkLabel}</a>
-        )}
-        <button className="bookmark-toast-close" onClick={hideToast}>
-          <X size={20} color="#fff" weight="bold" />
-        </button>
-      </div>
 
       {/* Author bottom sheet */}
       <AuthorSheet visible={authorSheetVisible} onClose={() => closeSheet(setAuthorSheetVisible)} />
