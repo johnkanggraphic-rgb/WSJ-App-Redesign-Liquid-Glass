@@ -302,6 +302,7 @@ export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleT
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
+    lastScrollY.current = el.scrollTop
     const onScroll = () => {
       const tabbar = el.closest('.content-area')?.querySelector('.tabbar-wrapper') as HTMLElement | null
       const current = el.scrollTop
@@ -318,25 +319,25 @@ export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleT
     }
     el.addEventListener('scroll', onScroll, { passive: true })
     return () => el.removeEventListener('scroll', onScroll)
-  }, [onNavDown])
+  }, [tabIndex, onNavDown])
 
-  if (tabIndex === 8) {
-    return (
-      <div ref={scrollRef} className={`topnav-page${visible ? ' topnav-page--visible' : ''}`} style={{ background: '#fff' }}>
-        <SectionsList onSectionTap={onSectionTap} />
-        <div className="feed-bottom-pad" style={{ background: '#fff' }} />
-      </div>
-    )
-  }
-
-  if (!data) return null
+  const bgColor = tabIndex === 2 ? '#f5f0eb' : '#fff'
 
   return (
-    <div ref={scrollRef} className={`topnav-page${visible ? ' topnav-page--visible' : ''}`}>
-      <Section hero={data.s1hero} compact={data.s1compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
-      <div className="feed-divider" />
-      <Section hero={data.s2hero} compact={data.s2compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
-      <div className="feed-bottom-pad" style={{ background: tabIndex === 2 ? '#f5f0eb' : '#fff' }} />
+    <div ref={scrollRef} className={`topnav-page${visible ? ' topnav-page--visible' : ''}`} style={{ background: bgColor }}>
+      {tabIndex === 8 ? (
+        <>
+          <SectionsList onSectionTap={onSectionTap} />
+          <div className="feed-bottom-pad" style={{ background: '#fff' }} />
+        </>
+      ) : data ? (
+        <>
+          <Section hero={data.s1hero} compact={data.s1compact} bgColor={bgColor} onArticleTap={onArticleTap} />
+          <div className="feed-divider" />
+          <Section hero={data.s2hero} compact={data.s2compact} bgColor={bgColor} onArticleTap={onArticleTap} />
+          <div className="feed-bottom-pad" style={{ background: bgColor }} />
+        </>
+      ) : null}
     </div>
   )
 }
