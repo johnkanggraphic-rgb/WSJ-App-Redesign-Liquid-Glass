@@ -3,9 +3,8 @@ import { CaretLeft } from '@phosphor-icons/react'
 import StatusBar from './StatusBar'
 import './PuzzlesPage.css'
 
-const imgHeroPhone    = 'https://www.figma.com/api/mcp/asset/cd91e185-9359-487b-9208-2363abd64e6f'
-const imgHeroPhone2   = 'https://www.figma.com/api/mcp/asset/e81d643f-0979-40f4-a3f1-115efe615f2d'
-const imgDot          = 'https://www.figma.com/api/mcp/asset/a4c8757b-c805-426b-ab5a-f4875ce09ba9'
+const imgHeroPhone  = '/assets/puzzle-phone-1.png'
+const imgHeroPhone2 = '/assets/puzzle-phone-2.png'
 
 const CROSSWORDS = [
   { title: 'Hot Spell',       author: 'Jennifer Cook',  date: 'April 9, 2026' },
@@ -98,7 +97,7 @@ export default function PuzzlesPage({ visible, onBack }: { visible: boolean; onB
           <div className="pz-hero-body">
             <div className="pz-hero-flashline">
               <span className="pz-flashline-text">TODAY'S SELECTION</span>
-              <img src={imgDot} alt="" className="pz-flashline-dot" />
+              <span className="pz-flashline-dot">·</span>
               <span className="pz-flashline-text">CROSSWORD</span>
             </div>
             <div className="pz-hero-text">

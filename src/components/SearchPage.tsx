@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
-import { CaretLeft, FunnelSimple } from '@phosphor-icons/react'
+import { CaretLeft, FunnelSimple, MagnifyingGlass } from '@phosphor-icons/react'
 import './SearchPage.css'
 import StatusBar from './StatusBar'
 import SearchResults from './SearchResults'
 import SearchFilterSheet from './SearchFilterSheet'
 
-const imgMagnifyingGlass = 'https://www.figma.com/api/mcp/asset/635ae259-7bba-4786-af71-dc08a91f3e16'
 
 // iOS-style keypad rows
 const KEYS = [
@@ -124,7 +123,7 @@ export default function SearchPage({ visible, onBack }: {
         <div className="search-bar-row">
         <div className="search-bar">
           <div className="search-bar-icon-wrap">
-            <img src={imgMagnifyingGlass} alt="" className="search-bar-icon" />
+            <MagnifyingGlass size={18} weight="regular" color="#6f6f6f" className="search-bar-icon" />
           </div>
           <div className="search-bar-field">
             <span className="search-bar-sizer" aria-hidden ref={sizerRef}>{(query.length > 0 ? 'Richard Boudreaux' : '') || ' '}</span>

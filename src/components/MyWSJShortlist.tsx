@@ -1,16 +1,12 @@
 import { useState, useRef } from 'react'
+import { Headphones, MinusCircle, CaretUp } from '@phosphor-icons/react'
 import './MyWSJShortlist.css'
 
-const imgHeadphones  = "https://www.figma.com/api/mcp/asset/a072504b-0655-4cc8-9491-249cfe607148"
-const imgMinus       = "https://www.figma.com/api/mcp/asset/709cb4bc-a74f-4eda-b9fd-8e0f033d956f"
-const imgCaretUp     = "https://www.figma.com/api/mcp/asset/3df75ed1-a2d5-47b7-a148-581ede211178"
-const imgDot         = "https://www.figma.com/api/mcp/asset/12449923-b3d8-40a6-a7db-3d25673f6e5f"
-
-const imgCard1 = "https://www.figma.com/api/mcp/asset/cd11d90a-463e-4a70-93aa-b18574d46812"
-const imgCard2 = "https://www.figma.com/api/mcp/asset/600ae649-214b-4446-bd23-5d633182bd06"
-const imgCard3 = "https://www.figma.com/api/mcp/asset/ab4de8ff-6823-4f88-aa23-b7a59367dba4"
-const imgCard4 = "https://www.figma.com/api/mcp/asset/dfb87a9b-833e-49e0-9fc9-0a3df825b275"
-const imgCard5 = "https://www.figma.com/api/mcp/asset/9c258bab-0cf6-4e46-adfd-3692dca586fe"
+const imgCard1 = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&q=80"
+const imgCard2 = "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=200&q=80"
+const imgCard3 = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80"
+const imgCard4 = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&q=80"
+const imgCard5 = "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=80"
 
 export type StoryItem = {
   id: string
@@ -63,7 +59,7 @@ export function ShortlistCard({ flashline, flashline2, headline, date, readTime,
             <span className={`sl-flashline${opinion ? ' sl-flashline--opinion' : ''}`}>{flashline}</span>
             {flashline2 && (
               <>
-                <span className="sl-flashline-dot"><img src={imgDot} alt="" /></span>
+                <span className="sl-flashline-dot">·</span>
                 <span className={`sl-flashline${opinion ? ' sl-flashline--opinion' : ''}`}>{flashline2}</span>
               </>
             )}
@@ -80,15 +76,15 @@ export function ShortlistCard({ flashline, flashline2, headline, date, readTime,
       <div className="sl-footer">
         <div className="sl-footer-left">
           <span className="sl-date">{date}</span>
-          <span className="sl-sep"><img src={imgDot} alt="" /></span>
+          <span className="sl-sep">·</span>
           <span className="sl-read-time">{readTime}</span>
         </div>
         <div className="sl-footer-right">
           <button className="sl-action-btn">
-            <img src={imgHeadphones} alt="Listen" />
+            <Headphones size={20} weight="regular" color="#6f6f6f" />
           </button>
           <button className="sl-action-btn" onClick={handleRemove}>
-            <img src={imgMinus} alt="Remove" />
+            <MinusCircle size={20} weight="regular" color="#6f6f6f" />
           </button>
         </div>
       </div>
@@ -141,7 +137,7 @@ export default function MyWSJShortlist() {
         <div className="sl-expired-header">
           <span className="sl-expired-title">Expired</span>
           <button className="sl-action-btn">
-            <img src={imgCaretUp} alt="Collapse" />
+            <CaretUp size={16} weight="bold" color="#6f6f6f" />
           </button>
         </div>
         {expired.map((item, i) => (

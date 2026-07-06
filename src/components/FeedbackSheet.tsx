@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { ThumbsUp, ThumbsDown } from '@phosphor-icons/react'
+import { ThumbsUp, ThumbsDown, X } from '@phosphor-icons/react'
 import './FeedbackSheet.css'
 
-const imgXClose = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
 
 const MAX_CHARS = 255
 
@@ -31,7 +30,7 @@ export default function FeedbackSheet({ visible, onClose }: {
             <div className="feedback-sheet-title">Share Feedback</div>
             <button className="feedback-sheet-close-btn" onClick={onClose}>
               <div className="feedback-sheet-close-glass">
-                <img src={imgXClose} alt="Close" className="feedback-sheet-close-icon" />
+                <X size={20} weight="bold" color="#222222" />
               </div>
             </button>
           </div>

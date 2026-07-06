@@ -62,18 +62,12 @@
 
 /* Arrow icon — 16x16 */
 .stock-arrow {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-}
-
-.stock-arrow img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .stock-percent {

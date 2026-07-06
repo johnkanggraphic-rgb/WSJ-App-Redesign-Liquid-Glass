@@ -1,8 +1,5 @@
+import { X, Envelope } from '@phosphor-icons/react'
 import './AuthorSheet.css'
-
-const imgXClose    = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
-const imgEnvelope  = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b0-b7d4-4304d3926780'
-const imgXLogo     = 'https://www.figma.com/api/mcp/asset/a2b9f7e5-0d5d-4cb6-89fa-e6cee2561b93'
 const imgAvatar    = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=top'
 
 export default function AuthorSheet({ visible, onClose }: {
@@ -26,7 +23,7 @@ export default function AuthorSheet({ visible, onClose }: {
             <div className="author-sheet-toolbar-spacer" />
             <button className="author-sheet-close-btn" onClick={onClose}>
               <div className="author-sheet-close-glass">
-                <img src={imgXClose} alt="Close" className="author-sheet-close-icon" />
+                <X size={20} weight="bold" color="#222222" />
               </div>
             </button>
           </div>
@@ -40,11 +37,11 @@ export default function AuthorSheet({ visible, onClose }: {
 
           <div className="author-sheet-actions">
             <button className="author-sheet-icon-btn">
-              <img src={imgEnvelope} alt="Email" className="author-sheet-action-icon" />
+              <Envelope size={22} weight="regular" color="#222222" />
             </button>
             <button className="author-sheet-follow-btn">Follow</button>
             <button className="author-sheet-icon-btn">
-              <img src={imgXLogo} alt="X" className="author-sheet-action-icon" />
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M11.73 8.77L17.9 2H16.4L11.06 7.85 6.77 2H2L8.46 11.01 2 18H3.5L9.14 11.83 13.65 18H18.42L11.73 8.77ZM9.89 10.93L9.23 10.01 4.04 3.07H6.03L10.47 9.01L11.13 9.93L16.41 17.07H14.42L9.89 10.93Z" fill="#222222"/></svg>
             </button>
           </div>
 

@@ -30,6 +30,8 @@ function computeScale(w: number, h: number) {
   return Math.min(w / PHONE_W, (h - PAD * 2) / PHONE_H, 1)
 }
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
 function App() {
   const stageRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(() => computeScale(window.innerWidth, window.innerHeight))
@@ -54,6 +56,7 @@ function App() {
   const [miniPlayerInfo, setMiniPlayerInfo] = useState<MiniPlayerInfo>({ flashline: '', headline: '' })
   const miniPlayerTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [navDown, setNavDown] = useState(false)
+  const [mediaSubTab, setMediaSubTab] = useState(0)
   const [articleToolbarHidden, setArticleToolbarHidden] = useState(false)
   const [articleSheetOpen, setArticleSheetOpen] = useState(false)
   const [feedToastActive, setFeedToastActive] = useState(false)
@@ -100,18 +103,10 @@ function App() {
     return () => ro.disconnect()
   }, [])
 
-  return (
-    <div className="stage" ref={stageRef}>
-      <div className="iphone" style={{ zoom: scale }}>
-        <div className="iphone-frame">
-          <div className="btn-power" />
-          <div className="btn-vol-up" />
-          <div className="btn-vol-down" />
-          <div className="btn-mute" />
-
-          <div className="iphone-screen">
+  const screenContents = (
+    <>
             <div className="iphone-screen-mask" />
-            <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3} />
+            {!isMobile && <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3 && mediaSubTab === 0} />}
             <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
             <TopNav
               activeIndex={topNavActive}
@@ -127,21 +122,21 @@ function App() {
                 onToastActive={setFeedToastActive}
               />
               <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
-              <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
+              <TabBar dark={activeTab === 3 && mediaSubTab === 0} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
             <SearchPage visible={showSearch} onBack={() => setShowSearch(false)} />
             <MyWSJPage slidePos={activeTab === 1 ? 'center' : activeTab > 1 ? 'left' : 'right'} onBellTap={() => setShowNotifs(true)} />
             <MarketDataPage slidePos={activeTab === 2 ? 'center' : activeTab > 2 ? 'left' : 'right'} onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} onVolumeInfo={() => setShowVolumeSheet(true)} onWatchlistPicker={() => setShowWatchlistSheet(true)} onAddSymbols={() => setShowAddSymbols(true)} />
-            <MediaPage slidePos={activeTab === 3 ? 'center' : activeTab > 3 ? 'left' : 'right'} />
+            <MediaPage slidePos={activeTab === 3 ? 'center' : activeTab > 3 ? 'left' : 'right'} onTabChange={setMediaSubTab} />
             <MorePage slidePos={activeTab === 4 ? 'center' : activeTab > 4 ? 'left' : 'right'} onBellTap={() => setShowNotifs(true)} onExploreTap={() => setShowPuzzles(true)} onPrintEditionTap={() => setShowPrintEdition(true)} />
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} onSheetChange={setArticleSheetOpen} onToast={handleArticleToast} />
+            <ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} onSheetChange={setArticleSheetOpen} onToast={handleArticleToast} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
-            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3 && !showPrintEdition && !showPrintRead && !articleSheetOpen && !feedToastActive && !articleToast.visible} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
+            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3 && !showPrintEdition && !showPrintRead && !articleSheetOpen && !feedToastActive && !articleToast.visible && !showSearch} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showNotifs ? 16 : showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
             {showArticle && (
               <div
                 className={`bookmark-toast${articleToast.visible ? ' bookmark-toast--visible' : ''}${articleToast.hiding ? ' bookmark-toast--hiding' : ''}`}
@@ -165,6 +160,24 @@ function App() {
             />
             <WatchlistPickerSheet visible={showWatchlistSheet} onClose={() => setShowWatchlistSheet(false)} />
             <AddSymbolsSheet visible={showAddSymbols} onClose={() => setShowAddSymbols(false)} />
+    </>
+  )
+
+  if (isMobile) {
+    return <div className="mobile-screen">{screenContents}</div>
+  }
+
+  return (
+    <div className="stage" ref={stageRef}>
+      <div className="iphone" style={{ zoom: scale }}>
+        <div className="iphone-frame">
+          <div className="btn-power" />
+          <div className="btn-vol-up" />
+          <div className="btn-vol-down" />
+          <div className="btn-mute" />
+
+          <div className="iphone-screen">
+            {screenContents}
           </div>
         </div>
       </div>

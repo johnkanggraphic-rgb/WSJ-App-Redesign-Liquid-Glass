@@ -1,17 +1,15 @@
 import { useState, useRef } from 'react'
-import { CaretLeft } from '@phosphor-icons/react'
+import { CaretLeft, ChatDots } from '@phosphor-icons/react'
 import './BackstoryPage.css'
 import StatusBar from './StatusBar'
 import FeedbackSheet from './FeedbackSheet'
 
-const imgChatDots   = 'https://www.figma.com/api/mcp/asset/86300a7a-8d27-4fb4-bdd5-a24197d5fb83'
-
-// Key player avatars
-const imgPortAuthority = 'https://www.figma.com/api/mcp/asset/ce216a21-a99b-4723-a08e-30101bedee93'
-const imgScottKirby    = 'https://www.figma.com/api/mcp/asset/9a2277e3-e492-44bd-9043-9a557d6847c6'
-const imgUnitedAirlines = 'https://www.figma.com/api/mcp/asset/c71c4385-7c4a-4a35-a093-3f3ec9cb5577'
-const imgSeanDuffy     = 'https://www.figma.com/api/mcp/asset/00970561-d13e-4e77-939a-b79777958632'
-const imgAndrewTangel  = 'https://www.figma.com/api/mcp/asset/72a5499d-6d47-404a-b576-e61baf585f9a'
+// Key player avatars (Unsplash — stable)
+const imgPortAuthority  = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop'
+const imgScottKirby     = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'
+const imgUnitedAirlines = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=100&h=100&fit=crop'
+const imgSeanDuffy      = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face'
+const imgAndrewTangel   = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'
 
 const tabs = ['Background', 'Timeline', 'Key Players', 'Sources']
 
@@ -180,7 +178,7 @@ export default function BackstoryPage({ visible, onBack }: {
         </button>
         <button className="backstory-feedback-btn" onClick={() => setFeedbackVisible(true)}>
           <div className="backstory-feedback-glass">
-            <img src={imgChatDots} alt="" className="backstory-feedback-icon" />
+            <ChatDots size={20} weight="regular" color="#6f6f6f" className="backstory-feedback-icon" />
             <span className="backstory-feedback-label">Share Feedback</span>
           </div>
         </button>

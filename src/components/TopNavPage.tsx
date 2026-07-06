@@ -1,9 +1,6 @@
-import { BookmarkSimple, PlusCircle } from '@phosphor-icons/react'
+import { BookmarkSimple, PlusCircle, Headphones, Chat } from '@phosphor-icons/react'
 import './TopNavPage.css'
 import './TodayFeed.css'
-
-const iconHeadphones = 'https://www.figma.com/api/mcp/asset/4b2003eb-885f-4967-95cb-ee29ba9648a8'
-const iconChat       = 'https://www.figma.com/api/mcp/asset/93ed0ef8-af4a-4c14-85e2-6c36f464374e'
 
 interface Card {
   headline: string
@@ -215,10 +212,10 @@ function CardFooter({ readTime }: { readTime: string }) {
       </div>
       <div className="card-footer-right">
         <button className="card-action-btn">
-          <img src={iconHeadphones} alt="" className="card-action-icon" />
+          <Headphones size={24} color="#6f6f6f" />
         </button>
         <button className="card-action-btn">
-          <img src={iconChat} alt="" className="card-action-icon" />
+          <Chat size={24} color="#6f6f6f" />
         </button>
         <button className="card-action-btn">
           <BookmarkSimple size={24} color="#6f6f6f" />

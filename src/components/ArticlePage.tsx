@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
+import { BookmarkSimple, CaretLeft, Envelope, Chat, Gift, ShareFat } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
@@ -7,12 +7,6 @@ import BackstoryPage from './BackstoryPage'
 import CommentSheet from './CommentSheet'
 import ShareSheet from './ShareSheet'
 
-const imgEnvelope       = 'https://www.figma.com/api/mcp/asset/8a7a0f51-2867-43b0-b7d4-4304d3926780'
-const imgXLogo          = 'https://www.figma.com/api/mcp/asset/a2b9f7e5-0d5d-4cb6-89fa-e6cee2561b93'
-const imgBackstory      = 'https://www.figma.com/api/mcp/asset/2f8632c6-9e38-4e33-9a03-4251935aac93'
-const imgChat           = 'https://www.figma.com/api/mcp/asset/68f3f97c-39f3-4cf3-ba6a-35627736d87c'
-const imgGift           = 'https://www.figma.com/api/mcp/asset/bf11000f-09f0-43e8-a543-e1299559894c'
-const imgShareFat       = 'https://www.figma.com/api/mcp/asset/9bdb2d0a-0424-42ad-bc28-61639c781bb0'
 const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
@@ -175,10 +169,10 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
           <div className="article-author-actions">
             <button className="article-follow-btn">Follow</button>
             <button className="article-author-icon-btn">
-              <img src={imgEnvelope} alt="Email" className="article-author-icon" />
+              <Envelope size={20} weight="regular" color="#6f6f6f" className="article-author-icon" />
             </button>
             <button className="article-author-icon-btn">
-              <img src={imgXLogo} alt="X" className="article-author-icon" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="article-author-icon"><path d="M11.73 8.77L17.9 2H16.4L11.06 7.85 6.77 2H2L8.46 11.01 2 18H3.5L9.14 11.83 13.65 18H18.42L11.73 8.77ZM9.89 10.93L9.23 10.01 4.04 3.07H6.03L10.47 9.01L11.13 9.93L16.41 17.07H14.42L9.89 10.93Z" fill="#6f6f6f"/></svg>
             </button>
           </div>
         </div>
@@ -241,19 +235,19 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         <div className="article-bottom-pill">
           <div className="article-bottom-pill-bg" />
           <button className="article-pill-btn" onClick={() => openSheet(setShowBackstory)}>
-            <img src={imgBackstory} alt="Backstory" className="article-pill-icon" />
+            <img src="/assets/backstory-icon.svg" alt="Backstory" style={{ width: 24, height: 24, objectFit: 'contain', display: 'block' }} />
           </button>
           <button className="article-pill-btn" onClick={() => openSheet(setCommentSheetVisible)}>
-            <img src={imgChat} alt="Chat" className="article-pill-icon" />
+            <Chat size={24} weight="regular" color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>
             <BookmarkSimple size={24} weight={bookmarked ? 'fill' : 'regular'} color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={handleGift}>
-            <img src={imgGift} alt="Gift" className="article-pill-icon" />
+            <Gift size={24} weight="regular" color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={() => openSheet(setShareSheetVisible)}>
-            <img src={imgShareFat} alt="Share" className="article-pill-icon" />
+            <ShareFat size={24} weight="regular" color="#222222" />
           </button>
         </div>
       </div>

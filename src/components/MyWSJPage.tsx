@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
+import { Bell, Headphones, BookmarkSimple } from '@phosphor-icons/react'
 import './MyWSJPage.css'
 import MyWSJShortlist, { ShortlistCard, INITIAL_CURRENT } from './MyWSJShortlist'
 
-const imgBell      = "https://www.figma.com/api/mcp/asset/0495eaba-4bb1-4397-a1b9-d7b995d94fec"
-const imgHeadphones = "https://www.figma.com/api/mcp/asset/7ba12120-9e6a-4750-bd48-89fb89393afd"
-const imgBookmark  = "https://www.figma.com/api/mcp/asset/dd5726c8-d208-47d2-988f-8e90228c744c"
 const imgCard1     = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80"
 const imgCard2     = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=80"
 const imgCard3     = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80"
@@ -63,7 +61,7 @@ export default function MyWSJPage({ slidePos, onBellTap }: { slidePos?: 'left' |
       <div className="mywsj-toolbar">
         <div className="mywsj-toolbar-leading">
           <button className="mywsj-bell-btn" onClick={onBellTap}>
-            <img src={imgBell} alt="Notifications" className="mywsj-bell-icon" />
+            <Bell size={24} weight="regular" color="#222222" className="mywsj-bell-icon" />
           </button>
         </div>
         <span className="mywsj-toolbar-title">MyWSJ</span>
@@ -110,10 +108,10 @@ export default function MyWSJPage({ slidePos, onBellTap }: { slidePos?: 'left' |
                       <span className="mywsj-read-time">6 min read</span>
                       <div className="mywsj-footer-actions">
                         <button className="mywsj-footer-btn">
-                          <img src={imgHeadphones} alt="Listen" />
+                          <Headphones size={20} weight="regular" color="#6f6f6f" />
                         </button>
                         <button className="mywsj-footer-btn">
-                          <img src={imgBookmark} alt="Save" />
+                          <BookmarkSimple size={20} weight="regular" color="#6f6f6f" />
                         </button>
                       </div>
                     </div>

@@ -219,31 +219,24 @@
 }
 
 .pz-hero-image-wrap {
-  position: relative;
-  height: 120px;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 360px;
+  align-self: center;
+  flex-shrink: 0;
+  margin-top: 16px;
 }
 
 .pz-hero-img {
-  position: absolute;
-  height: 115%;
-  object-fit: contain;
+  width: 360px;
+  height: auto;
+  display: block;
 }
 
 .pz-hero-img--1 {
-  left: 6.75%;
-  top: -6.55%;
-  width: 86.56%;
+  display: block;
 }
 
 .pz-hero-img--2 {
-  left: 8.57%;
-  top: -4.44%;
-  width: 82.47%;
+  display: none;
 }
 
 /* ── Section ── */

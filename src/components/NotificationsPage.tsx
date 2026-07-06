@@ -1,8 +1,7 @@
-import { CaretLeft } from '@phosphor-icons/react'
+import { CaretLeft, Circle } from '@phosphor-icons/react'
 import './NotificationsPage.css'
 import StatusBar from './StatusBar'
 
-const imgCircle      = 'https://www.figma.com/api/mcp/asset/61960c48-19b4-4fbc-8792-02217cc3815b'
 const imgJasonZweig  = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=top'
 
 const notifications = [
@@ -62,7 +61,7 @@ export default function NotificationsPage({ visible, onBack }: {
             <div className="notif-divider" />
             <div className="notif-card">
               <div className="notif-indicator">
-                <img src={imgCircle} alt="" className="notif-dot" />
+                <Circle size={10} weight="fill" color="#0057a8" />
               </div>
               <div className="notif-card-content">
                 <div className="notif-card-text">

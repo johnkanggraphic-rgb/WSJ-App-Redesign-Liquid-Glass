@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { SpeakerHigh, SpeakerSlash, ClosedCaptioning, ShareFat, Play, Pause, MagnifyingGlass } from '@phosphor-icons/react'
 import './MediaPage.css'
 import StatusBar from './StatusBar'
+import WatchPage from './WatchPage'
+import ListenPage from './ListenPage'
 
 const AV_TABS = ['Discover', 'Watch', 'Listen']
 
@@ -16,7 +18,7 @@ const VIDEOS = [
 
 const H = 852
 
-export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' | 'right' }) {
+export default function MediaPage({ slidePos, onTabChange }: { slidePos?: 'left' | 'center' | 'right'; onTabChange?: (i: number) => void }) {
   const [index, setIndex] = useState(0)
   const [progress, setProgress] = useState(0)
   const [muted, setMuted] = useState(true)
@@ -145,102 +147,132 @@ export default function MediaPage({ slidePos }: { slidePos?: 'left' | 'center' |
     }
   }
 
+  const isWatch = activeTab === 1
+  const isListen = activeTab === 2
+  const isLight = isWatch || isListen
+  const navIconColor = isLight ? '#222' : '#fff'
+
   return (
-    <div className={`media-page media-page--${slidePos ?? 'right'}`}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
+    <div className={`media-page media-page--${slidePos ?? 'right'}${isLight ? ' media-page--light' : ''}`}
+      onPointerDown={isLight ? undefined : onPointerDown}
+      onPointerMove={isLight ? undefined : onPointerMove}
+      onPointerUp={isLight ? undefined : onPointerUp}
+      onPointerCancel={isLight ? undefined : onPointerUp}
     >
-      {/* AV Navigation — top gradient + title + tabs, behind status bar */}
-      <div className={`av-nav${navVisible ? ' av-nav--visible' : ''}`}>
-        <div className="av-nav-gradient" />
+      {/* AV Navigation */}
+      <div className={`av-nav${navVisible || isLight ? ' av-nav--visible' : ''}${isLight ? ' av-nav--light' : ''}`}>
+        {!isLight && <div className="av-nav-gradient" />}
         <div className="av-nav-statusbar">
-          <StatusBar transparent />
+          <StatusBar transparent={!isLight} dark={isLight} />
         </div>
         <div className="av-nav-top-row">
           <div className="av-nav-leading" />
-          <span className="av-nav-title">Media</span>
+          <span className={`av-nav-title${isLight ? ' av-nav-title--light' : ''}`}>Media</span>
           <div className="av-nav-trailing">
             <button className="av-nav-icon-btn" style={{ opacity: 0, pointerEvents: 'none' }}>
-              <MagnifyingGlass size={24} color="#fff" weight="regular" />
+              <MagnifyingGlass size={24} color={navIconColor} weight="regular" />
             </button>
           </div>
         </div>
-        <div className="av-nav-tabs">
+        <div className="av-nav-tabs" onPointerDown={e => e.stopPropagation()}>
           {AV_TABS.map((tab, i) => (
             <button
               key={tab}
-              className={`av-tab${activeTab === i ? ' av-tab--active' : ''}`}
-              onClick={e => { e.stopPropagation(); setActiveTab(i) }}
+              className={`av-tab${activeTab === i ? ' av-tab--active' : ''}${isLight ? ' av-tab--light' : ''}`}
+              onClick={e => { e.stopPropagation(); setActiveTab(i); onTabChange?.(i) }}
             >
               {tab}
             </button>
           ))}
         </div>
+        {isLight && <div className="av-nav-tab-divider" />}
       </div>
 
-      {/* Play/Pause tap feedback */}
-      <div className={`media-playpause${showPlayPause ? ' media-playpause--visible' : ''}`}>
-        {paused
-          ? <Play size={28} color="white" weight="fill" />
-          : <Pause size={28} color="white" weight="fill" />
-        }
-      </div>
+      {/* Watch page content */}
+      {isWatch && (
+        <div className="media-watch-scroll">
+          <WatchPage />
+        </div>
+      )}
 
-      {/* Video stack */}
-      <div
-        ref={containerRef}
-        className="media-video-stack"
-        style={{ transform: `translateY(0px)` }}
-      >
-        {VIDEOS.map((src, i) => (
-          <div key={i} className="media-video-slide" style={{ top: i * H }}>
-            <video
-              ref={el => { videoRefs.current[i] = el }}
-              src={src}
-              autoPlay={i === 0}
-              muted={muted}
-              loop
-              playsInline
-              preload="auto"
-              draggable={false}
-              className="media-video"
-            />
-          </div>
-        ))}
-      </div>
+      {/* Listen page content */}
+      {isListen && (
+        <div className="media-watch-scroll">
+          <ListenPage />
+        </div>
+      )}
 
-      {/* Side icons */}
-      <div className="media-side-icons">
-        <button className="media-icon-btn" onClick={() => setMuted(m => !m)}>
-          {muted
-            ? <SpeakerSlash size={16} color="white" weight="fill" />
-            : <SpeakerHigh size={16} color="white" weight="fill" />
+      {/* Play/Pause tap feedback — only in video mode */}
+      {!isLight && (
+        <div className={`media-playpause${showPlayPause ? ' media-playpause--visible' : ''}`}>
+          {paused
+            ? <Play size={28} color="white" weight="fill" />
+            : <Pause size={28} color="white" weight="fill" />
           }
-        </button>
-        <button className="media-icon-btn">
-          <ClosedCaptioning size={16} color="white" weight="fill" />
-        </button>
-        <button className="media-icon-btn">
-          <ShareFat size={16} color="white" weight="regular" />
-        </button>
-      </div>
+        </div>
+      )}
 
-      {/* Blur + gradient at bottom */}
-      <div className="media-bottom-blur" />
-      <div className="media-bottom-gradient" />
+      {/* Video stack — only in video mode */}
+      {!isLight && (
+        <div
+          ref={containerRef}
+          className="media-video-stack"
+          style={{ transform: `translateY(0px)` }}
+        >
+          {VIDEOS.map((src, i) => (
+            <div key={i} className="media-video-slide" style={{ top: i * H }}>
+              <video
+                ref={el => { videoRefs.current[i] = el }}
+                src={src}
+                autoPlay={i === 0}
+                muted={muted}
+                loop
+                playsInline
+                preload="auto"
+                draggable={false}
+                className="media-video"
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* Closed captions */}
-      <div className="media-cc">
-        <span>Federal Reserve officials signaled they remain in</span>
-        <span>no rush to cut interest rates this year.</span>
-      </div>
+      {/* Side icons — only in video mode */}
+      {!isLight && (
+        <div className="media-side-icons">
+          <button className="media-icon-btn" onClick={() => setMuted(m => !m)}>
+            {muted
+              ? <SpeakerSlash size={16} color="white" weight="fill" />
+              : <SpeakerHigh size={16} color="white" weight="fill" />
+            }
+          </button>
+          <button className="media-icon-btn">
+            <ClosedCaptioning size={16} color="white" weight="fill" />
+          </button>
+          <button className="media-icon-btn">
+            <ShareFat size={16} color="white" weight="regular" />
+          </button>
+        </div>
+      )}
 
-      {/* Progress bar */}
-      <div className="media-progress-track">
-        <div className="media-progress-fill" style={{ transform: `scaleX(${progress})` }} />
-      </div>
+      {/* Blur + gradient at bottom — only in video mode */}
+      {!isLight && <div className="media-bottom-blur" />}
+      {!isLight && <div className="media-bottom-gradient" />}
+
+      {/* Closed captions — only in video mode */}
+      {!isLight && (
+        <div className="media-cc">
+          <span>Federal Reserve officials signaled they remain in</span>
+          <span>no rush to cut interest rates this year.</span>
+        </div>
+      )}
+
+      {/* Progress bar — only in video mode */}
+      {!isLight && (
+        <div className="media-progress-track">
+          <div className="media-progress-fill" style={{ transform: `scaleX(${progress})` }} />
+        </div>
+      )}
     </div>
   )
 }

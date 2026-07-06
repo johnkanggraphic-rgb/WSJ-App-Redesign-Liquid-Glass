@@ -1,26 +1,11 @@
 import { useRef, useState, useCallback } from 'react'
-import { CaretLeft, BookmarkSimple, X, CaretDown } from '@phosphor-icons/react'
+import { CaretLeft, BookmarkSimple, X, CaretDown, ArrowUp, CaretRight, ShareFat, Chat } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import './LiveCoveragePage.css'
 import StatusBar from './StatusBar'
 import EventTimelineSheet from './EventTimelineSheet'
 import ShareSheet from './ShareSheet'
 import CommentSheet from './CommentSheet'
-
-// ── Figma asset URLs (icons only) ─────────────────────────────────────────
-const imgArrowUp        = 'https://www.figma.com/api/mcp/asset/56a51659-2606-4cfa-b379-fd1ef6d5b404'
-const imgCaretRight     = 'https://www.figma.com/api/mcp/asset/6f7c4740-58d6-4a51-8366-a1434c39dcc2'
-const imgDot            = 'https://www.figma.com/api/mcp/asset/1d37423e-9da5-4f24-9d09-9bca4352c9b9'
-const imgShareFatStd    = 'https://www.figma.com/api/mcp/asset/773ad126-4d53-426d-945b-f7be74f3b4c2'
-const imgShareFatOp     = 'https://www.figma.com/api/mcp/asset/abd7efc3-787f-4c1d-9c27-2e895862fddd'
-const imgArrowUpArt     = 'https://www.figma.com/api/mcp/asset/348cb8ca-06da-4c20-a632-d39d08719f7d'
-const imgCaretRightArt  = 'https://www.figma.com/api/mcp/asset/a57cf56a-b6da-441b-94ec-1dd213ee4c46'
-const imgShareFatArt    = 'https://www.figma.com/api/mcp/asset/886acf04-09d2-466b-90f5-bf9902aa1be0'
-
-// ── ArticlePage toolbar icons ─────────────────────────────────────────────
-const imgChat      = 'https://www.figma.com/api/mcp/asset/68f3f97c-39f3-4cf3-ba6a-35627736d87c'
-
-const imgShareFat  = 'https://www.figma.com/api/mcp/asset/9bdb2d0a-0424-42ad-bc28-61639c781bb0'
 
 // ── Unsplash photos ───────────────────────────────────────────────────────
 const imgFeatured      = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80'  // courthouse
@@ -32,7 +17,7 @@ const imgAuthor1       = 'https://images.unsplash.com/photo-1560250097-0b93528c3
 const imgOpinionAuthor = 'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=200&h=200&fit=crop&crop=top'
 
 // ── Stock row ─────────────────────────────────────────────────────────────
-function StockRow({ arrow }: { arrow: string }) {
+function StockRow({ arrow }: { arrow: 'up' | 'down' }) {
   return (
     <div className="lc-stock-row">
       <div className="lc-stock-company">
@@ -43,7 +28,7 @@ function StockRow({ arrow }: { arrow: string }) {
         <span className="lc-stock-change lc-stock-change--up">6.18</span>
         <span className="lc-stock-pct lc-stock-change--up">0.70%</span>
         <div className="lc-stock-icon-wrap">
-          <img src={arrow} alt="" className="lc-stock-arrow" />
+          {arrow === 'up' ? <ArrowUp size={12} weight="bold" color="#00a651" /> : <ArrowUp size={12} weight="bold" color="#d9534f" style={{ transform: 'rotate(180deg)' }} />}
         </div>
       </div>
     </div>
@@ -98,12 +83,12 @@ function FeaturedPost({ onTimelineTap }: { onTimelineTap: () => void }) {
               <span className="lc-widget-title">Event Timeline</span>
               <div className="lc-widget-secondary">
                 <span className="lc-widget-sub">8 updates total</span>
-                <img src={imgDot} alt="" className="lc-widget-dot" />
+                <span className="lc-widget-dot">·</span>
                 <span className="lc-widget-updated">Updated 45 min ago</span>
               </div>
             </div>
             <div className="lc-widget-action">
-              <img src={imgCaretRight} alt="" className="lc-widget-caret" />
+              <CaretRight size={16} weight="regular" color="#6f6f6f" />
             </div>
           </div>
         </div>
@@ -145,9 +130,9 @@ function FeaturedPost({ onTimelineTap }: { onTimelineTap: () => void }) {
 
       {/* Stocks */}
       <div className="lc-stocks-section">
-        <StockRow arrow={imgArrowUp} />
-        <StockRow arrow={imgArrowUp} />
-        <StockRow arrow={imgArrowUp} />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
       </div>
     </div>
   )
@@ -195,9 +180,9 @@ function StandardPost({ time, image, headline }: { time: string; image: string; 
 
       {/* Stocks */}
       <div className="lc-post-stocks">
-        <StockRow arrow={imgArrowUp} />
-        <StockRow arrow={imgArrowUp} />
-        <StockRow arrow={imgArrowUp} />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
       </div>
 
       {/* Footer */}
@@ -208,7 +193,7 @@ function StandardPost({ time, image, headline }: { time: string; image: string; 
           <CaretDown size={16} color="#222" />
         </button>
         <button className="lc-post-share-btn">
-          <img src={imgShareFatStd} alt="" className="lc-share-icon" />
+          <ShareFat size={22} weight="regular" color="#6f6f6f" />
         </button>
       </div>
     </div>
@@ -259,7 +244,7 @@ function OpinionPost({ time }: { time: string }) {
           <CaretDown size={16} color="#865a1c" />
         </button>
         <button className="lc-post-share-btn">
-          <img src={imgShareFatOp} alt="" className="lc-share-icon" />
+          <ShareFat size={22} weight="regular" color="#865a1c" />
         </button>
       </div>
     </div>
@@ -290,9 +275,9 @@ function ArticlePost({ time }: { time: string }) {
 
       {/* Stocks */}
       <div className="lc-post-stocks lc-post-stocks--article">
-        <StockRow arrow={imgArrowUpArt} />
-        <StockRow arrow={imgArrowUpArt} />
-        <StockRow arrow={imgArrowUpArt} />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
+        <StockRow arrow="up" />
       </div>
 
       {/* Link */}
@@ -305,10 +290,10 @@ function ArticlePost({ time }: { time: string }) {
         <div className="lc-post-footer-spacer" />
         <button className="lc-read-full-btn">
           <span className="lc-show-more-text">Read Full Article</span>
-          <img src={imgCaretRightArt} alt="" className="lc-caret-right-icon" />
+          <CaretRight size={16} weight="bold" color="#222222" />
         </button>
         <button className="lc-post-share-btn">
-          <img src={imgShareFatArt} alt="" className="lc-share-icon" />
+          <ShareFat size={22} weight="regular" color="#6f6f6f" />
         </button>
       </div>
     </div>
@@ -420,13 +405,13 @@ export default function LiveCoveragePage({ visible, onBack }: { visible: boolean
         <div className="article-bottom-pill">
           <div className="article-bottom-pill-bg" />
           <button className="article-pill-btn" onClick={() => setCommentSheetVisible(true)}>
-            <img src={imgChat} alt="" className="article-pill-icon" />
+            <Chat size={24} weight="regular" color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={handleBookmark}>
             <BookmarkSimple size={24} weight={bookmarked ? 'fill' : 'regular'} color="#222222" />
           </button>
           <button className="article-pill-btn" onClick={() => setShareSheetVisible(true)}>
-            <img src={imgShareFat} alt="" className="article-pill-icon" />
+            <ShareFat size={24} weight="regular" color="#222222" />
           </button>
         </div>
       </div>

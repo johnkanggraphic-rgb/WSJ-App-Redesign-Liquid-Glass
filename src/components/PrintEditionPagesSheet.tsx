@@ -2,21 +2,13 @@ import { useState } from 'react'
 import { X } from '@phosphor-icons/react'
 import './PrintEditionPagesSheet.css'
 
-const imgPage1 = 'https://www.figma.com/api/mcp/asset/eeb594d3-fd9b-4f7f-b8fc-ccd0748c9c2f'
-const imgPage2 = 'https://www.figma.com/api/mcp/asset/6bc0b5d1-0d1b-4f68-bcc6-5f6bcd4a5838'
-const imgPage3 = 'https://www.figma.com/api/mcp/asset/32785a9a-ad6c-439f-9d6a-92d5b48612e3'
+const PAGE_IMGS: Record<number, string> = {
+  1: '/assets/pe-page-1.png',
+  2: '/assets/pe-page-2.png',
+  3: '/assets/pe-page-3.png',
+}
 
-const PAGES = [
-  { num: 1, img: imgPage1 },
-  { num: 2, img: imgPage2 },
-  { num: 3, img: imgPage3 },
-  { num: 4, img: imgPage1 },
-  { num: 5, img: imgPage2 },
-  { num: 6, img: imgPage3 },
-  { num: 7, img: imgPage1 },
-  { num: 8, img: imgPage2 },
-  { num: 9, img: imgPage3 },
-]
+const PAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => ({ num }))
 
 export default function PrintEditionPagesSheet({ visible, onClose }: {
   visible: boolean
@@ -47,7 +39,12 @@ export default function PrintEditionPagesSheet({ visible, onClose }: {
             className={`peps-card${activePage === page.num ? ' peps-card--active' : ''}`}
             onClick={() => { setActivePage(page.num); onClose() }}
           >
-            <img src={page.img} alt={`Page ${page.num}`} className="peps-card-img" />
+            <div className="peps-card-img">
+              {PAGE_IMGS[page.num]
+                ? <img src={PAGE_IMGS[page.num]} alt={`Page ${page.num}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                : <span style={{ fontSize: 12, color: '#999' }}>{page.num}</span>
+              }
+            </div>
             <span className="peps-card-num">{page.num}</span>
           </button>
         ))}

@@ -1,0 +1,154 @@
+.watch-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+}
+
+.watch-section-strap {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 1.116px;
+  text-transform: uppercase;
+  color: #222222;
+  padding: 24px 16px 0;
+  display: block;
+  text-align: left;
+}
+
+/* Video card */
+.watch-card {
+  padding: 24px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+}
+
+.watch-card-flashline-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.watch-card-flashline {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.806px;
+  text-transform: uppercase;
+  color: #6f6f6f;
+  white-space: nowrap;
+}
+
+.watch-card-sep {
+  font-family: 'Retina Narrow', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #6f6f6f;
+}
+
+.watch-card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.watch-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.watch-card-play {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  height: 28px;
+  padding: 0 10px 0 8px;
+}
+
+.watch-card-duration {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.watch-card-headline {
+  font-family: 'DJ5 Escrow Cond', 'DJ5EscrowCond', Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #222222;
+  margin: 12px 0 0;
+  text-align: left;
+}
+
+.watch-card-summary {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222222;
+  margin: 8px 0 0;
+  text-align: left;
+}
+
+.watch-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.watch-card-date {
+  font-family: 'Retina', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6f6f6f;
+}
+
+.watch-card-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin-right: -12px;
+}
+
+.watch-card-divider {
+  width: 100%;
+  height: 1px;
+  background: #ebebeb;
+  flex-shrink: 0;
+}
+
+.watch-bottom-pad {
+  height: 120px;
+  background: #fff;
+  flex-shrink: 0;
+}

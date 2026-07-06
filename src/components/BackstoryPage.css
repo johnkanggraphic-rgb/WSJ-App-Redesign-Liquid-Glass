@@ -42,6 +42,14 @@
   align-self: flex-start;
 }
 
+.backstory-content-tag-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
 .backstory-content-tag-text {
   font-family: 'Retina Narrow', system-ui, sans-serif;
   font-weight: 500;
@@ -51,6 +59,8 @@
   text-transform: uppercase;
   color: #222;
   white-space: nowrap;
+  position: relative;
+  top: 1px;
 }
 
 /* ── Title section ───────────────────────────────────────────────────────── */

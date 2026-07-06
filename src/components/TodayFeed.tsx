@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useContext, createContext, useCallback } from 'react'
-import { PlusCircle, MinusCircle, BookmarkSimple, X, Pause } from '@phosphor-icons/react'
+import { PlusCircle, MinusCircle, BookmarkSimple, X, Pause, Headphones, Chat, ShareFat } from '@phosphor-icons/react'
 import './TodayFeed.css'
 import StockBar from './StockBar'
 
@@ -20,19 +20,8 @@ const CommentTapContext = createContext<(headline: string) => void>(() => {})
 // ── Live coverage tap context ──────────────────────────────────────────────
 const LiveCoverageTapContext = createContext<() => void>(() => {})
 
-// ── Icon assets from Figma ─────────────────────────────────────────────────
-// Article card (node 2189:47269)
-const imgArticlePhoto = 'https://www.figma.com/api/mcp/asset/e85a6828-768e-417b-aae7-b49e1fbd8ee8'
-const imgHeadphones   = 'https://www.figma.com/api/mcp/asset/a06853eb-5018-4679-ae5a-6b8d116e13e8'
-const imgChat         = 'https://www.figma.com/api/mcp/asset/8cc66f6a-c736-4150-b45e-e146c0f176d5'
-
-// Live card (node 2189:47327)
-const imgChatLive = 'https://www.figma.com/api/mcp/asset/4d9ffed9-96a9-43e8-9323-80496988fe1b'
-const imgShareFat = 'https://www.figma.com/api/mcp/asset/1b7c231c-ed8f-47f5-9b23-cc6559938601'
-
-// Compact article card icons (node 2189:47364)
-const imgHeadphones2 = 'https://www.figma.com/api/mcp/asset/8195a4cb-5dba-4fa0-8fb7-915488948945'
-const imgChat2       = 'https://www.figma.com/api/mcp/asset/2b67c32e-bd1f-4986-b060-cd1011692615'
+// Article photo (Unsplash — stable)
+const imgArticlePhoto = 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&q=80'
 
 // ── Plus button with filled toggle ────────────────────────────────────────
 function PlusButton() {
@@ -90,9 +79,9 @@ function BookmarkButton() {
 
 // ── Shared footer actions ──────────────────────────────────────────────────
 function ArticleActions({
-  headphones, chat, readTime, flashline = '', headline = ''
+  readTime, flashline = '', headline = ''
 }: {
-  headphones: string; chat: string; readTime: string; flashline?: string; headline?: string
+  readTime: string; flashline?: string; headline?: string
 }) {
   const showMiniPlayer = useContext(MiniPlayerContext)
   const onCommentTap   = useContext(CommentTapContext)
@@ -103,10 +92,10 @@ function ArticleActions({
       </div>
       <div className="card-footer-right">
         <button className="card-action-btn" onClick={() => showMiniPlayer({ flashline, headline })}>
-          <img src={headphones} alt="" className="card-action-icon" />
+          <Headphones size={24} weight="regular" color="#6f6f6f" />
         </button>
         <button className="card-action-btn" onClick={() => onCommentTap(headline)}>
-          <img src={chat} alt="" className="card-action-icon" />
+          <Chat size={24} weight="regular" color="#6f6f6f" />
         </button>
         <BookmarkButton />
         <PlusButton />
@@ -129,8 +118,6 @@ function ArticleCardHero({ onTap }: { onTap?: (headline: string) => void }) {
         <img src={imgArticlePhoto} alt="" className="card-image" />
       </div>
       <ArticleActions
-        headphones={imgHeadphones}
-        chat={imgChat}
         flashline="Flashline"
         headline={HERO_HEADLINE}
         readTime="6 min read"
@@ -182,10 +169,10 @@ function LiveCard() {
         </div>
         <div className="card-footer-right">
           <button className="card-action-btn">
-            <img src={imgChatLive} alt="" className="card-action-icon" />
+            <Chat size={24} weight="regular" color="#6f6f6f" />
           </button>
           <button className="card-action-btn">
-            <img src={imgShareFat} alt="" className="card-action-icon" />
+            <ShareFat size={24} weight="regular" color="#6f6f6f" />
           </button>
         </div>
       </div>
@@ -205,8 +192,6 @@ function CompactArticleCard({
       <div className="card-flashline">{flashline}</div>
       <h3 className="card-headline-s">{headline}</h3>
       <ArticleActions
-        headphones={imgHeadphones2}
-        chat={imgChat2}
         flashline={flashline}
         headline={headline}
         readTime={readTime}
@@ -234,39 +219,32 @@ function AdCard() {
   )
 }
 
-// ── News Package (node 2189:47411) ────────────────────────────────────────
-// ── Opinion Package (node 2189:47423) ─────────────────────────────────────
-const opinionIcons = {
-  headphones: 'https://www.figma.com/api/mcp/asset/45cb41e0-7683-4369-a546-8efde86bb4ac',
-  chat:       'https://www.figma.com/api/mcp/asset/16356b20-eb8a-48bf-acf5-6c0384c2fa85',
-  bookmark:   'https://www.figma.com/api/mcp/asset/5994a1a2-fffc-4f5d-9ad1-72fb6aff0526',
-  plus:       'https://www.figma.com/api/mcp/asset/fda72b99-e9c5-4344-8be1-5833aaab7115',
-}
+// ── News Package / Opinion Package ────────────────────────────────────────
 
 const opinionCards = [
   {
     flashline: 'Review & Outlook',
     headline: 'Trump, Wrongful Deportation and the Courts',
     readTime: '6 min read',
-    img: 'https://www.figma.com/api/mcp/asset/3f87ddde-e6d2-4660-9a8d-e4807ca4920c',
+    img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=200&q=80',
   },
   {
     flashline: 'Review & Outlook',
     headline: 'The Tariff Demon on Trump\'s Shoulder',
     readTime: '6 min read',
-    img: 'https://www.figma.com/api/mcp/asset/3320b47b-bc19-4213-a4a4-7acdf98fe016',
+    img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80',
   },
   {
     flashline: 'Review & Outlook',
     headline: 'Prada Hits the FTC With a Handbag',
     readTime: '6 min read',
-    img: 'https://www.figma.com/api/mcp/asset/590b5990-2f46-4980-bb6c-6bbd4fa82def',
+    img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=80',
   },
   {
     flashline: 'Kimberley A. Strassel',
     headline: "Trump's Triple-Dog Supreme Court Dare",
     readTime: '6 min read',
-    img: 'https://www.figma.com/api/mcp/asset/6ec4c67a-8e57-4a80-8cd6-ff769fc5e116',
+    img: 'https://images.unsplash.com/photo-1550399105-c4db5fb85c18?w=200&q=80',
   },
 ]
 
@@ -291,10 +269,10 @@ function OpinionCard({ flashline, headline, readTime, img }: {
         </div>
         <div className="card-footer-right">
           <button className="card-action-btn">
-            <img src={opinionIcons.headphones} alt="" className="card-action-icon" />
+            <Headphones size={24} weight="regular" color="#6f6f6f" />
           </button>
           <button className="card-action-btn">
-            <img src={opinionIcons.chat} alt="" className="card-action-icon" />
+            <Chat size={24} weight="regular" color="#6f6f6f" />
           </button>
           <BookmarkButton />
           <PlusButton />
@@ -318,13 +296,7 @@ function OpinionPackage() {
   )
 }
 
-// ── World Package (node 2189:47437) ───────────────────────────────────────
-const worldIcons = {
-  headphones: 'https://www.figma.com/api/mcp/asset/4b2003eb-885f-4967-95cb-ee29ba9648a8',
-  chat:       'https://www.figma.com/api/mcp/asset/93ed0ef8-af4a-4c14-85e2-6c36f464374e',
-  bookmark:   'https://www.figma.com/api/mcp/asset/7a7ba8d9-58c5-40cc-9c0f-4893cb253106',
-  plus:       'https://www.figma.com/api/mcp/asset/716342b1-0417-4030-9a28-a8730294f18e',
-}
+// ── World Package ─────────────────────────────────────────────────────────
 const imgWorldHero = 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80'
 
 const WORLD_HEADLINE_1 = "Caitlin Clark Breaks WNBA All-Time Scoring Record in Season Opener"
@@ -346,7 +318,6 @@ function WorldPackage() {
           <img src={imgWorldHero} alt="" className="card-image" />
         </div>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_HEADLINE_1}
           readTime="6 min read"
         />
@@ -356,7 +327,6 @@ function WorldPackage() {
       <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_2)}>
         <h3 className="card-headline-s">{WORLD_HEADLINE_2}</h3>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_HEADLINE_2}
           readTime="6 min read"
         />
@@ -365,7 +335,6 @@ function WorldPackage() {
       <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_3)}>
         <h3 className="card-headline-s">{WORLD_HEADLINE_3}</h3>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_HEADLINE_3}
           readTime="6 min read"
         />
@@ -393,7 +362,6 @@ function WorldSection() {
           <img src={imgWorldSectionHero} alt="" className="card-image" />
         </div>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_S_HEADLINE_1}
           readTime="5 min read"
         />
@@ -402,7 +370,6 @@ function WorldSection() {
       <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_S_HEADLINE_2)}>
         <h3 className="card-headline-s">{WORLD_S_HEADLINE_2}</h3>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_S_HEADLINE_2}
           readTime="4 min read"
         />
@@ -411,7 +378,6 @@ function WorldSection() {
       <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_S_HEADLINE_3)}>
         <h3 className="card-headline-s">{WORLD_S_HEADLINE_3}</h3>
         <ArticleActions
-          headphones={worldIcons.headphones} chat={worldIcons.chat}
           headline={WORLD_S_HEADLINE_3}
           readTime="6 min read"
         />
@@ -421,7 +387,7 @@ function WorldSection() {
 }
 
 // ── Mini Player ───────────────────────────────────────────────────────────
-const imgMiniPlayerThumb = 'https://www.figma.com/api/mcp/asset/dc625918-054a-46a7-af2e-17834a2ff978'
+const imgMiniPlayerThumb = 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=120&q=80'
 
 const marqueeStyleEl: { el: HTMLStyleElement | null } = { el: null }
 

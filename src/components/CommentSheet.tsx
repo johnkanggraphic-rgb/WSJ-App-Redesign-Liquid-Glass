@@ -1,9 +1,7 @@
-import { ThumbsUp } from '@phosphor-icons/react'
+import { ThumbsUp, X, ArrowsDownUp } from '@phosphor-icons/react'
 import './CommentSheet.css'
 
-const imgXClose      = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
 const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=80&q=80'
-const imgCaretUpDown = 'https://www.figma.com/api/mcp/asset/4f7624b0-cc80-4124-b966-a3268c50d67d'
 
 function CommentCard({ initials, name, time, text }: {
   initials: string
@@ -54,7 +52,7 @@ export default function CommentSheet({ visible, onClose }: {
             <div className="comment-sheet-title">Comments</div>
             <button className="comment-sheet-close-btn" onClick={onClose}>
               <div className="comment-sheet-close-glass">
-                <img src={imgXClose} alt="Close" className="comment-sheet-close-icon" />
+                <X size={20} weight="bold" color="#222222" />
               </div>
             </button>
           </div>
@@ -74,7 +72,7 @@ export default function CommentSheet({ visible, onClose }: {
           <div className="comment-sort">
             <span className="comment-sort-label">Sort by</span>
             <span className="comment-sort-value">Newest</span>
-            <img src={imgCaretUpDown} alt="" className="comment-sort-caret" />
+            <ArrowsDownUp size={16} weight="regular" color="#6f6f6f" className="comment-sort-caret" />
           </div>
         </div>
 

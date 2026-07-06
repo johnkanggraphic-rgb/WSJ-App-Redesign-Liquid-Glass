@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { CaretLeft, DownloadSimple, DotsThree } from '@phosphor-icons/react'
+
+const imgReadPage = '/assets/print-read-page.png'
 import StatusBar from './StatusBar'
 import PrintEditionOptionsSheet from './PrintEditionOptionsSheet'
 import './PrintEditionReadPage.css'
-
-const imgNewspaper = 'https://www.figma.com/api/mcp/asset/918bf87e-9fa2-49b0-9941-52929eb31f6a'
 
 export default function PrintEditionReadPage({ visible, onBack }: {
   visible: boolean
@@ -16,7 +16,7 @@ export default function PrintEditionReadPage({ visible, onBack }: {
     <div className={`per-page${visible ? ' per-page--visible' : ''}`}>
       {/* Newspaper content */}
       <div className="per-newspaper-wrap">
-        <img src={imgNewspaper} alt="Today's Edition" className="per-newspaper-img" />
+        <img src={imgReadPage} alt="WSJ Front Page" className="per-newspaper-img" />
       </div>
 
       {/* Floating status bar */}

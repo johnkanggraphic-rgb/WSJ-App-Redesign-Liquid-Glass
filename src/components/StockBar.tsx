@@ -1,7 +1,5 @@
+import { ArrowUp, ArrowDown } from '@phosphor-icons/react'
 import './StockBar.css'
-
-const imgArrowUp = "https://www.figma.com/api/mcp/asset/6499233a-f91b-4407-933b-0a659aea6940"
-const imgArrowDown = "https://www.figma.com/api/mcp/asset/a11b8d23-204a-4ad0-bebc-cd29f1e23c71"
 
 type StockState = 'positive' | 'negative'
 
@@ -32,10 +30,10 @@ function StockCell({ ticker, percent, state }: StockItem) {
         <div className="stock-space-4" />
         <div className="stock-change">
           <div className="stock-arrow">
-            <img
-              src={isPositive ? imgArrowUp : imgArrowDown}
-              alt={isPositive ? '▲' : '▼'}
-            />
+            {isPositive
+              ? <ArrowUp size={16} weight="bold" color="#00a651" />
+              : <ArrowDown size={16} weight="bold" color="#d9534f" />
+            }
           </div>
           <div className="stock-space-4" />
           <p className={`stock-percent ${isPositive ? 'stock-percent--positive' : 'stock-percent--negative'}`}>

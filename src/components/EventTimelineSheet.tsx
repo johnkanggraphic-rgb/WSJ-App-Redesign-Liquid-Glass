@@ -1,6 +1,6 @@
+import { X } from '@phosphor-icons/react'
 import './EventTimelineSheet.css'
 
-const imgXClose = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
 
 const TIMELINE_ITEMS = [
   { time: '45 min ago',       headline: 'Lorem Ipsum Dolar Sit Amet Doal Aliquamin Semper Nulla Sed Nulla' },
@@ -26,7 +26,7 @@ export default function EventTimelineSheet({ visible, onClose }: { visible: bool
             <span className="et-title">Event Timeline</span>
             <button className="et-close-btn" onClick={onClose}>
               <div className="et-close-glass">
-                <img src={imgXClose} alt="Close" className="et-close-icon" />
+                <X size={20} weight="bold" color="#222222" />
               </div>
             </button>
           </div>

@@ -1,10 +1,7 @@
 import { useRef, useEffect } from 'react'
-import { CaretLeft } from '@phosphor-icons/react'
+import { CaretLeft, Headphones, BookmarkSimple } from '@phosphor-icons/react'
 import './StylePage.css'
 import StatusBar from './StatusBar'
-
-const imgHeadphones = 'https://www.figma.com/api/mcp/asset/4b2003eb-885f-4967-95cb-ee29ba9648a8'
-const imgBookmark   = 'https://www.figma.com/api/mcp/asset/f11d5efe-688c-4b4c-9c17-8f9e47426362'
 
 interface Story {
   flashline: string
@@ -676,10 +673,10 @@ export default function SectionSubPage({ title, visible, onBack }: {
                   <span className="style-read-time">{story.readTime}</span>
                   <div className="style-footer-actions">
                     <button className="style-footer-btn">
-                      <img src={imgHeadphones} alt="Listen" />
+                      <Headphones size={24} color="#6f6f6f" />
                     </button>
                     <button className="style-footer-btn">
-                      <img src={imgBookmark} alt="Save" />
+                      <BookmarkSimple size={24} color="#6f6f6f" />
                     </button>
                   </div>
                 </div>

@@ -1,32 +1,19 @@
 import { useState, useRef, useEffect } from 'react'
-import { PencilSimple, MagnifyingGlass, XCircle, Plus, Check, CaretUpDown, FunnelSimple, Headphones, BookmarkSimple } from '@phosphor-icons/react'
+import { PencilSimple, MagnifyingGlass, XCircle, Plus, Check, CaretUpDown, FunnelSimple, Headphones, BookmarkSimple, Bell, ShareFat, ArrowUp, ArrowDown, Minus, CaretDown, Clock, X } from '@phosphor-icons/react'
 import './MarketDataPage.css'
-
-const imgBell           = "https://www.figma.com/api/mcp/asset/0495eaba-4bb1-4397-a1b9-d7b995d94fec"
-const imgMagnifyingGlass = "https://www.figma.com/api/mcp/asset/9bedbd3e-b823-45b0-8dc5-996fc7c3a00f"
-const imgClockCountdown = "https://www.figma.com/api/mcp/asset/f4d984f3-96a9-4feb-aeb9-a2948e9e826f"
-const imgArrowDown      = "https://www.figma.com/api/mcp/asset/0f780cbc-72af-4242-a06d-2eaca32ce797"
-const imgArrowUp        = "https://www.figma.com/api/mcp/asset/90055443-9136-4c58-b777-9b44daa90292"
-const imgMinusMinus     = "https://www.figma.com/api/mcp/asset/c87992f8-478f-4c0c-8052-de018f3608e2"
-const imgHeadphones     = "https://www.figma.com/api/mcp/asset/58a18138-63b7-4145-afa7-df5d7a6e65d3"
-const imgBookmarkSimple = "https://www.figma.com/api/mcp/asset/09a082d1-a61d-4131-8b39-f541dc8bfc41"
-const imgShareFat       = "https://www.figma.com/api/mcp/asset/d47ba93c-2767-413b-8574-1a6b1e7449fb"
-
-const imgSparkFillRed   = "https://www.figma.com/api/mcp/asset/7b94aa48-44c9-4ac3-9f36-057343494a38"
-const imgSparkStrokeRed = "https://www.figma.com/api/mcp/asset/bca5625c-842e-4281-a2b7-6eba3af5ef2f"
-const imgSparkFillGreen = "https://www.figma.com/api/mcp/asset/a52e5e06-76f0-47d3-a600-dbb46babbcf2"
-const imgSparkStrokeGreen = "https://www.figma.com/api/mcp/asset/daec86e5-28d7-4bdf-9d4b-5d34f7154f15"
 
 const imgAdFill = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'
 
-const imgWlCaretDown    = "https://www.figma.com/api/mcp/asset/5f5c21f3-1ab2-4b51-99ba-491ceb1060ed"
-const imgWlSparkGreenFill   = "https://www.figma.com/api/mcp/asset/eb075eb6-a86e-47ee-8aaa-4e9a4a850356"
-const imgWlSparkGreenStroke = "https://www.figma.com/api/mcp/asset/15f6e8ce-6c2b-482d-92ec-a5c29b39686e"
-const imgWlSparkRedFill     = "https://www.figma.com/api/mcp/asset/94c2a9dd-abc2-47e3-be4e-3986adb2422a"
-const imgWlSparkRedStroke   = "https://www.figma.com/api/mcp/asset/eff8601b-d951-4ae8-a007-315a90469446"
-const imgWlArrowUp          = "https://www.figma.com/api/mcp/asset/b3b32616-bdcb-4dde-bdeb-3a2fb71262d6"
-const imgWlArrowDown        = "https://www.figma.com/api/mcp/asset/87be56cc-56bb-4a71-aa5f-87c06d6eb50d"
-const imgWlMinusMinus       = "https://www.figma.com/api/mcp/asset/2e7776ec-237a-4c33-8664-c64d5448e49b"
+// Inline SVG spark line data URIs — stable, no expiry
+const imgSparkFillRed     = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpolygon points='0,28 16,20 32,24 48,10 64,4 64,32 0,32' fill='%23fde8e8'/%3E%3Cpolyline points='0,28 16,20 32,24 48,10 64,4' fill='none' stroke='%23d9534f' strokeWidth='1.5'/%3E%3C/svg%3E"
+const imgSparkStrokeRed   = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpolyline points='0,28 16,20 32,24 48,10 64,4' fill='none' stroke='%23d9534f' strokeWidth='1.5'/%3E%3C/svg%3E"
+const imgSparkFillGreen   = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpolygon points='0,28 16,22 32,18 48,12 64,4 64,32 0,32' fill='%23e6f9ec'/%3E%3Cpolyline points='0,28 16,22 32,18 48,12 64,4' fill='none' stroke='%2300a651' strokeWidth='1.5'/%3E%3C/svg%3E"
+const imgSparkStrokeGreen = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cpolyline points='0,28 16,22 32,18 48,12 64,4' fill='none' stroke='%2300a651' strokeWidth='1.5'/%3E%3C/svg%3E"
+
+const imgWlSparkGreenFill   = imgSparkFillGreen
+const imgWlSparkGreenStroke = imgSparkStrokeGreen
+const imgWlSparkRedFill     = imgSparkFillRed
+const imgWlSparkRedStroke   = imgSparkStrokeRed
 
 const TABS = ['Overview', 'Watchlist']
 
@@ -73,17 +60,17 @@ const REGION_CARDS: Record<string, MarketCardData[]> = {
 }
 
 function MarketCard({ name, price, pct, direction }: MarketCardData) {
-  const arrowSrc = direction === 'down' ? imgArrowDown : direction === 'up' ? imgArrowUp : imgMinusMinus
   const pctColor = direction === 'down' ? '#e10000' : direction === 'up' ? '#0a8200' : '#6f6f6f'
   const fillSrc   = direction === 'up' ? imgSparkFillGreen   : imgSparkFillRed
   const strokeSrc = direction === 'up' ? imgSparkStrokeGreen : imgSparkStrokeRed
+  const ArrowIcon = direction === 'down' ? ArrowDown : direction === 'up' ? ArrowUp : Minus
   return (
     <div className="md-card-slot">
       <div className="md-card-inner">
         <div className="md-card-text">
           <span className="md-card-name">{name}</span>
           <div className="md-card-price-row">
-            <img src={arrowSrc} alt="" className="md-card-arrow" />
+            <ArrowIcon size={12} weight="bold" color={pctColor} className="md-card-arrow" />
             <span className="md-card-price">{price}</span>
           </div>
           <span className="md-card-pct" style={{ color: pctColor }}>{pct}</span>
@@ -123,8 +110,8 @@ function Sparkline({ direction }: { direction: Direction }) {
 }
 
 function StockRow({ ticker, name, price, change, pctChange, direction }: StockRowProps) {
-  const arrowSrc    = direction === 'down' ? imgArrowDown : direction === 'up' ? imgArrowUp : imgMinusMinus
   const changeColor = direction === 'down' ? '#e10000'   : direction === 'up' ? '#0a8200'  : '#6f6f6f'
+  const ArrowIcon = direction === 'down' ? ArrowDown : direction === 'up' ? ArrowUp : Minus
   return (
     <div className="md-stock-row">
       <div className="md-stock-left">
@@ -134,7 +121,7 @@ function StockRow({ ticker, name, price, change, pctChange, direction }: StockRo
       <Sparkline direction={direction} />
       <div className="md-stock-right">
         <div className="md-stock-price">
-          <img src={arrowSrc} alt="" className="md-stock-arrow" />
+          <ArrowIcon size={12} weight="bold" color={changeColor} className="md-stock-arrow" />
           <span>{price}</span>
         </div>
         <div className="md-stock-change" style={{ color: changeColor }}>
@@ -174,7 +161,7 @@ function NewsArticle({ headline, tickers, time, timeRed }: {
       <div className="md-tickers-row">
         {tickers.map(t => (
           <div key={t.label} className={`md-ticker-btn md-ticker-btn--${t.dir}`}>
-            <img src={t.dir === 'up' ? imgArrowUp : imgArrowDown} alt="" className="md-ticker-arrow" />
+            {t.dir === 'up' ? <ArrowUp size={10} weight="bold" /> : <ArrowDown size={10} weight="bold" />}
             <span>{t.label}</span>
           </div>
         ))}
@@ -182,8 +169,8 @@ function NewsArticle({ headline, tickers, time, timeRed }: {
       <div className="md-news-footer">
         <span className="md-news-time" style={{ color: timeRed ? '#e10000' : '#6f6f6f' }}>{time}</span>
         <div className="md-footer-actions">
-          <button className="md-action-btn"><img src={imgHeadphones} alt="Listen" /></button>
-          <button className="md-action-btn"><img src={imgBookmarkSimple} alt="Save" /></button>
+          <button className="md-action-btn"><Headphones size={20} weight="regular" color="#6f6f6f" /></button>
+          <button className="md-action-btn"><BookmarkSimple size={20} weight="regular" color="#6f6f6f" /></button>
         </div>
       </div>
     </div>
@@ -293,8 +280,8 @@ const WL_STOCK_ARTICLES: Record<string, string[]> = {
 
 function WlStockRow({ ticker, name, price, change, pct, direction }: WlStockData) {
   const [open, setOpen] = useState(false)
-  const arrowSrc = direction === 'down' ? imgWlArrowDown : direction === 'up' ? imgWlArrowUp : imgWlMinusMinus
   const amtColor = direction === 'down' ? '#e10000' : direction === 'up' ? '#0a8200' : '#6f6f6f'
+  const WlArrow = direction === 'down' ? ArrowDown : direction === 'up' ? ArrowUp : Minus
   const articles = WL_STOCK_ARTICLES[ticker] ?? []
 
   return (
@@ -308,7 +295,7 @@ function WlStockRow({ ticker, name, price, change, pct, direction }: WlStockData
         <WlSparkline direction={direction} />
         <div className="wl-stock-right">
           <div className="wl-price-row">
-            <img src={arrowSrc} alt="" className="wl-arrow-icon" />
+            <WlArrow size={12} weight="bold" color={amtColor} className="wl-arrow-icon" />
             <span className="wl-price">{price}</span>
           </div>
           <div className="wl-amts" style={{ color: amtColor }}>
@@ -317,7 +304,7 @@ function WlStockRow({ ticker, name, price, change, pct, direction }: WlStockData
           </div>
         </div>
         <button className="wl-caret-btn" onClick={() => setOpen(o => !o)}>
-          <img src={open ? imgWlCaretDown : imgWlCaretDown} alt="" className={`wl-caret-icon${open ? ' wl-caret-icon--open' : ''}`} />
+          <CaretDown size={16} weight="bold" color="#6f6f6f" className={`wl-caret-icon${open ? ' wl-caret-icon--open' : ''}`} />
         </button>
       </div>
 
@@ -327,7 +314,7 @@ function WlStockRow({ ticker, name, price, change, pct, direction }: WlStockData
           {/* After hours bar */}
           <div className="wl-after-hours">
             <div className="wl-after-hours-left">
-              <img src={imgWlMinusMinus} alt="" className="wl-moon-icon" style={{ width: 16, height: 16 }} />
+              <Minus size={16} weight="bold" color="#6f6f6f" className="wl-moon-icon" />
               <span className="wl-after-hours-label">AFTER HOURS</span>
             </div>
             <div className="wl-after-hours-nums">
@@ -388,7 +375,7 @@ function WlNewsCard({ headline, tickers, time, timeRed }: WlNewsArticle) {
       <div className="wl-tickers-row">
         {tickers.map(t => (
           <div key={t.label} className={`md-ticker-btn md-ticker-btn--${t.dir}`}>
-            <img src={t.dir === 'up' ? imgArrowUp : imgArrowDown} alt="" className="md-ticker-arrow" />
+            {t.dir === 'up' ? <ArrowUp size={10} weight="bold" /> : <ArrowDown size={10} weight="bold" />}
             <span>{t.label}</span>
           </div>
         ))}
@@ -518,7 +505,6 @@ function WatchlistContent({ onWatchlistPicker, onAddSymbols }: { onWatchlistPick
   )
 }
 
-const imgMdXClose = 'https://www.figma.com/api/mcp/asset/738d0fae-32f6-492b-985a-2aec721ee963'
 
 const ADD_SYMBOLS_ALL = [
   { ticker: 'NWS',      boldPart: 'NWS',    name: 'News Corp Cl B',       exchange: 'U.S.: Nasdaq',          added: true  },
@@ -559,7 +545,7 @@ export function AddSymbolsSheet({ visible, onClose }: { visible: boolean; onClos
           <span className="md-info-title">Add Symbols</span>
           <button className="md-info-close-btn" onClick={onClose}>
             <div className="md-info-close-glass">
-              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+              <X size={20} weight="bold" color="#222222" className="md-info-close-icon" />
             </div>
           </button>
         </div>
@@ -634,7 +620,7 @@ export function WatchlistPickerSheet({ visible, onClose }: { visible: boolean; o
           <span className="md-info-title">My Watchlists</span>
           <button className="md-info-close-btn" onClick={onClose}>
             <div className="md-info-close-glass">
-              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+              <X size={20} weight="bold" color="#222222" className="md-info-close-icon" />
             </div>
           </button>
         </div>
@@ -671,7 +657,7 @@ export function MdInfoSheet({ visible, onClose, title, body }: {
           <span className="md-info-title">{title}</span>
           <button className="md-info-close-btn" onClick={onClose}>
             <div className="md-info-close-glass">
-              <img src={imgMdXClose} alt="Close" className="md-info-close-icon" />
+              <X size={20} weight="bold" color="#222222" className="md-info-close-icon" />
             </div>
           </button>
         </div>
@@ -701,7 +687,7 @@ function OverviewContent({ onVolumeInfo }: { onVolumeInfo: () => void }) {
         ))}
       </div>
       <div className="md-countdown">
-        <img src={imgClockCountdown} alt="" className="md-clock-icon" />
+        <Clock size={14} weight="regular" color="#6f6f6f" className="md-clock-icon" />
         <span className="md-countdown-text">{COUNTDOWN[region]}</span>
       </div>
       <div className="md-cards-scroll">
@@ -737,7 +723,7 @@ function OverviewContent({ onVolumeInfo }: { onVolumeInfo: () => void }) {
         <div className="md-space-8" />
         <div className="md-live-footer">
           <span className="md-view-all">View All Updates</span>
-          <button className="md-action-btn"><img src={imgShareFat} alt="Share" /></button>
+          <button className="md-action-btn"><ShareFat size={20} weight="regular" color="#6f6f6f" /></button>
         </div>
       </div>
 
@@ -914,13 +900,13 @@ export default function MarketDataPage({ slidePos, onBellTap, onSearchTap, onVol
       <div className="md-toolbar">
         <div className="md-toolbar-leading">
           <button className="md-glass-btn" onClick={onBellTap}>
-            <img src={imgBell} alt="Notifications" className="md-btn-icon" />
+            <Bell size={24} weight="regular" color="#222222" className="md-btn-icon" />
           </button>
         </div>
         <span className="md-toolbar-title">Market Data</span>
         <div className="md-toolbar-trailing">
           <button className="md-glass-btn" onClick={onSearchTap}>
-            <img src={imgMagnifyingGlass} alt="Search" className="md-btn-icon" />
+            <MagnifyingGlass size={24} weight="regular" color="#222222" className="md-btn-icon" />
           </button>
         </div>
       </div>

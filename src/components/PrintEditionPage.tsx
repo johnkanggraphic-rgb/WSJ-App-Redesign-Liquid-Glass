@@ -1,21 +1,19 @@
-import { CaretLeft } from '@phosphor-icons/react'
+import { CaretLeft, DownloadSimple } from '@phosphor-icons/react'
 import StatusBar from './StatusBar'
 import './PrintEditionPage.css'
 
-const imgNewspaper  = 'https://www.figma.com/api/mcp/asset/f3885992-9a7e-4f8c-b8a2-064cfba3ac77'
-const imgEdition1   = 'https://www.figma.com/api/mcp/asset/f3885992-9a7e-4f8c-b8a2-064cfba3ac77'
-const imgEdition4   = 'https://www.figma.com/api/mcp/asset/ff66f2b2-aed2-4746-91d8-a95caeb12213'
-const imgEdition5   = 'https://www.figma.com/api/mcp/asset/59ad4674-424d-4c82-90ca-3357a5318daa'
-const imgEdition6   = 'https://www.figma.com/api/mcp/asset/c63ebc66-1ada-461a-8125-0b8adf9bb471'
-const imgDownload   = 'https://www.figma.com/api/mcp/asset/d25dcad2-8fa4-40ca-8de6-5f1a482061a8'
+const imgCover     = '/assets/print-edition-cover.png'
+const imgEdition1  = '/assets/print-edition-1.png'
+const imgEdition2  = '/assets/print-edition-2.png'
+const imgEdition3  = '/assets/print-edition-3.png'
 
 const EDITIONS = [
-  { date: 'April 14, 2026', img: imgEdition1 },
-  { date: 'April 13, 2026', img: imgEdition1 },
-  { date: 'April 12, 2026', img: imgEdition1 },
-  { date: 'April 11, 2026', img: imgEdition4 },
-  { date: 'April 10, 2026', img: imgEdition5 },
-  { date: 'April 9, 2026',  img: imgEdition6 },
+  { date: 'April 14, 2026', img: imgCover    },
+  { date: 'April 13, 2026', img: imgCover    },
+  { date: 'April 12, 2026', img: imgCover    },
+  { date: 'April 11, 2026', img: imgEdition1 },
+  { date: 'April 10, 2026', img: imgEdition2 },
+  { date: 'April 9, 2026',  img: imgEdition3 },
 ]
 
 export default function PrintEditionPage({ visible, onBack, onReadTap }: {
@@ -47,7 +45,7 @@ export default function PrintEditionPage({ visible, onBack, onReadTap }: {
             <span className="pe-hero-date">April 15, 2026</span>
           </div>
           <div className="pe-hero-image-wrap">
-            <img src={imgNewspaper} alt="Today's edition" className="pe-hero-image" />
+            <img src={imgCover} alt="Today's Edition" className="pe-hero-cover-img" />
           </div>
           <div className="pe-hero-btns">
             <button className="pe-btn pe-btn--solid" onClick={onReadTap}>Read</button>
@@ -71,7 +69,7 @@ export default function PrintEditionPage({ visible, onBack, onReadTap }: {
                 <span className="pe-edition-date">{ed.date}</span>
               </div>
               <button className="pe-edition-dl-btn">
-                <img src={imgDownload} alt="Download" className="pe-dl-icon" />
+                <DownloadSimple size={22} weight="regular" color="#6f6f6f" />
               </button>
             </div>
           ))}

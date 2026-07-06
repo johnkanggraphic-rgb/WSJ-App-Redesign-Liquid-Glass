@@ -1,67 +1,82 @@
-import {
-  ChartBar,
-  Play,
-} from '@phosphor-icons/react'
-
-const imgTodayRegular = "https://www.figma.com/api/mcp/asset/0b0ccdcf-6486-4103-8090-ea1e31352362"
-const imgTodayFill    = "https://www.figma.com/api/mcp/asset/72d5b9c6-77d1-4a07-ade9-cc16461056b1"
+import { ChartBar, Play } from '@phosphor-icons/react'
 
 type IconProps = { active: boolean; dark?: boolean }
 
 const size = 24
 
 export function HomeIcon({ active, dark }: IconProps) {
+  const suffix = dark ? '-dark' : ''
   return (
     <img
-      src={active ? imgTodayFill : imgTodayRegular}
+      src={active ? `/assets/home-icon-active${suffix}.svg` : `/assets/home-icon-inactive${suffix}.svg`}
       alt="Home"
-      width={size}
-      height={size}
-      style={{ display: 'block', filter: dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2)') : undefined }}
+      style={{ width: size, height: size, display: 'block' }}
     />
   )
 }
 
-const imgMyWSJTopRegular    = "https://www.figma.com/api/mcp/asset/cc42c444-8d6d-467a-87c3-f9e5d3bf623f"
-const imgMyWSJBottomRegular = "https://www.figma.com/api/mcp/asset/f7e2950c-48eb-4280-9138-4028eefd5bb4"
-const imgMyWSJTopFill       = "https://www.figma.com/api/mcp/asset/5c5fa805-cb1b-4325-ba30-71e610a903d3"
-const imgMyWSJBottomFill    = "https://www.figma.com/api/mcp/asset/add2b850-44df-4d48-9841-7cc64fce7100"
-
 export function MyWSJIcon({ active, dark }: IconProps) {
-  const topSrc    = active ? imgMyWSJTopFill    : imgMyWSJTopRegular
-  const bottomSrc = active ? imgMyWSJBottomFill : imgMyWSJBottomRegular
-  const imgFilter = dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2)') : undefined
+  const c = dark ? '#ffffff' : '#222222'
   return (
-    <div style={{ position: 'relative', width: size, height: size }}>
-      <div style={{ position: 'absolute', top: '15.63%', left: '12.5%', right: '12.5%', bottom: '44%' }}>
-        <img src={topSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', filter: imgFilter }} />
-      </div>
-      <div style={{ position: 'absolute', top: '53.12%', left: '12.5%', right: '12.51%', bottom: '18.03%' }}>
-        <img src={bottomSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', filter: imgFilter }} />
-      </div>
-    </div>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Top slider: union outline = active, 4-petal filled = inactive */}
+      {active ? (
+        <g transform="translate(3, 3.75)">
+          {/* Union knob (outline style) — active */}
+          <path fillRule="evenodd" clipRule="evenodd" d="M4.15364 0.692273C4.15364 0.309941 4.46358 0 4.84591 0C5.22824 0 5.53818 0.309941 5.53818 0.692273C5.53818 2.58127 7.05125 4.11682 8.93147 4.15309C8.95413 4.15278 8.97682 4.15262 8.99955 4.15262C9.38188 4.15262 9.69182 4.46257 9.69182 4.8449L9.69182 4.84601C9.69182 5.22835 9.38188 5.5383 8.99955 5.5383C8.9768 5.5383 8.95409 5.53814 8.93142 5.53783C7.05122 5.57413 5.53818 7.10967 5.53818 8.99865C5.53818 9.38098 5.22824 9.69092 4.84591 9.69092C4.46358 9.69092 4.15364 9.38098 4.15364 8.99865C4.15364 7.10969 2.64063 5.57415 0.760457 5.53783C0.737766 5.53814 0.715039 5.5383 0.692274 5.5383C0.309942 5.5383 0 5.22836 0 4.84602V4.8449C0 4.46256 0.309942 4.15262 0.692274 4.15262C0.715038 4.15262 0.737766 4.15278 0.760456 4.15309C2.64063 4.11677 4.15364 2.58123 4.15364 0.692273Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M8.30818 4.84591C8.30818 4.46358 8.61812 4.15364 9.00045 4.15364H17.3077C17.6901 4.15364 18 4.46358 18 4.84591C18 5.22824 17.6901 5.53818 17.3077 5.53818H9.00045C8.61812 5.53818 8.30818 5.22824 8.30818 4.84591Z" fill={c}/>
+        </g>
+      ) : (
+        <g transform="translate(3, 3.75)">
+          {/* 4-petal knob (filled) — inactive */}
+          <path fillRule="evenodd" clipRule="evenodd" d="M4.84668 0C5.22901 0 5.53895 0.309934 5.53895 0.692256C5.53895 2.60395 7.08865 4.15365 9.00027 4.15365C9.3826 4.15365 9.69254 4.46358 9.69254 4.84591C9.69254 5.22823 9.3826 5.53816 9.00027 5.53816C6.32396 5.53816 4.15442 3.36856 4.15442 0.692256C4.15442 0.309934 4.46435 0 4.84668 0Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M4.84586 0C4.46353 0 4.15359 0.309934 4.15359 0.692256C4.15359 2.60395 2.60388 4.15365 0.692265 4.15365C0.309938 4.15365 3.66189e-08 4.46358 3.66189e-08 4.84591C3.66189e-08 5.22823 0.309938 5.53816 0.692265 5.53816C3.36858 5.53816 5.53812 3.36856 5.53812 0.692256C5.53812 0.309934 5.22818 0 4.84586 0Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M4.84586 9.69091C4.46353 9.69091 4.15359 9.38098 4.15359 8.99866C4.15359 7.08696 2.60388 5.53726 0.692265 5.53726C0.309938 5.53726 2.15567e-07 5.22733 2.466e-07 4.84501C2.77633e-07 4.46268 0.309938 4.15275 0.692265 4.15275C3.36858 4.15275 5.53812 6.32235 5.53812 8.99866C5.53812 9.38098 5.22818 9.69091 4.84586 9.69091Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M4.84668 9.69091C5.22901 9.69091 5.53895 9.38098 5.53895 8.99866C5.53895 7.08696 7.08865 5.53726 9.00027 5.53726C9.3826 5.53726 9.69254 5.22733 9.69254 4.84501C9.69254 4.46268 9.3826 4.15275 9.00027 4.15275C6.32396 4.15275 4.15442 6.32235 4.15442 8.99866C4.15442 9.38098 4.46435 9.69091 4.84668 9.69091Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M8.30859 4.84579C8.30859 4.46347 8.61852 4.15353 9.00085 4.15353H17.308C17.6904 4.15353 18.0003 4.46347 18.0003 4.84579C18.0003 5.22811 17.6904 5.53804 17.308 5.53804H9.00085C8.61852 5.53804 8.30859 5.22811 8.30859 4.84579Z" fill={c}/>
+        </g>
+      )}
+      {/* Bottom slider: filled circle = active, outline circle = inactive */}
+      {active ? (
+        <g transform="translate(3, 12.75)">
+          <path fillRule="evenodd" clipRule="evenodd" d="M3.76701e-05 3.69192C3.76701e-05 3.30959 0.309979 2.99965 0.692311 2.99965L8.30731 2.99965C8.68965 2.99965 8.99959 3.30959 8.99959 3.69192C8.99959 4.07426 8.68965 4.3842 8.30731 4.3842H0.692311C0.309979 4.3842 3.76701e-05 4.07426 3.76701e-05 3.69192Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M13.8455 3.69192C13.8455 3.30959 14.1554 2.99965 14.5378 2.99965L17.3069 2.99965C17.6892 2.99965 17.9991 3.30959 17.9991 3.69192C17.9991 4.07426 17.6892 4.3842 17.3069 4.3842L14.5378 4.3842C14.1554 4.3842 13.8455 4.07426 13.8455 3.69192Z" fill={c}/>
+          {/* Filled circle — active */}
+          <path fillRule="evenodd" clipRule="evenodd" d="M7.61487 3.46139C7.61487 1.54974 9.16458 2.95639e-05 11.0762 2.95639e-05C12.9879 2.95639e-05 14.5376 1.54974 14.5376 3.46139C14.5376 5.37305 12.9879 6.92276 11.0762 6.92276C9.16458 6.92276 7.61487 5.37305 7.61487 3.46139Z" fill={c}/>
+        </g>
+      ) : (
+        <g transform="translate(3, 12.75)">
+          <path fillRule="evenodd" clipRule="evenodd" d="M0 3.69179C0 3.30947 0.309938 2.99953 0.692265 2.99953L8.30718 2.99953C8.68951 2.99953 8.99945 3.30947 8.99945 3.69179C8.99945 4.07411 8.68951 4.38405 8.30718 4.38405H0.692265C0.309938 4.38405 0 4.07411 0 3.69179Z" fill={c}/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M13.8451 3.69179C13.8451 3.30947 14.155 2.99953 14.5373 2.99953L17.3064 2.99953C17.6887 2.99953 17.9987 3.30947 17.9987 3.69179C17.9987 4.07411 17.6887 4.38405 17.3064 4.38405L14.5373 4.38405C14.155 4.38405 13.8451 4.07411 13.8451 3.69179Z" fill={c}/>
+          {/* Outline circle — inactive */}
+          <path fillRule="evenodd" clipRule="evenodd" d="M11.0768 1.38451C9.92983 1.38451 9.00001 2.31431 9.00001 3.46128C9.00001 4.60825 9.92983 5.53805 11.0768 5.53805C12.2238 5.53805 13.1536 4.60825 13.1536 3.46128C13.1536 2.31431 12.2238 1.38451 11.0768 1.38451ZM7.61548 3.46128C7.61548 1.54967 9.16517 0 11.0768 0C12.9884 0 14.5381 1.54967 14.5381 3.46128C14.5381 5.37289 12.9884 6.92256 11.0768 6.92256C9.16517 6.92256 7.61548 5.37289 7.61548 3.46128Z" fill={c}/>
+        </g>
+      )}
+    </svg>
   )
 }
 
 export function MarketDataIcon({ active, dark }: IconProps) {
-  return <ChartBar size={size} weight={active ? 'fill' : 'regular'} color={dark ? (active ? '#ffffff' : '#ffffff') : '#222222'} />
+  return <ChartBar size={size} weight={active ? 'fill' : 'regular'} color={dark ? '#ffffff' : '#222222'} />
 }
 
 export function MediaIcon({ active, dark }: IconProps) {
-  return <Play size={size} weight={active ? 'fill' : 'regular'} color={dark ? (active ? '#ffffff' : '#ffffff') : '#222222'} />
+  return <Play size={size} weight={active ? 'fill' : 'regular'} color={dark ? '#ffffff' : '#222222'} />
 }
 
-const imgMoreOutline = "https://www.figma.com/api/mcp/asset/fe6c7014-a771-4d6b-8b89-7e40bb1fac92"
-const imgMoreFill    = "https://www.figma.com/api/mcp/asset/b294ce23-d887-4ba7-9857-115bc484d254"
-
 export function MoreIcon({ active, dark }: IconProps) {
+  const c = dark ? '#ffffff' : '#222222'
+  const circles = [
+    'M17 10C18.6569 10 20 8.65685 20 7C20 5.34315 18.6569 4 17 4C15.3431 4 14 5.34315 14 7C14 8.65685 15.3431 10 17 10Z',
+    'M7 10C8.65685 10 10 8.65685 10 7C10 5.34315 8.65685 4 7 4C5.34315 4 4 5.34315 4 7C4 8.65685 5.34315 10 7 10Z',
+    'M17 20C18.6569 20 20 18.6569 20 17C20 15.3431 18.6569 14 17 14C15.3431 14 14 15.3431 14 17C14 18.6569 15.3431 20 17 20Z',
+    'M7 20C8.65685 20 10 18.6569 10 17C10 15.3431 8.65685 14 7 14C5.34315 14 4 15.3431 4 17C4 18.6569 5.34315 20 7 20Z',
+  ]
   return (
-    <img
-      src={active ? imgMoreFill : imgMoreOutline}
-      alt="More"
-      width={size}
-      height={size}
-      style={{ display: 'block', filter: dark ? (active ? 'invert(1) brightness(2)' : 'invert(1) brightness(2)') : undefined }}
-    />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {circles.map((d, i) => (
+        <path key={i} d={d} fill={active ? c : 'none'} stroke={c} strokeWidth="1.5" strokeMiterlimit="10" />
+      ))}
+    </svg>
   )
 }

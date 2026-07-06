@@ -1,8 +1,5 @@
+import { Bell, MagnifyingGlass } from '@phosphor-icons/react'
 import './TitleBar.css'
-
-const imgBell   = "https://www.figma.com/api/mcp/asset/0495eaba-4bb1-4397-a1b9-d7b995d94fec"
-const imgSearch = "https://www.figma.com/api/mcp/asset/5bb36d78-3037-4e81-bf53-6b9e298e7f41"
-const imgLogo   = "https://www.figma.com/api/mcp/asset/867757ad-edcc-4f55-ac23-2b9a168db1c7"
 
 export default function TitleBar({ onBellTap, onSearchTap }: { onBellTap?: () => void; onSearchTap?: () => void }) {
   return (
@@ -10,21 +7,21 @@ export default function TitleBar({ onBellTap, onSearchTap }: { onBellTap?: () =>
       {/* Leading — Bell */}
       <div className="titlebar-leading">
         <button className="titlebar-btn-group" onClick={onBellTap}>
-          <img src={imgBell} alt="Notifications" className="titlebar-icon" />
+          <Bell size={24} weight="regular" color="#222222" />
         </button>
       </div>
 
       {/* Center — WSJ Logo */}
       <div className="titlebar-logo-wrap">
         <div className="titlebar-logo">
-          <img src={imgLogo} alt="The Wall Street Journal" />
+          <img src="/assets/wsj-logo.svg" alt="The Wall Street Journal" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
         </div>
       </div>
 
       {/* Trailing — Search */}
       <div className="titlebar-trailing">
         <button className="titlebar-btn-group" onClick={onSearchTap}>
-          <img src={imgSearch} alt="Search" className="titlebar-icon" />
+          <MagnifyingGlass size={24} weight="regular" color="#222222" />
         </button>
       </div>
     </div>

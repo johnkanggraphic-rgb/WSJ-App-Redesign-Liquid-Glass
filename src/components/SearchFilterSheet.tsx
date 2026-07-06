@@ -1,7 +1,5 @@
+import { Check, X } from '@phosphor-icons/react'
 import './SearchFilterSheet.css'
-
-const imgCheck = 'https://www.figma.com/api/mcp/asset/c3c2c3f1-77f2-4225-a3d7-2e4b0186daec'
-const imgX     = 'https://www.figma.com/api/mcp/asset/954ba18f-0aa8-45ce-aefe-5ac7aa9902c1'
 
 function Divider() {
   return <div className="sfs-divider" />
@@ -21,7 +19,7 @@ function Item({ label, checked, first }: { label: string; checked?: boolean; fir
       <span className="sfs-item-label">{label}</span>
       {checked && (
         <div className="sfs-item-check">
-          <img src={imgCheck} alt="" className="sfs-check-icon" />
+          <Check size={18} weight="bold" color="#222222" />
         </div>
       )}
     </div>
@@ -46,7 +44,7 @@ export default function SearchFilterSheet({ visible, onClose }: {
             <span className="sfs-title">Date Range and Sorting</span>
             <button className="sfs-close-btn" onClick={onClose}>
               <div className="sfs-close-glass">
-                <img src={imgX} alt="Close" className="sfs-close-icon" />
+                <X size={20} weight="bold" color="#222222" />
               </div>
             </button>
           </div>

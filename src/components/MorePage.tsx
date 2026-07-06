@@ -1,8 +1,5 @@
-import { Bell } from '@phosphor-icons/react'
+import { Bell, Newspaper, PuzzlePiece } from '@phosphor-icons/react'
 import './MorePage.css'
-
-const imgNewspaper  = 'https://www.figma.com/api/mcp/asset/af2e83f3-4159-4a71-b2d7-478f0342e7ad'
-const imgPuzzle     = 'https://www.figma.com/api/mcp/asset/5425b9af-e49a-4573-b8d7-62c44c06760f'
 
 const PROFILE_ROWS = ['Account', 'Setting', 'Support', 'Developer', 'Sign Out']
 
@@ -33,7 +30,7 @@ export default function MorePage({ slidePos, onBellTap, onExploreTap, onPrintEdi
         {/* Puzzles hero card */}
         <div className="more-hero-card">
           <div className="more-hero-content">
-            <img src={imgPuzzle} alt="" className="more-hero-icon" />
+            <PuzzlePiece size={40} weight="regular" color="#222222" className="more-hero-icon" />
             <p className="more-hero-headline">Puzzles</p>
             <p className="more-hero-sub">Challenge yourself with our crosswords and other games.</p>
           </div>
@@ -43,7 +40,7 @@ export default function MorePage({ slidePos, onBellTap, onExploreTap, onPrintEdi
         {/* Print Edition row */}
         <div className="more-card-row" onClick={onPrintEditionTap} style={{ cursor: 'pointer' }}>
           <div className="more-card-icon-wrap">
-            <img src={imgNewspaper} alt="" className="more-card-icon" />
+            <Newspaper size={32} weight="regular" color="#222222" className="more-card-icon" />
           </div>
           <span className="more-card-label">Print Edition</span>
         </div>

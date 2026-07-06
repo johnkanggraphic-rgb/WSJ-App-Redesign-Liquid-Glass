@@ -1,19 +1,12 @@
+import { ArrowUp, ArrowDown, Headphones, BookmarkSimple, ShareFat, PlusCircle, Play } from '@phosphor-icons/react'
 import './SearchResults.css'
 
-const imgArrowUp   = 'https://www.figma.com/api/mcp/asset/882eb807-9f6c-4d43-b72e-928eac9d4a02'
-const imgArrowDown = 'https://www.figma.com/api/mcp/asset/0918323b-cd61-4a8f-bad5-a6c4f9fd2d7c'
-const imgHeadphones = 'https://www.figma.com/api/mcp/asset/96c3b686-c1ec-47c4-8847-a6f0006b9130'
-const imgBookmark  = 'https://www.figma.com/api/mcp/asset/f11d5efe-688c-4b4c-9c17-8f9e47426362'
-const imgShare     = 'https://www.figma.com/api/mcp/asset/11588b0b-94b4-4c89-935e-7e580e83c8aa'
-const imgPlus      = 'https://www.figma.com/api/mcp/asset/8066bc4e-6351-43f0-b7be-1774e60b421b'
-const imgPlay      = 'https://www.figma.com/api/mcp/asset/faccdae1-082b-40f6-b91a-85b0f9bf8596'
-
-const imgCard1 = 'https://www.figma.com/api/mcp/asset/d106f3c8-b549-490c-8d4e-91a49f49e5c1'
-const imgCard2 = 'https://www.figma.com/api/mcp/asset/2633c810-0fc8-4887-9258-6fbec372b9cd'
-const imgCard3 = 'https://www.figma.com/api/mcp/asset/5f86f0af-e873-4ebe-be46-2ee2d669231f'
-const imgCard4 = 'https://www.figma.com/api/mcp/asset/96a7e837-e039-4d1c-9adb-72706eb2fe1a'
-const imgCard5 = 'https://www.figma.com/api/mcp/asset/60899a42-5ca3-4b35-8d8d-2e4602b48390'
-const imgCard6 = 'https://www.figma.com/api/mcp/asset/d4db0988-9cb8-48ca-a8ca-34b9f627163a'
+const imgCard1 = 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=200&q=80'
+const imgCard2 = 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&q=80'
+const imgCard3 = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80'
+const imgCard4 = 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=200&q=80'
+const imgCard5 = 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=80'
+const imgCard6 = 'https://images.unsplash.com/photo-1550399105-c4db5fb85c18?w=200&q=80'
 
 const filterTabs = ['All', 'Market Data', 'Opinion', 'Video', 'Audio']
 
@@ -50,7 +43,7 @@ export default function SearchResults() {
             </div>
             <div className="sr-stock-right">
               <div className="sr-stock-price-row">
-                <img src={imgArrowUp} alt="" className="sr-stock-arrow" />
+                <ArrowUp size={12} weight="bold" color="#0a8200" className="sr-stock-arrow" />
                 <span className="sr-stock-price">26.70 USD</span>
               </div>
               <div className="sr-stock-change sr-stock-change--up">
@@ -72,7 +65,7 @@ export default function SearchResults() {
             </div>
             <div className="sr-stock-right">
               <div className="sr-stock-price-row">
-                <img src={imgArrowDown} alt="" className="sr-stock-arrow" />
+                <ArrowDown size={12} weight="bold" color="#e10000" className="sr-stock-arrow" />
                 <span className="sr-stock-price">369.50 USD</span>
               </div>
               <div className="sr-stock-change sr-stock-change--down">
@@ -105,14 +98,14 @@ export default function SearchResults() {
             <div className="sr-footer">
               <div className="sr-footer-left">
                 <div className="sr-player">
-                  <img src={imgPlay} alt="" className="sr-play-icon" />
+                  <Play size={16} weight="fill" color="#ffffff" className="sr-play-icon" />
                   <span className="sr-player-time">3:20</span>
                 </div>
                 <span className="sr-timestamp">Nov. 13</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgShare} alt="" className="sr-action-icon" /></button>
-                <button className="sr-action-btn"><img src={imgPlus} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><ShareFat size={20} weight="regular" color="#6f6f6f" /></button>
+                <button className="sr-action-btn"><PlusCircle size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
@@ -137,7 +130,7 @@ export default function SearchResults() {
                 <span className="sr-timestamp sr-timestamp--red" style={{ marginLeft: 16 }}>13 min ago</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgShare} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><ShareFat size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
@@ -158,8 +151,8 @@ export default function SearchResults() {
                 <span className="sr-timestamp sr-timestamp--red">13 min ago</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgHeadphones} alt="" className="sr-action-icon" /></button>
-                <button className="sr-action-btn"><img src={imgBookmark} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><Headphones size={20} weight="regular" color="#6f6f6f" /></button>
+                <button className="sr-action-btn"><BookmarkSimple size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
@@ -180,8 +173,8 @@ export default function SearchResults() {
                 <span className="sr-read-time">6 min read</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgHeadphones} alt="" className="sr-action-icon" /></button>
-                <button className="sr-action-btn"><img src={imgBookmark} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><Headphones size={20} weight="regular" color="#6f6f6f" /></button>
+                <button className="sr-action-btn"><BookmarkSimple size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
@@ -204,8 +197,8 @@ export default function SearchResults() {
                 <span className="sr-read-time">6 min read</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgHeadphones} alt="" className="sr-action-icon" /></button>
-                <button className="sr-action-btn"><img src={imgBookmark} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><Headphones size={20} weight="regular" color="#6f6f6f" /></button>
+                <button className="sr-action-btn"><BookmarkSimple size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
@@ -227,8 +220,8 @@ export default function SearchResults() {
                 <span className="sr-read-time">6 min read</span>
               </div>
               <div className="sr-footer-right">
-                <button className="sr-action-btn"><img src={imgHeadphones} alt="" className="sr-action-icon" /></button>
-                <button className="sr-action-btn"><img src={imgBookmark} alt="" className="sr-action-icon" /></button>
+                <button className="sr-action-btn"><Headphones size={20} weight="regular" color="#6f6f6f" /></button>
+                <button className="sr-action-btn"><BookmarkSimple size={20} weight="regular" color="#6f6f6f" /></button>
               </div>
             </div>
           </div>
