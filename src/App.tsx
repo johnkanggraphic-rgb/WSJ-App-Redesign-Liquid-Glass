@@ -107,11 +107,11 @@ function App() {
     <>
             <div className="iphone-screen-mask" />
             {!isMobile && <StatusBar transparent={activeTab === 3 || activeTab === 4} dark={activeTab === 3 && mediaSubTab === 0} />}
-            <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />
-            <TopNav
+            {(!isMobile || activeTab === 0) && <TitleBar onBellTap={() => setShowNotifs(true)} onSearchTap={() => setShowSearch(true)} />}
+            {(!isMobile || activeTab === 0) && <TopNav
               activeIndex={topNavActive}
               onTabChange={(i) => setTopNavActive(i)}
-            />
+            />}
             <div className="content-area">
               <TodayFeed
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}

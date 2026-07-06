@@ -92,8 +92,7 @@ body {
   align-items: stretch;
   overflow: hidden;
   color-scheme: light;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  /* No padding — TitleBar/toolbars each handle safe-area-inset-top; tab bar handles bottom */
 }
 
 .mobile-screen .content-area {
@@ -104,8 +103,17 @@ body {
 }
 
 /* On mobile, TitleBar sits flush at the top (safe-area inset is on the wrapper) */
+/* TitleBar extends behind real status bar — padding-top clears it visually */
 .mobile-screen .titlebar {
   top: 0;
+  padding-top: env(safe-area-inset-top);
+  height: calc(56px + env(safe-area-inset-top));
+  background: rgba(255, 255, 255, 1);
+}
+
+/* TopNav sits below the now-taller TitleBar */
+.mobile-screen .topnav-container {
+  margin-top: calc(56px + env(safe-area-inset-top));
 }
 
 /* Content area: feed + tab bar stacked, tab bar floats above feed */
@@ -163,4 +171,161 @@ body {
   background: linear-gradient(to left, #c0c0c0, #e0e0e0, #c0c0c0);
   border-radius: 3px 0 0 3px;
   box-shadow: -1px 0 2px rgba(0,0,0,0.2);
+}
+
+/* On mobile, slide pages fill from top — add safe-area inset so toolbar clears status bar */
+.mobile-screen .mywsj-page,
+.mobile-screen .md-page {
+  top: 0;
+}
+
+.mobile-screen .mywsj-toolbar,
+.mobile-screen .md-toolbar {
+  height: calc(56px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
+}
+
+/* On mobile, remove iPhone frame styling from MediaPage */
+.mobile-screen .media-page {
+  border-radius: 0;
+}
+
+/* On mobile, hide the top blur/gradient overlays that assume the iframe layout */
+.mobile-screen .more-top-blur,
+.mobile-screen .more-top-gradient {
+  display: none;
+}
+
+/* On mobile, More toolbar extends behind status bar */
+.mobile-screen .more-toolbar {
+  height: calc(56px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 16px 0;
+  box-sizing: border-box;
+}
+
+/* On mobile, More scroll starts below the toolbar */
+.mobile-screen .more-scroll {
+  top: 56px;
+}
+
+/* On mobile, More scroll: toolbar height + 16px gap */
+.mobile-screen .more-scroll {
+  top: 0;
+  padding-top: calc(72px + env(safe-area-inset-top));
+}
+
+/* On mobile, hide the fake StatusBar inside MediaPage nav */
+.mobile-screen .av-nav-statusbar {
+  display: none;
+}
+
+/* ── Mobile fixes for slide-in pages ──────────────────────────────────────── */
+
+/* Remove iPhone frame border-radius from pages that have it */
+.mobile-screen .pz-page,
+.mobile-screen .pe-page {
+  border-radius: 0;
+}
+
+/* Hide embedded StatusBar on mobile — real device has its own */
+.mobile-screen .pz-page .statusbar,
+.mobile-screen .pe-page .statusbar,
+.mobile-screen .notif-page .statusbar,
+.mobile-screen .search-page .statusbar,
+.mobile-screen .per-statusbar-overlay {
+  display: none;
+}
+
+/* Hide top blur/gradient overlays that assume the iframe StatusBar height */
+.mobile-screen .pz-top-blur,
+.mobile-screen .pz-top-gradient,
+.mobile-screen .pe-top-blur,
+.mobile-screen .pe-top-gradient {
+  display: none;
+}
+
+/* Puzzle page toolbar extends behind status bar */
+.mobile-screen .pz-toolbar {
+  height: calc(56px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 16px 0;
+  box-sizing: border-box;
+}
+
+/* Puzzle scroll: toolbar height + 16px gap */
+.mobile-screen .pz-scroll {
+  padding-top: calc(72px + env(safe-area-inset-top));
+}
+
+/* Print Edition toolbar extends behind status bar */
+.mobile-screen .pe-toolbar {
+  height: calc(56px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 16px 0;
+  box-sizing: border-box;
+}
+
+/* Print Edition scroll: toolbar height + 16px gap */
+.mobile-screen .pe-scroll {
+  padding-top: calc(72px + env(safe-area-inset-top));
+}
+
+/* Print Edition Read: remove top padding (StatusBar overlay hidden) */
+.mobile-screen .per-newspaper-wrap {
+  padding-top: 0;
+}
+
+/* Notifications/Search toolbars extend behind status bar */
+.mobile-screen .notif-toolbar,
+.mobile-screen .search-toolbar {
+  height: calc(56px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
+}
+
+/* Tab bar: sit above the home indicator on real devices */
+.mobile-screen .tabbar-wrapper {
+  bottom: 0;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+/* Media page: bleed edge-to-edge on real device — position:fixed so it escapes content-area */
+.mobile-screen .media-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0;
+}
+
+/* Media av-nav: add safe-area padding so "Media" title clears real status bar */
+.mobile-screen .av-nav-statusbar {
+  height: env(safe-area-inset-top);
+  display: block;
+}
+
+/* ExpandedAudioPlayer: replace 59px — starts at top:0, shows white area behind status bar */
+.mobile-screen .exp-player {
+  top: 0;
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
+}
+
+/* Article page: position:fixed so gradient bleeds behind real status bar */
+.mobile-screen .article-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Article statusbar overlay sits at physical y=0 — no offset needed */
+.mobile-screen .article-statusbar-overlay {
+  top: 0;
+}
+
+/* Article scroll: pad top by safe-area so content doesn't start under status bar */
+.mobile-screen .article-scroll {
+  padding-top: env(safe-area-inset-top);
 }
