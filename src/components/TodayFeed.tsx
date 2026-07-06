@@ -8,7 +8,7 @@ import StockBar from './StockBar'
 const ToastContext = createContext<(linkLabel: string | null) => void>(() => {})
 
 // ── Mini player context ────────────────────────────────────────────────────
-interface MiniPlayerInfo { flashline: string; headline: string }
+export interface MiniPlayerInfo { flashline: string; headline: string }
 const MiniPlayerContext = createContext<(info: MiniPlayerInfo) => void>(() => {})
 
 // ── Article tap context ────────────────────────────────────────────────────
@@ -235,90 +235,6 @@ function AdCard() {
 }
 
 // ── News Package (node 2189:47411) ────────────────────────────────────────
-const imgPkg2LivePhoto = 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'
-const imgPkg2ShareFat  = 'https://www.figma.com/api/mcp/asset/4b381112-91c0-488d-bc0e-33eb8b057e97'
-const imgPkg2Headphones = 'https://www.figma.com/api/mcp/asset/07615240-36d9-4b57-9b67-68c7bb5a224e'
-const imgPkg2Chat       = 'https://www.figma.com/api/mcp/asset/dfe26845-9ea3-4be0-854d-e6ec2104802a'
-
-const pkg2Updates = [
-  { time: '13 min ago', headline: 'Inflation Outlook Reaches 44-Year High' },
-  { time: '24 min ago', headline: 'Analysis | The Simple Explanation for the Treasury Market Mayhem' },
-  { time: '38 min ago', headline: 'Dollar Tumbles as Investors Flee U.S. Assets' },
-  { time: '1 hr ago',   headline: 'China Signals It Will Match Any Further U.S. Tariff Hikes' },
-]
-
-const NEWS_PKG_HEADLINE = 'Consumer Sentiment Plunges on Recession Fears; China Hits Back Again on Tariffs'
-const NEWS_PKG_COMPACT_1 = "The 'Hidden Force' That Can Bring Mortgage Rates Down"
-const NEWS_PKG_COMPACT_2 = 'Musk Vaulted to Top of a Popular Game. How Did He Find the Time?'
-function NewsPackageCard() {
-  const onArticleTap = useContext(ArticleTapContext)
-  return (
-    <div className="pkg-wrapper">
-      {/* Live card with image */}
-      <div className="feed-card feed-card--live" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_HEADLINE)}>
-        <div className="card-top-section">
-          <div className="live-tag">
-            <div className="live-dot" />
-            <span className="live-tag-text">Live</span>
-          </div>
-          <h2 className="card-headline-l card-headline-l--live">
-            Consumer Sentiment Plunges on Recession Fears; China Hits Back Again on Tariffs
-          </h2>
-          <p className="card-summary card-summary--live">
-            Beijing signaled it wouldn't match any further tariff increases by Washington. The dollar and Treasury prices fell, while U.S. stocks rose on the last trading day of a tumultuous week.
-          </p>
-          <div className="card-image-wrap">
-            <img src={imgPkg2LivePhoto} alt="" className="card-image" />
-          </div>
-        </div>
-        <div className="live-updates-outer">
-          <div className="live-updates-scroll">
-            {pkg2Updates.map((item, i) => (
-              <div className="live-update-item" key={i}>
-                {i > 0 && <div className="live-update-divider" />}
-                <div className="live-update-content">
-                  <span className="live-update-time">{item.time}</span>
-                  <p className="live-update-headline">{item.headline}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="card-footer live-card-footer" onClick={e => e.stopPropagation()}>
-          <div className="card-footer-left">
-            <a href="#" className="view-all-link">View All Updates</a>
-          </div>
-          <div className="card-footer-right">
-            <button className="card-action-btn">
-              <img src={imgPkg2ShareFat} alt="" className="card-action-icon" />
-            </button>
-          </div>
-        </div>
-      </div>
-      {/* Compact card 1 */}
-      <div className="feed-divider" />
-      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_COMPACT_1)}>
-        <h3 className="card-headline-s">{NEWS_PKG_COMPACT_1}</h3>
-        <ArticleActions
-          headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-          headline={NEWS_PKG_COMPACT_1}
-          readTime="6 min read"
-        />
-      </div>
-      <div className="feed-divider" />
-      {/* Compact card 2 */}
-      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(NEWS_PKG_COMPACT_2)}>
-        <h3 className="card-headline-s">{NEWS_PKG_COMPACT_2}</h3>
-        <ArticleActions
-          headphones={imgPkg2Headphones} chat={imgPkg2Chat}
-          headline={NEWS_PKG_COMPACT_2}
-          readTime="6 min read"
-        />
-      </div>
-    </div>
-  )
-}
-
 // ── Opinion Package (node 2189:47423) ─────────────────────────────────────
 const opinionIcons = {
   headphones: 'https://www.figma.com/api/mcp/asset/45cb41e0-7683-4369-a546-8efde86bb4ac',
@@ -409,22 +325,22 @@ const worldIcons = {
   bookmark:   'https://www.figma.com/api/mcp/asset/7a7ba8d9-58c5-40cc-9c0f-4893cb253106',
   plus:       'https://www.figma.com/api/mcp/asset/716342b1-0417-4030-9a28-a8730294f18e',
 }
-const imgWorldHero = 'https://www.figma.com/api/mcp/asset/f47532ee-8c04-46c8-a479-adf9a4df06c1'
+const imgWorldHero = 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80'
 
-const WORLD_HEADLINE_1 = 'For Working Women in India, Staying Safe Can Feel Like a Full-Time Job'
-const WORLD_HEADLINE_2 = 'Flights Redirected From Barcelona as Fresh Storms Lash Spanish Coast'
-const WORLD_HEADLINE_3 = 'Kate Middleton Returns With A New Royal Role'
+const WORLD_HEADLINE_1 = "Caitlin Clark Breaks WNBA All-Time Scoring Record in Season Opener"
+const WORLD_HEADLINE_2 = 'NFL Draft: Chiefs Trade Up to Secure Generational Talent at Quarterback'
+const WORLD_HEADLINE_3 = 'Novak Djokovic Wins 25th Grand Slam Title at the French Open'
 function WorldPackage() {
   const onArticleTap = useContext(ArticleTapContext)
   return (
     <div className="world-pkg">
-      <div className="section-strap">World</div>
+      <div className="section-strap">Sports</div>
 
       {/* Hero card with image */}
       <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_HEADLINE_1)}>
         <h2 className="card-headline-l">{WORLD_HEADLINE_1}</h2>
         <p className="card-summary">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique magna eu lacus blandit fringilla.
+          The Indiana Fever star surpassed the previous record in just her second professional season, cementing her status as the face of women's basketball.
         </p>
         <div className="card-image-wrap">
           <img src={imgWorldHero} alt="" className="card-image" />
@@ -458,12 +374,58 @@ function WorldPackage() {
   )
 }
 
+// ── World Section ─────────────────────────────────────────────────────────
+const imgWorldSectionHero = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80'
+const WORLD_S_HEADLINE_1 = 'Ukraine Strikes Russian Oil Depot Deep Inside Enemy Territory With Long-Range Drones'
+const WORLD_S_HEADLINE_2 = 'China Signals It Will Match Any Further U.S. Tariff Hikes'
+const WORLD_S_HEADLINE_3 = "France's Snap Election Leaves No Party With a Clear Majority"
+function WorldSection() {
+  const onArticleTap = useContext(ArticleTapContext)
+  return (
+    <div className="world-pkg">
+      <div className="section-strap">World</div>
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_S_HEADLINE_1)}>
+        <h2 className="card-headline-l">{WORLD_S_HEADLINE_1}</h2>
+        <p className="card-summary">
+          The overnight attack targeted a fuel storage facility more than 400 miles from the front line, marking one of the deepest strikes of the war.
+        </p>
+        <div className="card-image-wrap">
+          <img src={imgWorldSectionHero} alt="" className="card-image" />
+        </div>
+        <ArticleActions
+          headphones={worldIcons.headphones} chat={worldIcons.chat}
+          headline={WORLD_S_HEADLINE_1}
+          readTime="5 min read"
+        />
+      </div>
+      <div className="feed-divider" />
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_S_HEADLINE_2)}>
+        <h3 className="card-headline-s">{WORLD_S_HEADLINE_2}</h3>
+        <ArticleActions
+          headphones={worldIcons.headphones} chat={worldIcons.chat}
+          headline={WORLD_S_HEADLINE_2}
+          readTime="4 min read"
+        />
+      </div>
+      <div className="feed-divider" />
+      <div className="feed-card" style={{ cursor: 'pointer' }} onClick={() => onArticleTap(WORLD_S_HEADLINE_3)}>
+        <h3 className="card-headline-s">{WORLD_S_HEADLINE_3}</h3>
+        <ArticleActions
+          headphones={worldIcons.headphones} chat={worldIcons.chat}
+          headline={WORLD_S_HEADLINE_3}
+          readTime="6 min read"
+        />
+      </div>
+    </div>
+  )
+}
+
 // ── Mini Player ───────────────────────────────────────────────────────────
 const imgMiniPlayerThumb = 'https://www.figma.com/api/mcp/asset/dc625918-054a-46a7-af2e-17834a2ff978'
 
 const marqueeStyleEl: { el: HTMLStyleElement | null } = { el: null }
 
-function MarqueeHeadline({ text }: { text: string }) {
+export function MarqueeHeadline({ text }: { text: string }) {
   const outerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLSpanElement>(null)
 
@@ -516,13 +478,13 @@ function MarqueeHeadline({ text }: { text: string }) {
   )
 }
 
-function MiniPlayer({ visible, hiding, info, onClose, onExpand, navDown }: {
-  visible: boolean; hiding: boolean; info: MiniPlayerInfo; onClose: () => void; onExpand: () => void; navDown: boolean
+export function MiniPlayer({ visible, hiding, info, onClose, onExpand, bottomOffset }: {
+  visible: boolean; hiding: boolean; info: MiniPlayerInfo; onClose: () => void; onExpand: () => void; bottomOffset?: number
 }) {
   return (
     <div
       className={`mini-player${visible ? ' mini-player--visible' : ''}${hiding ? ' mini-player--hiding' : ''}`}
-      style={navDown ? { bottom: 83 } : undefined}
+      style={bottomOffset !== undefined ? { bottom: bottomOffset } : undefined}
       onClick={onExpand}
     >
       <div className="mini-player-thumb">
@@ -566,7 +528,7 @@ function BookmarkToast({ visible, hiding, linkLabel, onClose, navDown }: { visib
 }
 
 // ── TodayFeed ──────────────────────────────────────────────────────────────
-export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap, onExpandPlayer }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void; onExpandPlayer?: (info: { flashline: string; headline: string }) => void }) {
+export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLiveTap, onMiniPlayer, onNavDown }: { onArticleTap?: (headline: string) => void; onCommentTap?: (headline: string) => void; onDarkBg?: (dark: boolean) => void; onLiveTap?: () => void; onMiniPlayer?: (info: MiniPlayerInfo) => void; onNavDown?: (down: boolean) => void }) {
   const feedRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
   const [toastVisible, setToastVisible] = useState(false)
@@ -575,21 +537,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const toastHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const [playerVisible, setPlayerVisible] = useState(false)
-  const [playerHiding, setPlayerHiding] = useState(false)
-  const [playerInfo, setPlayerInfo] = useState<MiniPlayerInfo>({ flashline: '', headline: '' })
   const [navDown, setNavDown] = useState(false)
-
-  const hidePlayer = useCallback(() => {
-    setPlayerHiding(true)
-    setTimeout(() => { setPlayerVisible(false); setPlayerHiding(false) }, 220)
-  }, [])
-
-  const showMiniPlayer = useCallback((info: MiniPlayerInfo) => {
-    setPlayerInfo(info)
-    setPlayerHiding(false)
-    setPlayerVisible(true)
-  }, [])
 
   const hideToast = useCallback(() => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
@@ -626,9 +574,11 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
         if (current > lastScrollY.current && current > 40) {
           tabbar.classList.add('tabbar--scrolled-down')
           setNavDown(true)
+          onNavDown?.(true)
         } else {
           tabbar.classList.remove('tabbar--scrolled-down')
           setNavDown(false)
+          onNavDown?.(false)
         }
       }
       lastScrollY.current = current
@@ -659,7 +609,7 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
   }, [onDarkBg])
 
   return (
-    <MiniPlayerContext.Provider value={showMiniPlayer}>
+    <MiniPlayerContext.Provider value={(info) => onMiniPlayer?.(info)}>
     <ArticleTapContext.Provider value={onArticleTap ?? (() => {})}>
     <CommentTapContext.Provider value={onCommentTap ?? (() => {})}>
     <LiveCoverageTapContext.Provider value={onLiveTap ?? (() => {})}>
@@ -707,17 +657,13 @@ export default function TodayFeed({ onArticleTap, onCommentTap, onDarkBg, onLive
         />
         <div className="feed-divider" />
         <AdCard />
-        <div className="feed-divider" />
-        <NewsPackageCard />
-        <div className="feed-divider" />
+        <WorldPackage />
         <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%', boxShadow: 'inset 0 -1.5px 0 0 #ebebeb' }} />
         <OpinionPackage />
-        <div className="feed-divider" />
-        <WorldPackage />
+        <WorldSection />
         <div className="feed-bottom-pad" />
       </div>
       <BookmarkToast visible={toastVisible} hiding={toastHiding} linkLabel={toastLinkLabel} onClose={hideToast} navDown={navDown} />
-      <MiniPlayer visible={playerVisible} hiding={playerHiding} info={playerInfo} onClose={hidePlayer} onExpand={() => onExpandPlayer?.(playerInfo)} navDown={navDown} />
     </ToastContext.Provider>
     </LiveCoverageTapContext.Provider>
 </CommentTapContext.Provider>

@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import './App.css'
 import StatusBar from './components/StatusBar'
 import TitleBar from './components/TitleBar'
 import TopNav from './components/TopNav'
-import TodayFeed from './components/TodayFeed'
+import TodayFeed, { MiniPlayer } from './components/TodayFeed'
+import type { MiniPlayerInfo } from './components/TodayFeed'
 import TabBar from './components/TabBar'
 import NotificationsPage from './components/NotificationsPage'
 import SearchPage from './components/SearchPage'
@@ -47,6 +48,27 @@ function App() {
   const [topNavActive, setTopNavActive] = useState(0)
   const [activeSectionPage, setActiveSectionPage] = useState<string | null>(null)
   const [expandedPlayerInfo, setExpandedPlayerInfo] = useState<{ flashline: string; headline: string } | null>(null)
+  const [miniPlayerVisible, setMiniPlayerVisible] = useState(false)
+  const [miniPlayerHiding, setMiniPlayerHiding] = useState(false)
+  const [miniPlayerInfo, setMiniPlayerInfo] = useState<MiniPlayerInfo>({ flashline: '', headline: '' })
+  const miniPlayerTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [navDown, setNavDown] = useState(false)
+  const [articleToolbarHidden, setArticleToolbarHidden] = useState(false)
+
+  const hideMiniPlayer = useCallback(() => {
+    setMiniPlayerHiding(true)
+    if (miniPlayerTimer.current) clearTimeout(miniPlayerTimer.current)
+    miniPlayerTimer.current = setTimeout(() => {
+      setMiniPlayerVisible(false)
+      setMiniPlayerHiding(false)
+    }, 220)
+  }, [])
+
+  const showMiniPlayer = useCallback((info: MiniPlayerInfo) => {
+    setMiniPlayerInfo(info)
+    setMiniPlayerHiding(false)
+    setMiniPlayerVisible(true)
+  }, [])
 
   useEffect(() => {
     const el = stageRef.current
@@ -81,7 +103,8 @@ function App() {
                 onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }}
                 onCommentTap={(h) => { setArticleHeadline(h); setOpenComments(true); setShowArticle(true) }}
                 onLiveTap={() => setShowLiveCoverage(true)}
-                onExpandPlayer={(info) => setExpandedPlayerInfo(info)}
+                onMiniPlayer={showMiniPlayer}
+                onNavDown={setNavDown}
               />
               <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
@@ -95,9 +118,10 @@ function App() {
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onExpandPlayer={(info) => setExpandedPlayerInfo(info)} />
+<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onMiniPlayer={showMiniPlayer} onToolbarChange={setArticleToolbarHidden} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
+            <MiniPlayer visible={miniPlayerVisible && activeTab !== 3} hiding={miniPlayerHiding} info={miniPlayerInfo} onClose={hideMiniPlayer} onExpand={() => setExpandedPlayerInfo(miniPlayerInfo)} bottomOffset={showArticle ? (articleToolbarHidden ? 16 : 96) : (navDown ? 87 : undefined)} />
             <ExpandedAudioPlayer visible={expandedPlayerInfo !== null} info={expandedPlayerInfo ?? { flashline: '', headline: '' }} onClose={() => setExpandedPlayerInfo(null)} />
             <MdInfoSheet
               visible={showVolumeSheet}

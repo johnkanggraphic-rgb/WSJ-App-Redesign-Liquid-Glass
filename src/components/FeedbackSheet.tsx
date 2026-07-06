@@ -10,7 +10,7 @@ export default function FeedbackSheet({ visible, onClose }: {
   visible: boolean
   onClose: () => void
 }) {
-  const [thumbs, setThumbs] = useState<'up' | 'down' | null>(null)
+  const [thumbs, setThumbs] = useState<'up' | 'down' | null>('up')
   const [text, setText] = useState('')
   const remaining = MAX_CHARS - text.length
 

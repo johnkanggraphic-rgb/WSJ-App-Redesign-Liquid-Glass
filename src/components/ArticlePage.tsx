@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { Pause, X, BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
+import { X, BookmarkSimple, CaretLeft } from '@phosphor-icons/react'
 import './ArticlePage.css'
 import StatusBar from './StatusBar'
 import AuthorSheet from './AuthorSheet'
@@ -17,12 +17,13 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onExpandPlayer }: {
+export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onMiniPlayer, onToolbarChange }: {
   visible: boolean
   onBack: () => void
   openComments?: boolean
   headline?: string
-  onExpandPlayer?: (info: { flashline: string; headline: string }) => void
+  onMiniPlayer?: (info: { flashline: string; headline: string }) => void
+  onToolbarChange?: (hidden: boolean) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
@@ -38,6 +39,8 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
     }
     if (!visible) {
       setCommentSheetVisible(false)
+      setToolbarHidden(false)
+      onToolbarChange?.(false)
     }
   }, [visible, openComments])
 
@@ -80,14 +83,6 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
     showToast('Gift link copied', null)
   }, [showToast])
 
-  const [playerVisible, setPlayerVisible] = useState(false)
-  const [playerHiding, setPlayerHiding] = useState(false)
-  const playerTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const hidePlayer = useCallback(() => {
-    setPlayerHiding(true)
-    playerTimer.current = setTimeout(() => { setPlayerVisible(false); setPlayerHiding(false) }, 220)
-  }, [])
 
   useEffect(() => {
     const el = scrollRef.current
@@ -96,8 +91,10 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
       const y = el.scrollTop
       if (y > lastY.current && y > 60) {
         setToolbarHidden(true)
+        onToolbarChange?.(true)
       } else if (y < lastY.current) {
         setToolbarHidden(false)
+        onToolbarChange?.(false)
       }
       lastY.current = y
     }
@@ -141,7 +138,7 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
         </div>
 
         {/* Listen to article */}
-        <div className="article-listen" onClick={() => { setPlayerHiding(false); setPlayerVisible(true) }}>
+        <div className="article-listen" onClick={() => onMiniPlayer?.({ flashline: 'Flashline', headline: 'Judge Rules Google Operates Illegal Ad Monopoly' })}>
           <span className="article-listen-label">Listen to this article</span>
           <span className="article-listen-duration">4 minutes</span>
         </div>
@@ -243,30 +240,6 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
       {/* Share sheet */}
       <ShareSheet visible={shareSheetVisible} onClose={() => setShareSheetVisible(false)} />
 
-      {/* Article mini player */}
-      <div
-        className={`article-mini-player${playerVisible ? ' article-mini-player--visible' : ''}${playerHiding ? ' article-mini-player--hiding' : ''}`}
-        style={{ bottom: toolbarHidden ? 20 : 96, cursor: 'pointer' }}
-        onClick={() => onExpandPlayer?.({ flashline: 'Flashline', headline: 'Judge Rules Google Operates Illegal Ad Monopoly' })}
-      >
-        <div className="mini-player-thumb">
-          <img src={imgHero} alt="" className="mini-player-thumb-img" />
-        </div>
-        <div className="mini-player-content">
-          <span className="mini-player-flashline">Flashline</span>
-          <div className="mini-player-headline-outer">
-            <span className="mini-player-headline">Judge Rules Google Operates Illegal Ad Monopoly</span>
-          </div>
-        </div>
-        <div className="mini-player-actions">
-          <button className="mini-player-btn" onClick={e => e.stopPropagation()}>
-            <Pause size={20} weight="fill" color="#222222" />
-          </button>
-          <button className="mini-player-btn" onClick={e => { e.stopPropagation(); hidePlayer() }}>
-            <X size={20} weight="bold" color="#222222" />
-          </button>
-        </div>
-      </div>
 
       {/* Bottom toolbar */}
       <div className={`article-toolbar${toolbarHidden ? ' article-toolbar--hidden' : ''}`}>

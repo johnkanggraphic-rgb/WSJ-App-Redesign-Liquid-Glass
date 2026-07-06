@@ -313,7 +313,7 @@ export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleT
   return (
     <div className={`topnav-page${visible ? ' topnav-page--visible' : ''}`}>
       <Section hero={data.s1hero} compact={data.s1compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
-      <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%', boxShadow: 'inset 0 -1.5px 0 0 #ebebeb' }} />
+      <div className="feed-divider" />
       <Section hero={data.s2hero} compact={data.s2compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
       <div className="feed-bottom-pad" style={{ background: tabIndex === 2 ? '#f5f0eb' : '#fff' }} />
     </div>
