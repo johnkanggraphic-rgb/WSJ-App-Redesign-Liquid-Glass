@@ -231,11 +231,11 @@ function CardFooter({ readTime }: { readTime: string }) {
   )
 }
 
-function Section({ hero, compact, bgColor }: { hero: Card; compact: [Card, Card]; bgColor?: string }) {
+function Section({ hero, compact, bgColor, onArticleTap }: { hero: Card; compact: [Card, Card]; bgColor?: string; onArticleTap?: (headline: string) => void }) {
   const bg = bgColor ? { background: bgColor } : undefined
   return (
     <div className="world-pkg" style={{ borderTop: 'none', ...bg }}>
-      <div className="feed-card" style={bg}>
+      <div className="feed-card" style={{ ...bg, cursor: 'pointer' }} onClick={() => onArticleTap?.(hero.headline)}>
         <h2 className="card-headline-l">{hero.headline}</h2>
         {hero.summary && <p className="card-summary">{hero.summary}</p>}
         {hero.img && (
@@ -246,12 +246,12 @@ function Section({ hero, compact, bgColor }: { hero: Card; compact: [Card, Card]
         <CardFooter readTime={hero.readTime} />
       </div>
       <div className="feed-divider" />
-      <div className="feed-card" style={bg}>
+      <div className="feed-card" style={{ ...bg, cursor: 'pointer' }} onClick={() => onArticleTap?.(compact[0].headline)}>
         <h3 className="card-headline-s">{compact[0].headline}</h3>
         <CardFooter readTime={compact[0].readTime} />
       </div>
       <div className="feed-divider" />
-      <div className="feed-card" style={bg}>
+      <div className="feed-card" style={{ ...bg, cursor: 'pointer' }} onClick={() => onArticleTap?.(compact[1].headline)}>
         <h3 className="card-headline-s">{compact[1].headline}</h3>
         <CardFooter readTime={compact[1].readTime} />
       </div>
@@ -296,7 +296,7 @@ function SectionsList({ onSectionTap }: { onSectionTap?: (section: string) => vo
   )
 }
 
-export default function TopNavPage({ tabIndex, visible, onSectionTap }: { tabIndex: number; visible: boolean; onSectionTap?: (section: string) => void }) {
+export default function TopNavPage({ tabIndex, visible, onSectionTap, onArticleTap }: { tabIndex: number; visible: boolean; onSectionTap?: (section: string) => void; onArticleTap?: (headline: string) => void }) {
   const data = tabData[tabIndex]
 
   if (tabIndex === 8) {
@@ -312,9 +312,9 @@ export default function TopNavPage({ tabIndex, visible, onSectionTap }: { tabInd
 
   return (
     <div className={`topnav-page${visible ? ' topnav-page--visible' : ''}`}>
-      <Section hero={data.s1hero} compact={data.s1compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} />
+      <Section hero={data.s1hero} compact={data.s1compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
       <div style={{ height: 8, background: '#f4f5f7', flexShrink: 0, width: '100%', boxShadow: 'inset 0 -1.5px 0 0 #ebebeb' }} />
-      <Section hero={data.s2hero} compact={data.s2compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} />
+      <Section hero={data.s2hero} compact={data.s2compact} bgColor={tabIndex === 2 ? '#f5f0eb' : '#fff'} onArticleTap={onArticleTap} />
       <div className="feed-bottom-pad" style={{ background: tabIndex === 2 ? '#f5f0eb' : '#fff' }} />
     </div>
   )

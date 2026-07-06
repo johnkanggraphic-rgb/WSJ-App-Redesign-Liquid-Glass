@@ -17,11 +17,12 @@ const imgHero        = 'https://images.unsplash.com/photo-1611974789855-9c2a0a72
 const imgInline      = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'
 const imgAvatar      = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=top'
 
-export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly' }: {
+export default function ArticlePage({ visible, onBack, openComments = false, headline = 'Judge Rules Google Operates Illegal Ad Monopoly', onExpandPlayer }: {
   visible: boolean
   onBack: () => void
   openComments?: boolean
   headline?: string
+  onExpandPlayer?: (info: { flashline: string; headline: string }) => void
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const lastY = useRef(0)
@@ -245,7 +246,8 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
       {/* Article mini player */}
       <div
         className={`article-mini-player${playerVisible ? ' article-mini-player--visible' : ''}${playerHiding ? ' article-mini-player--hiding' : ''}`}
-        style={{ bottom: toolbarHidden ? 20 : 96 }}
+        style={{ bottom: toolbarHidden ? 20 : 96, cursor: 'pointer' }}
+        onClick={() => onExpandPlayer?.({ flashline: 'Flashline', headline: 'Judge Rules Google Operates Illegal Ad Monopoly' })}
       >
         <div className="mini-player-thumb">
           <img src={imgHero} alt="" className="mini-player-thumb-img" />
@@ -257,10 +259,10 @@ export default function ArticlePage({ visible, onBack, openComments = false, hea
           </div>
         </div>
         <div className="mini-player-actions">
-          <button className="mini-player-btn">
+          <button className="mini-player-btn" onClick={e => e.stopPropagation()}>
             <Pause size={20} weight="fill" color="#222222" />
           </button>
-          <button className="mini-player-btn" onClick={hidePlayer}>
+          <button className="mini-player-btn" onClick={e => { e.stopPropagation(); hidePlayer() }}>
             <X size={20} weight="bold" color="#222222" />
           </button>
         </div>

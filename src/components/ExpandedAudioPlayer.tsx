@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { CaretDown, SkipBack, SkipForward, Pause, ArrowCounterClockwise, ClockCountdown, ShareFat, Play } from '@phosphor-icons/react'
 import './ExpandedAudioPlayer.css'
 
-const imgAlbum = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80'
+const imgAlbum = 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80'
+
+const SPEEDS = ['0.5x', '0.75x', '1x', '1.25x', '1.5x', '2x']
 
 interface Props {
   visible: boolean
@@ -12,12 +15,15 @@ interface Props {
 const episodes = [
   { date: 'Oct. 31', duration: '3:20', headline: 'Judge Rules Google Operates Illegal Ad Monopoly',             img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&q=80' },
   { date: 'Oct. 30', duration: '3:20', headline: 'Fed Officials Signal No Rush to Cut Rates Despite Cooling Inflation', img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=200&q=80' },
-  { date: 'Oct. 29', duration: '3:20', headline: 'Ukraine Strikes Russian Oil Depot Deep Inside Enemy Territory', img: 'https://images.unsplash.com/photo-1580902394724-b08ff42e8c93?w=200&q=80' },
+  { date: 'Oct. 29', duration: '3:20', headline: 'Ukraine Strikes Russian Oil Depot Deep Inside Enemy Territory', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&q=80' },
   { date: 'Oct. 29', duration: '3:20', headline: 'Boeing Reaches $1.1 Billion Settlement With Families of 737 MAX Victims', img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200&q=80' },
   { date: 'Oct. 29', duration: '3:20', headline: 'The A.I. Arms Race Moves to the Data Center',                img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200&q=80' },
 ]
 
 export default function ExpandedAudioPlayer({ visible, onClose, info }: Props) {
+  const [speedSheetOpen, setSpeedSheetOpen] = useState(false)
+  const [activeSpeed, setActiveSpeed] = useState('1x')
+
   return (
     <div className={`exp-player${visible ? ' exp-player--visible' : ''}`}>
       {/* Top nav */}
@@ -92,12 +98,28 @@ export default function ExpandedAudioPlayer({ visible, onClose, info }: Props) {
 
             {/* Action bar */}
             <div className="exp-action-bar">
-              <button className="exp-action-btn-text">1x</button>
+              <div className="exp-speed-anchor">
+                <button className="exp-action-btn-text" onClick={() => setSpeedSheetOpen(true)}>{activeSpeed}</button>
+                {speedSheetOpen && (
+                  <>
+                    <div className="exp-speed-backdrop" onClick={() => setSpeedSheetOpen(false)} />
+                    <div className="exp-speed-popover">
+                      <span className="wl-sort-section-label">Playback Speed</span>
+                      {SPEEDS.map(s => (
+                        <button key={s} className="wl-sort-row" onClick={() => { setActiveSpeed(s); setSpeedSheetOpen(false) }}>
+                          <span className="wl-sort-check">{s === activeSpeed ? '✓' : ''}</span>
+                          <span className="wl-sort-option">{s}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
               <button className="exp-action-btn-icon">
                 <ClockCountdown size={24} color="#222" />
               </button>
-              <button className="exp-action-btn-icon exp-action-btn-icon--share">
-                <ShareFat size={24} color="#222" />
+              <button className="exp-action-btn-icon">
+                <ShareFat size={24} color="#6f6f6f" />
               </button>
             </div>
           </div>
@@ -156,8 +178,8 @@ export default function ExpandedAudioPlayer({ visible, onClose, info }: Props) {
                     </div>
                     <span className="exp-episode-date">{ep.date}</span>
                   </div>
-                  <button className="exp-episode-share-btn exp-episode-share-btn--colored">
-                    <ShareFat size={24} color="#222" />
+                  <button className="exp-episode-share-btn">
+                    <ShareFat size={24} color="#6f6f6f" />
                   </button>
                 </div>
               </div>
@@ -167,6 +189,7 @@ export default function ExpandedAudioPlayer({ visible, onClose, info }: Props) {
           <div className="exp-bottom-pad" />
         </div>
       </div>
+
     </div>
   )
 }

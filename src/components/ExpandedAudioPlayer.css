@@ -308,10 +308,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.exp-action-btn-icon--share {
-  background: #f6f6f6;
-  border-color: #f6f6f6;
-}
 
 /* ── Spacer ─────────────────────────────────────────────────────────────── */
 .exp-spacer-8 {
@@ -358,6 +354,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: flex-start;
 }
 
 .exp-host-name {
@@ -367,6 +364,7 @@
   line-height: 20px;
   color: #222;
   text-decoration: underline;
+  text-align: left;
 }
 
 .exp-host-role {
@@ -376,6 +374,7 @@
   line-height: 20px;
   color: #6f6f6f;
   margin-top: 4px;
+  text-align: left;
 }
 
 /* ── Episode card ────────────────────────────────────────────────────────── */
@@ -474,10 +473,6 @@
   padding: 12px;
 }
 
-.exp-episode-share-btn--colored {
-  background: #f6f6f6;
-  border-radius: 8px;
-}
 
 .exp-divider {
   height: 1px;
@@ -487,4 +482,33 @@
 
 .exp-bottom-pad {
   height: 100px;
+}
+
+/* ── Speed popover ───────────────────────────────────────────────────────── */
+.exp-speed-anchor {
+  position: relative;
+}
+
+.exp-speed-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+}
+
+.exp-speed-popover {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  z-index: 91;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-speed-popover .wl-sort-section-label {
+  text-align: left;
 }

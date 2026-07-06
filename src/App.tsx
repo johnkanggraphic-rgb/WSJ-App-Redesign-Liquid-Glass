@@ -83,7 +83,7 @@ function App() {
                 onLiveTap={() => setShowLiveCoverage(true)}
                 onExpandPlayer={(info) => setExpandedPlayerInfo(info)}
               />
-              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} />
+              <TopNavPage tabIndex={topNavActive} visible={topNavActive > 0} onSectionTap={(s) => setActiveSectionPage(s)} onArticleTap={(h) => { setArticleHeadline(h); setOpenComments(false); setShowArticle(true) }} />
               <TabBar dark={activeTab === 3} onTabChange={setActiveTab} />
             </div>
             <NotificationsPage visible={showNotifs} onBack={() => setShowNotifs(false)} />
@@ -95,7 +95,7 @@ function App() {
             <PuzzlesPage visible={showPuzzles} onBack={() => setShowPuzzles(false)} />
             <PrintEditionPage visible={showPrintEdition} onBack={() => setShowPrintEdition(false)} onReadTap={() => setShowPrintRead(true)} />
             <PrintEditionReadPage visible={showPrintRead} onBack={() => setShowPrintRead(false)} />
-<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} />
+<ArticlePage visible={showArticle} onBack={() => { setShowArticle(false); setOpenComments(false) }} openComments={openComments} headline={articleHeadline} onExpandPlayer={(info) => setExpandedPlayerInfo(info)} />
             <LiveCoveragePage visible={showLiveCoverage} onBack={() => setShowLiveCoverage(false)} />
             <SectionSubPage title={activeSectionPage ?? ''} visible={activeSectionPage !== null} onBack={() => setActiveSectionPage(null)} />
             <ExpandedAudioPlayer visible={expandedPlayerInfo !== null} info={expandedPlayerInfo ?? { flashline: '', headline: '' }} onClose={() => setExpandedPlayerInfo(null)} />
